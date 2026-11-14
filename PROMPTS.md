@@ -18,3 +18,6 @@ Summary: Created README.md, PROMPTS.md, CHANGELOG.md, CREDITS.md and SECURITY.md
 
 ### 4 · 2026-11-14 · Step 25 · Create vercel.json
 Summary: Created vercel.json with clean web addresses (no .html at the end, no trailing slash) and 4 security settings: no file-type guessing, private link sharing, no embedding by other sites, and camera/microphone/location/payment switched off.
+
+### 5 · 2026-11-14 · Side task · Always ask before commit and push
+Summary: Updated CLAUDE.md so Claude Code asks "Shall I commit and push now?" and waits for my yes before every save and upload.

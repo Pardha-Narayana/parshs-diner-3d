@@ -13,6 +13,9 @@ Newest changes at the top.
 - `vercel.json` — Vercel settings: clean web addresses and 4 basic security settings.
 - GSAP skills for Claude Code (gsap-core, gsap-performance, gsap-plugins, gsap-scrolltrigger, gsap-timeline, gsap-utils) in `.claude/skills/`, listed in `skills-lock.json`.
 
+### Changed
+- `CLAUDE.md` — Claude Code now always asks before every commit and push.
+
 ### Notes
 - Helpers installed on this computer (not saved in the project): frontend-design, modern-web-guidance, chrome-devtools.
 - No website pages yet. Building starts after Phase 1 (planning) is approved.

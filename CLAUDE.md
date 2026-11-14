@@ -50,7 +50,7 @@ Plan in Claude Chat → build with Claude Code → check in Chrome and on my pho
 4. Touch only the files needed. Never mix a redesign and a logic change in the same step.
 5. Check your own work with the chrome-devtools tool: at phone width (375px) and desktop width, and look for errors in the console.
 6. Report back (see section 7), then STOP and wait for my "approved".
-7. After I approve: update CHANGELOG.md and remind me to add my prompt to PROMPTS.md. Then wait. Only when I say "commit" or "commit and push", follow the Git rules in section 9.
+7. After I approve: update CHANGELOG.md and remind me to add my prompt to PROMPTS.md. Then ASK me: "Shall I commit and push now?" and wait for my "yes". Never commit or push without my yes.
 - Follow SITE-PLAN.md once it exists. If the plan should change, ask me first.
 - New ideas that are not in the plan go into the "Later" list in SITE-PLAN.md, not into the build.
 - If a session gets long and you start repeating mistakes, tell me to commit and start a fresh session.
@@ -96,8 +96,8 @@ Only say "tested" if you actually ran a check. Otherwise say "not tested yet".
 - Ask me before deleting any file.
 - If you are unsure about something, say so. Do not guess.
 
-Git rules (I do not type Git commands — you do the Git work, but ONLY when I say "commit" or "commit and push", never on your own):
-- Before saving: show me a short list of the files that will be saved, and check that no password, key, token or .env file is included. If you find one, stop and tell me.
+Git rules (I do not type Git commands — you do the Git work, but ALWAYS ask me first and wait for my "yes", never on your own):
+- Before saving: show me a short list of the files that will be saved, and check that no password, key, token or .env file is included. If you find one, stop and tell me. Then ask "Commit and push these files?" and wait for my "yes".
 - Write a clear commit message that a stranger could understand (for example "Add hero section with 3D burger"), not "update" or "fix".
 - Commit to the main branch. Push to GitHub only when I say "push" or "commit and push".
 - After pushing, tell me the commit message and confirm it reached GitHub.

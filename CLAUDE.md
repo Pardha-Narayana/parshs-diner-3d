@@ -58,7 +58,7 @@ Plan in Claude Chat → build with Claude Code → check in Chrome and on my pho
 ## 6. Things that must never silently break
 After ANY change, even a design-only change, re-check the ordering flow:
 - Add to cart, change quantity, remove an item, cart total is correct.
-- The WhatsApp button opens a message with the correct items and total.
+- The WhatsApp button opens a message with the correct items, total, name, phone, Pickup or Delivery, and the address only for Delivery.
 - The Google Sheet receives a test order row (or tell me exactly how to check it).
 After any restructure, search the project for "TODO", "placeholder" and "lorem" and tell me what you found.
 
@@ -91,7 +91,7 @@ Only say "tested" if you actually ran a check. Otherwise say "not tested yet".
 - Only work inside this project folder. Never touch other folders (like parsh-portfolio).
 - Never write passwords, keys or tokens into any file. If one is needed, use a .env file (which must be in .gitignore) and put a placeholder until I give the real value.
 - The Google Sheet order address will be visible in the page code (normal for a static site). So the Apps Script must ONLY add order rows, must check the data (required fields, length limits, sensible totals), and must limit spam. It must never get access to anything else.
-- Collect only what an order needs (name, phone, items, notes). The privacy page will explain this.
+- Collect only what an order needs: name, phone, items, notes, and Pickup or Delivery. Ask for the delivery address ONLY when Delivery is chosen. The privacy page will explain this.
 - Ask me before installing any tool, library, skill or plugin. Do not add another design skill — we use frontend-design only.
 - Ask me before deleting any file.
 - If you are unsure about something, say so. Do not guess.

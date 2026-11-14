@@ -15,6 +15,7 @@ Newest changes at the top.
 
 ### Changed
 - `CLAUDE.md` — Claude Code now always asks before every commit and push.
+- `CLAUDE.md` and `SECURITY.md` — orders can be Pickup or Delivery; the address is collected only for Delivery.
 
 ### Notes
 - Helpers installed on this computer (not saved in the project): frontend-design, modern-web-guidance, chrome-devtools.

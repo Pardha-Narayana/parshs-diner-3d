@@ -21,3 +21,8 @@ Summary: Created vercel.json with clean web addresses (no .html at the end, no t
 
 ### 5 · 2026-11-14 · Side task · Always ask before commit and push
 Summary: Updated CLAUDE.md so Claude Code asks "Shall I commit and push now?" and waits for my yes before every save and upload.
+
+## Phase 1 — Planning
+
+### 6 · 2026-11-14 · Phase 1, Step 1 · Old site content and honesty decisions
+Summary: Read the old site's content. Decided: remove fake reviews, owner story and "real restaurant" claims; add a sample banner; keep my real number for test orders; keep Pickup or Delivery (address only for Delivery); remove the unused Google Analytics tag. Updated CLAUDE.md and SECURITY.md for the delivery address.

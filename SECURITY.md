@@ -7,7 +7,7 @@ Report it privately through GitHub: open this repository's **Security** tab and 
 ## What this site does and does not do
 - It is a **static site**: no logins, no user accounts, no database of our own, no server of our own.
 - It uses **no passwords, keys or tokens** in the code.
-- It only collects what an order needs: **name, phone, items and notes**.
+- It only collects what an order needs: **name, phone, items, notes, and Pickup or Delivery**. The **delivery address** is asked only when Delivery is chosen.
 
 ## How orders are kept safe
 - Orders are sent by the customer through **WhatsApp** (a wa.me link). The site never sees WhatsApp passwords or messages.

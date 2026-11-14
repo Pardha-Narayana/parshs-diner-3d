@@ -26,3 +26,9 @@ Summary: Updated CLAUDE.md so Claude Code asks "Shall I commit and push now?" an
 
 ### 6 · 2026-11-14 · Phase 1, Step 1 · Old site content and honesty decisions
 Summary: Read the old site's content. Decided: remove fake reviews, owner story and "real restaurant" claims; add a sample banner; keep my real number for test orders; keep Pickup or Delivery (address only for Delivery); remove the unused Google Analytics tag. Updated CLAUDE.md and SECURITY.md for the delivery address.
+
+### 7 · 2026-11-14 · Phase 1, Step 8 · Write SITE-PLAN.md
+Summary: Wrote SITE-PLAN.md from the decisions made in Claude Chat (Steps 1–7). Menu, prices, address and hours copied from the old site.
+
+### 8 · 2026-11-14 · Phase 1, Step 9 · Switch to a real restaurant
+Summary: PARSH'S Diner is real (Kakinada, 100% halal, Est. 2024). Updated the plan, rules and README: real address, map link, hours, delivery within 5 km, 4-dish menu, stock photos for now, hosting chosen at launch.

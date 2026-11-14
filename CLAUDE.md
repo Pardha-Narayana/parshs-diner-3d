@@ -3,9 +3,9 @@ Standing rules for Claude Code. Read this at the start of every session.
 If anything here stops being true, tell me so we can update it.
 
 ## 1. What this project is
-- A motion + 3D upgrade of my PARSH'S Diner sample website.
-- PARSH'S Diner is a SAMPLE (fictional) portfolio site: a halal diner in Madhapur, Hyderabad. It is not a real restaurant.
-- Purpose: my main portfolio showpiece to win web-design clients. It must look made by senior front-end designers, and it must be honest.
+- A motion + 3D upgrade of the PARSH'S Diner website.
+- PARSH'S Diner is a REAL 100% halal diner, Est. 2024, at: Near Church Square centre, Jagannaickpur, Kakinada, Andhra Pradesh 533002.
+- Purpose: the restaurant's website, and my main portfolio showpiece to win web-design clients. It must look made by senior front-end designers, and it must be honest.
 - Old site for reference: https://parshsdiner.vercel.app
 - Me: complete beginner, Windows 11, working alone.
 
@@ -14,7 +14,7 @@ If anything here stops being true, tell me so we can update it.
 - Claude Code (Code tab in the Claude desktop app): you. You build and edit the files in this folder. Permission mode: Auto.
 - Git: the save-history of this project. I do not type Git commands. When I say "commit" or "commit and push", you do the Git work for me (see the Git rules in section 9).
 - GitHub (account: Pardha-Narayana): the online copy (backup) of this project, and where Vercel takes the site from.
-- Vercel (free plan): puts the website online at a public address.
+- Vercel: puts the website online at a public address. Its free Hobby plan does not allow business sites, so at launch we choose Vercel Pro or a free host that allows business use.
 - Git Bash (terminal): only for quick checks if needed.
 - Google Chrome: where I check the site on desktop. My phone: where I check the mobile view.
 - Google Sheets + Google Apps Script: the order log for the cart.
@@ -27,7 +27,7 @@ Plan in Claude Chat → build with Claude Code → check in Chrome and on my pho
 - This is a STATIC site: finished pages only. No logins, no user accounts, no admin area, no database of our own, no server of our own.
 - Ordering: a cart in the browser → the order is sent as a WhatsApp message (wa.me link) → a copy of the order is logged to a Google Sheet through a Google Apps Script web address.
 - Motion: GSAP + Lenis (smooth scrolling). 3D: model-viewer. Three.js only if I agree it is truly needed.
-- Hosting: GitHub + Vercel (free plan).
+- Hosting: GitHub + a host chosen at launch — Vercel Pro, or a free host that allows business use (Vercel's free Hobby plan does not allow business sites).
 - Whether we use plain files or a build tool (like Vite) is decided in Phase 1. Always pick the simplest option that meets the quality bar, and tell me what each extra tool will need from me in a year.
 
 ## 4. Quality bar
@@ -40,7 +40,7 @@ Plan in Claude Chat → build with Claude Code → check in Chrome and on my pho
 - Search basics on every page: a page title (under 60 characters), a description (under 155 characters), a share image, a favicon. Our own 404 (page not found) page.
 - Prices in Indian Rupees, written like ₹1,499.
 - No "lorem ipsum", "TODO" or placeholder text left anywhere visible.
-- Honesty: never invent reviews, awards, press mentions, numbers or an owner story. The site must clearly say it is a sample/concept project.
+- Honesty: Only real facts. Never invent reviews, awards, press mentions or numbers. Stock photos are temporary and must be replaced with real photos of our dishes.
 - Only use images, fonts, icons and 3D models we have the right to use. Record every one in CREDITS.md.
 
 ## 5. How we work (the build loop)

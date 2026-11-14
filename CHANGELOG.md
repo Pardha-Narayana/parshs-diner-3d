@@ -4,6 +4,13 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-14 — Phase 1: Planning
+### Added
+- `SITE-PLAN.md` — the full blueprint: design, pages, motion map, 3D plan, ordering plan.
+
+### Changed
+- PARSH'S Diner is now a real restaurant in Kakinada: updated CLAUDE.md, README.md and SITE-PLAN.md (address, map, hours, delivery, 4-dish menu, hosting note).
+
 ## 2026-11-14 — Phase 0: Setup
 
 ### Added

@@ -1,22 +1,22 @@
 # PARSH'S Diner 3D
 
-A motion + 3D upgrade of the PARSH'S Diner sample website, built as a portfolio showpiece by Pardha (PARSH).
+A motion + 3D upgrade of the PARSH'S Diner website, built by Pardha (PARSH). It is also Pardha's portfolio showpiece.
 
-> **This is a sample/concept project.** PARSH'S Diner is a fictional diner in Madhapur, Hyderabad. It is not a real restaurant.
+> **PARSH'S Diner is a real restaurant:** a 100% halal diner, Est. 2024, Near Church Square centre, Jagannaickpur, Kakinada, Andhra Pradesh 533002. Map: https://maps.app.goo.gl/GvMQWYbLxqMJfsXBA
 
 - Old version (reference): https://parshsdiner.vercel.app
 - New version (live link): to be added at launch.
 
 ## 1. What this site is, and who it is for
-- **For:** restaurant owners who might hire me, so they can see what their own website could look like.
-- **What visitors can do:** browse the menu, add dishes to a cart, and send the order on WhatsApp. A copy of each order is logged to a Google Sheet.
+- **For:** customers in Kakinada (mostly on phones). Also restaurant owners who might hire me, as my portfolio showpiece.
+- **What visitors can do:** browse the menu, add dishes to a cart, choose Pickup at the restaurant or Delivery within 5 km in Kakinada, and send the order on WhatsApp. A copy of each order is logged to a Google Sheet.
 - **Type of site:** static (finished pages only). No logins, no database of our own, no server of our own.
 
 ## 2. Tools used to build it
 - Motion: GSAP + Lenis (smooth scrolling).
 - 3D: model-viewer.
 - Built with Claude Code, with these helpers: frontend-design, modern-web-guidance, GSAP skills, chrome-devtools.
-- Hosting: GitHub + Vercel (free plan).
+- Hosting: GitHub + a host chosen at launch — Vercel Pro, or a free host that allows business use (Vercel's free Hobby plan does not allow business sites).
 
 ## 3. How to run it on your computer
 To be filled in during Phase 1, once we decide between plain files and a build tool.
@@ -32,16 +32,16 @@ If one is ever needed, it goes in a `.env` file (never uploaded — see `.gitign
 | Service | What it is used for | Account | Cost |
 |---|---|---|---|
 | GitHub | Stores the code and its history | Pardha-Narayana | Free |
-| Vercel | Puts the site online | Pardha's Vercel account | Free (Hobby plan) |
+| Vercel (or another host) | Puts the site online | Pardha's account | Chosen at launch: Vercel Pro (paid), or a free host that allows business use. Vercel's free Hobby plan does not allow business sites. |
 | WhatsApp (wa.me link) | Customers send their order | Pardha's WhatsApp | Free |
 | Google Apps Script + Google Sheet | Logs a copy of each order | Pardha's Google account | Free |
 
 ## 7. Recurring costs and renewals
-None right now. Everything runs on free plans. If a custom domain is added later, note its yearly renewal date here.
+None yet. Hosting is chosen at launch: if it is Vercel Pro, note its monthly cost and renewal date here. If a custom domain is added later, note its yearly renewal date here.
 
 ## 8. Things that are unusual on purpose
-- The site clearly says it is a sample. Do not remove that unless it becomes a real restaurant's site.
-- No made-up reviews, awards or numbers.
+- Only real facts. No made-up reviews, awards, press or numbers.
+- Dish photos are free stock photos (Unsplash) for now. They must be replaced with real photos of our own dishes.
 - The Google Sheet order address is visible in the page code (normal for a static site). The Apps Script behind it only adds order rows and checks the data. See SECURITY.md.
 
 ## 9. Project files

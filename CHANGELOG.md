@@ -4,6 +4,23 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 2: Dish photos
+### Added
+- `assets/images/` — 6 temporary stock photos from Unsplash (free Unsplash License), each 1200 px wide and under 250 KB:
+  - `menu-burger.jpg` — smash burger
+  - `menu-milkshake-chocolate.jpg` — chocolate shake
+  - `menu-milkshake-cherry.jpg` — shake with a cherry on top
+  - `menu-french-toast.jpg` — banana French toast
+  - `menu-pasta-tagliatelle.jpg` — ribbon pasta
+  - `menu-pasta-penne.jpg` — penne pasta
+
+### Changed
+- `CREDITS.md` — added a credit line (photographer, link, licence) for each of the 6 photos.
+
+### Notes
+- These are stock photos. They will be replaced with real photos of our own dishes later.
+- The photos are not on any page yet. The menu is built in a later step.
+
 ## 2026-11-14 — Phase 1: Planning
 ### Added
 - `SITE-PLAN.md` — the full blueprint: design, pages, motion map, 3D plan, ordering plan.

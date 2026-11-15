@@ -15,6 +15,7 @@ A motion + 3D upgrade of the PARSH'S Diner website, built by Pardha (PARSH). It 
 ## 2. Tools used to build it
 - Motion: GSAP + Lenis (smooth scrolling).
 - 3D: model-viewer.
+- Preparing 3D files (not used by the live site): gltf-transform, run with `npx @gltf-transform/cli@4.5.1`. Use version 4.5.1 — version 4.1.1 fails on Windows with the error "colourspace: parameter space not set" (it mixes two versions of its image library).
 - Built with Claude Code, with these helpers: frontend-design, modern-web-guidance, GSAP skills, chrome-devtools.
 - Hosting: GitHub + a host chosen at launch — Vercel Pro, or a free host that allows business use (Vercel's free Hobby plan does not allow business sites).
 

@@ -35,3 +35,8 @@ Summary: PARSH'S Diner is real (Kakinada, 100% halal, Est. 2024). Updated the pl
 
 ### 9 · 2026-11-15 · Phase 1, Step 10 · How to run
 Summary: Filled in how to preview the site (npx serve on port 3000) and how deploying works.
+
+## Phase 2 — Assets
+
+### 10 · 2026-11-15 · Phase 2, Steps 1–2 · Choose and save 6 dish photos
+Summary: Searched Unsplash for photo options over several rounds (asked for sharper, food-focused shots on a matching dark background). Chose 6 free photos: burger, chocolate shake, cherry shake, banana French toast, ribbon pasta and penne. Saved them in assets/images/, shrank each to 1200 px wide and under 250 KB, and added a credit line for each to CREDITS.md. Skipped one paid Unsplash+ photo and deleted one unapproved photo.

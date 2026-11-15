@@ -119,7 +119,7 @@ Words: plain, friendly, honest. No made-up claims, awards or numbers.
 Reduce motion ON: no smooth scrolling, no scroll moment (burger stays closed), panels appear instead of sliding.
 
 ## 7. 3D plan
-- One semi-realistic burger model (not cartoon) with separate layers: top bun, lettuce, cheese, patty, bottom bun.
+- One semi-realistic burger model (not cartoon) with 4 separate layers: top bun, lettuce, filling (tomato, cheese and two patties together), bottom bun. Chosen: "Hamburger" by Simal Mai (CC-BY), saved as `assets/models/burger.glb` (1.76 MB). In this model the tomato, cheese and patties are one connected shape, so they open together as "filling".
 - Free licence that allows use (CC0, or CC-BY with credit). Sources: Poly Pizza, Sketchfab. Recorded in CREDITS.md.
 - Under about 2 MB after shrinking.
 - Claude Code adds the "opening" animation to the file once, with a free tool. The website only uses model-viewer.

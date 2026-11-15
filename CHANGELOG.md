@@ -4,6 +4,18 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 2: 3D burger
+### Added
+- `assets/models/burger.glb` — 3D burger, "Hamburger" by Simal Mai on Sketchfab (CC-BY). Split into 4 layers (top_bun, lettuce, filling, bottom_bun) and shrunk from 12.6 MB to 1.76 MB (2048 px WebP textures).
+
+### Changed
+- `CREDITS.md` — added the 3D burger: maker, link, licence, and the changes made.
+- `SITE-PLAN.md` section 7 — the burger now has 4 layers; tomato, cheese and patties open together as "filling" (they are one connected shape in this model).
+- `README.md` — prepare 3D files with gltf-transform 4.5.1 (4.1.1 fails on Windows).
+
+### Notes
+- The burger is not on any page yet. The hero is built in a later step.
+
 ## 2026-11-15 — Phase 2: Dish photos
 ### Added
 - `assets/images/` — 6 temporary stock photos from Unsplash (free Unsplash License), each 1200 px wide and under 250 KB:

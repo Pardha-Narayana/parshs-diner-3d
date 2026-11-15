@@ -4,6 +4,16 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 3, Step 3 fix: Solid burger layers
+### Added
+- `tools/burger/solidify.mjs` — fills the empty middles of the 3D burger's layers (the original model only had their outsides): bread-coloured cut sides on both buns, a lettuce disc with thickness, a tomato-red top and patty-brown bottom on the filling. Colours measured from the model's texture. Hidden when the burger is closed.
+
+### Changed
+- `assets/models/burger.glb` — rebuilt with solid layers and a smaller opening. 1.77 MB → 1.79 MB (1,851,120 → 1,875,328 bytes). Closed burger checked against the old one: 99.98% of pixels unchanged; the backup still image did not need remaking.
+- `tools/burger/animate.mjs` — smaller opening: top bun 0.85 (was 1.1), lettuce 0.55 (was 0.7), filling 0.25 (was 0.35).
+- `tools/burger/README.md` — new solidify step in the rebuild order, new expected size, and a check that the closed burger still matches the still image.
+- `CREDITS.md` — the 3D burger's "changes made" now mentions the solid middles (the CC-BY licence asks us to say what we changed).
+
 ## 2026-11-15 — Phase 3, Step 3: Smooth scrolling and the burger opening
 ### Added
 - `js/motion.js` — loads after the page has appeared. Starts light Lenis smooth scrolling for the mouse wheel (phones keep their own touch scrolling), sharing GSAP's clock with ScrollTrigger. Sets up the ONE scroll moment: once the 3D burger is ready, scrolling from the hero toward the next section moves its "open" animation forward; scrolling back closes it. Follows the scroll exactly, no pinning. While it opens, the 3D camera moves back 20% and aims slightly higher so the top bun stays in view; closed = the starting camera, matching the still image. Fully open when the burger box reaches just below the header (at least 150 px of scrolling on computers). Nothing runs with "reduce motion" on, and switching it on mid-visit closes the burger and stops smooth scrolling. Skipped quietly when the backup image is showing.

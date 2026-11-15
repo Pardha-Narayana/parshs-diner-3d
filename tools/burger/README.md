@@ -9,9 +9,10 @@ These scripts are only for preparing the 3D burger. The live website does not us
    - `lettuce` = pieces 02–05
    - `filling` = pieces 06–07 (tomato, cheese and both patties are one connected shape in this model)
    - `bottom_bun` = piece_08
-3. `animate.mjs` — adds the "open" animation (1 second): the bottom bun stays still, filling rises 0.35, lettuce 0.7, top bun 1.1 (the burger is about 3 units tall). Time 0 = closed, time 1 = gently open. The website sets the time from the scroll position.
-4. `explode.mjs` — test only: pulls the pieces apart so you can see them. Its output is never used on the site.
-5. `still.html` + `still-server.cjs` — make the backup still image `assets/images/hero-burger.webp` (closed burger, see-through background).
+3. `solidify.mjs` — makes every layer look solid when the burger opens. The original model only has the outside of each layer (the hidden middles were never made), so opened layers looked like empty rings. It adds, inside each layer: a soft bread-coloured cut side under the top bun and on the bottom bun, a lettuce-green disc with real thickness, a tomato-red top and a patty-brown bottom on the filling. Lettuce, tomato and patty colours are measured from the model's own texture. The new pieces are hidden inside the closed burger, so the closed burger (and the backup still image) look the same. Adds about 24 KB.
+4. `animate.mjs` — adds the "open" animation (1 second): the bottom bun stays still, filling rises 0.25, lettuce 0.55, top bun 0.85 (the burger is about 3 units tall; kept small so it still looks like one burger). Time 0 = closed, time 1 = gently open. The website sets the time from the scroll position.
+5. `explode.mjs` — test only: pulls the pieces apart so you can see them. Its output is never used on the site.
+6. `still.html` + `still-server.cjs` — make the backup still image `assets/images/hero-burger.webp` (closed burger, see-through background).
 
 ## How to rebuild the burger
 You need Node.js (it includes `npm` and `npx`).
@@ -27,9 +28,13 @@ You need Node.js (it includes `npm` and `npx`).
    `node group.mjs <path>/split-4k.glb <path>/layers-4k.glb`
 4. Shrink, keeping the layers apart (run from any folder outside the project):
    `npx @gltf-transform/cli@4.5.1 optimize <path>/layers-4k.glb <path>/burger.glb --compress false --join false --flatten false --instance false --simplify false --texture-compress webp --texture-size 2048`
-5. Add the opening animation:
-   `node animate.mjs <path>/burger.glb <path>/burger-animated.glb`
-6. Copy `burger-animated.glb` to `assets/models/burger.glb`. Expected size: about 1.77 MB.
+5. Make the layers solid (must come before the animation):
+   `node solidify.mjs <path>/burger.glb <path>/burger-solid.glb`
+6. Add the opening animation:
+   `node animate.mjs <path>/burger-solid.glb <path>/burger-animated.glb`
+7. Copy `burger-animated.glb` to `assets/models/burger.glb`. Expected size: about 1.79 MB (1,875,328 bytes).
+
+Check after rebuilding: the closed burger must look the same as the backup still image (the new solid pieces are hidden when closed). If it does not, remake the still image (below).
 
 ## How to remake the backup still image
 1. Copy `assets/models/burger.glb` into this folder (`tools/burger/burger.glb`; delete the copy afterwards).

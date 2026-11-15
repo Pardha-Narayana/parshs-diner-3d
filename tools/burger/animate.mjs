@@ -7,7 +7,8 @@ import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 
 const [, , inPath, outPath] = process.argv;
-const LIFT = { top_bun: 1.1, lettuce: 0.7, filling: 0.35, bottom_bun: 0 }; // model units; the burger is about 3 units tall
+// model units; the burger is about 3 units tall. Kept small so the open burger still reads as one burger.
+const LIFT = { top_bun: 0.85, lettuce: 0.55, filling: 0.25, bottom_bun: 0 };
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
 const doc = await io.read(inPath);

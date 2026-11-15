@@ -66,3 +66,6 @@ Summary: Chose the hero words over several rounds: no "100% halal" in the text (
 
 ### 18 · 2026-11-15 · Phase 3, Step 3 · Smooth scrolling and the burger opening
 Summary: Added js/motion.js: light Lenis smooth scrolling (mouse wheel only) linked to GSAP ScrollTrigger, and the one scroll moment — the 3D burger opens as you scroll down and closes as you scroll back, with no pinning. The camera eases back while it opens so the top bun stays visible. Off with "reduce motion" and skipped when the backup image shows. js/hero-burger.js now signals when the 3D is ready. Tested at 360px, 375px and desktop, reduce motion on/off/switched mid-visit, no-3D device, and a 4x slower phone (about 58 frames per second).
+
+### 19 · 2026-11-15 · Phase 3, Step 3 fix · Solid burger layers
+Summary: The opened burger looked hollow. Diagnosis: the 3D model only had the outside of each layer (the top bun had no bottom; lettuce, tomato and patties were only rings). Chose option A: new tools/burger/solidify.mjs fills each layer's middle (bread cut sides, thick lettuce disc, tomato top, patty bottom, colours taken from the texture) and animate.mjs opens a little less (0.85 / 0.55 / 0.25). burger.glb is now 1.79 MB. The closed burger still matches the backup image (99.98% of pixels unchanged). Updated the tools README and the CREDITS change note.

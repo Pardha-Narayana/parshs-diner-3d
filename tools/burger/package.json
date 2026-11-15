@@ -1,0 +1,11 @@
+{
+  "name": "parshs-burger-tools",
+  "private": true,
+  "description": "Scripts that prepare assets/models/burger.glb. Not used by the live website.",
+  "type": "module",
+  "dependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "ndarray-pixels": "5.2.0"
+  }
+}

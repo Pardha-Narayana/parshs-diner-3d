@@ -64,7 +64,7 @@ Home sections, in order:
 5. Why order direct — for customers: order straight from the restaurant on WhatsApp, no app needed.
 6. Hours and visit — real address, map link, hours, "Delivery within 5 km".
 7. Final call to action — one big line and an "Order now" button.
-8. Footer — "Website by PARSH" (links to my portfolio), privacy link.
+8. Footer — "Website by PARSH" (links to my portfolio), privacy link, and a small credit line for the 3D burger: "3D burger: 'Hamburger' by Simal Mai, CC BY 4.0", with links to the model page and the licence (required by the CC-BY licence).
 
 Always on screen: a "Your order" button that opens the cart panel (section 8).
 
@@ -159,6 +159,7 @@ Apps Script protections (a new, upgraded script):
 - [ ] Images and 3D model are small; page loads in under 3 seconds on mobile
 - [ ] Reduce motion works; keyboard works; text easy to read
 - [ ] Every image, font, model and library listed in CREDITS.md
+- [ ] Every CC-BY item (the 3D burger) also credited on the website, in the footer, with working links
 - [ ] README and CHANGELOG are true
 - [ ] Address, map link and hours are correct
 - [ ] Hosting plan allows business use

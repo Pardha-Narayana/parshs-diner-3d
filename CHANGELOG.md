@@ -13,6 +13,11 @@ Newest changes at the top.
 - `SITE-PLAN.md` section 7 — the burger now has 4 layers; tomato, cheese and patties open together as "filling" (they are one connected shape in this model).
 - `README.md` — prepare 3D files with gltf-transform 4.5.1 (4.1.1 fails on Windows).
 
+- `SITE-PLAN.md` — footer gets a small CC-BY credit line for the 3D burger (with links); added a matching before-launch check.
+
+### Added (tools)
+- `tools/burger/` — the scripts that split the burger into 4 layers (`split.mjs`, `group.mjs`, test helper `explode.mjs`), exact library versions (`package.json`, `package-lock.json`) and `README.md` with rebuild steps. Tested: the steps rebuild an identical `burger.glb`. Not used by the live website.
+
 ### Notes
 - The burger is not on any page yet. The hero is built in a later step.
 

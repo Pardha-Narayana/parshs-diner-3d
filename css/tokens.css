@@ -1,0 +1,136 @@
+/* ==========================================================
+   PARSH'S Diner — design system (SITE-PLAN.md section 3)
+   Every colour, font, space, corner and shadow lives here.
+   Other files only use these names. Do not add new colours.
+   ========================================================== */
+
+/* ---------- Fonts (saved in assets/fonts, SIL OFL 1.1) ----------
+   Each font has two files with the same name:
+   - "latin" holds the normal letters, numbers and punctuation.
+   - "rupee" holds only the ₹ sign. The browser downloads it only
+     when a ₹ appears on the page (unicode-range does this). */
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("/assets/fonts/big-shoulders-display-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("/assets/fonts/big-shoulders-display-rupee.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+20B9;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/figtree-latin.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/figtree-rupee.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+20B9;
+}
+
+:root {
+  /* ---------- Colours: 5 only, each with one job ---------- */
+  --night: #1a1220;       /* page background */
+  --griddle: #2a1c2e;     /* cards, panels, cart, solid header */
+  --neon: #ff4f6d;        /* things you tap — only these */
+  --streetlight: #f7b538; /* prices and highlights — only these */
+  --cream: #f6e9d8;       /* all text */
+
+  /* Same colours as R G B numbers, so we can make see-through versions */
+  --night-rgb: 26 18 32;
+  --neon-rgb: 255 79 109;
+  --streetlight-rgb: 247 181 56;
+  --cream-rgb: 246 233 216;
+
+  --text: var(--cream);
+  --text-soft: rgb(var(--cream-rgb) / 0.78); /* quieter text, still easy to read */
+  --line: rgb(var(--cream-rgb) / 0.1);       /* hairlines and lit edges */
+
+  /* ---------- Fonts ---------- */
+  --font-sign: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Figtree", system-ui, "Segoe UI", Roboto, sans-serif;
+  --weight-sign: 900;
+  --weight-sign-light: 700;
+  --weight-body: 400;
+  --weight-body-strong: 600;
+
+  /* Type sizes (rem follows the visitor's own text size setting) */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --text-2xl: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --text-hero: clamp(3.25rem, 2rem + 7vw, 7rem);
+
+  /* ---------- Spacing ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem); /* space at the left and right edges */
+  --page-max: 75rem;                            /* widest the content gets */
+
+  /* ---------- Corner style ----------
+     Tappable things are round like neon tubes (pill).
+     Cards and panels have soft corners. */
+  --radius-pill: 999px;
+  --radius-card: 1.25rem;
+  --radius-small: 0.625rem;
+
+  /* ---------- Depth: light, shadow, glow ---------- */
+  --edge-lit: inset 0 1px 0 rgb(var(--cream-rgb) / 0.09);     /* lit top edge */
+  --shadow-deep: 0 1.5rem 3rem -1rem rgb(0 0 0 / 0.65);         /* deep soft shadow */
+  --glow-neon: 0 0 0 1px rgb(var(--neon-rgb) / 0.55),
+    0 0 1rem rgb(var(--neon-rgb) / 0.35),
+    0 0 2.5rem rgb(var(--neon-rgb) / 0.18);
+  --glow-neon-strong: 0 0 0 1px rgb(var(--neon-rgb) / 0.7),
+    0 0 1.25rem rgb(var(--neon-rgb) / 0.5),
+    0 0 3rem rgb(var(--neon-rgb) / 0.28);
+
+  /* ---------- Motion (only answers the visitor) ---------- */
+  --time-quick: 0.2s;  /* hover, press, header turning solid */
+  --time-open: 0.25s;  /* delivery address box */
+  --time-panel: 0.3s;  /* cart panel */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---------- Layers ---------- */
+  --layer-header: 50;
+  --layer-grain: 100;
+
+  /* Header height, so jumping to a section never hides it under the header */
+  --header-height: 6.5rem;
+}
+
+@media (min-width: 52rem) {
+  :root {
+    --header-height: 5rem;
+  }
+}

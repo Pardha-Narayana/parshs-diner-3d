@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PARSH'S Diner | 100% halal diner in Kakinada</title>
+  <meta name="description" content="100% halal diner in Jagannaickpur, Kakinada. Burgers, shakes, pasta and French toast. Order on WhatsApp for pickup or delivery within 5 km.">
+  <meta name="theme-color" content="#1a1220">
+  <!-- Real favicon comes in a later step. This empty one stops a "not found" error. -->
+  <link rel="icon" href="data:,">
+
+  <!-- Start downloading the two main font files early -->
+  <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/header.css">
+
+  <!-- Import map: tells the browser where our saved libraries live (vendor/).
+       Nothing is loaded from another company's server. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "gsap": "/vendor/gsap/index.js",
+        "gsap/ScrollTrigger": "/vendor/gsap/ScrollTrigger.js",
+        "lenis": "/vendor/lenis/lenis.mjs",
+        "@google/model-viewer": "/vendor/model-viewer/model-viewer.min.js"
+      }
+    }
+  </script>
+  <script type="module" src="/js/header.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="site-header__bar">
+      <div class="site-header__inner wrap">
+        <a class="logo" href="#top" aria-label="PARSH'S Diner, back to top">
+          <span class="logo__name">PARSH&rsquo;S</span>
+          <span class="logo__sub">Diner</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#how-to-order">How to order</a></li>
+            <li><a href="#visit">Visit</a></li>
+          </ul>
+        </nav>
+
+        <button class="order-button" type="button">
+          <span>Your order</span>
+          <span class="order-button__count" data-order-count>0</span>
+          <span class="visually-hidden">items</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- Sections come in the next steps: hero, menu, how to order, why order direct, visit, final call, footer. -->
+  </main>
+</body>
+</html>

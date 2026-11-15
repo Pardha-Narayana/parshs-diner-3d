@@ -4,6 +4,14 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 3, Step 1: Base page, design system and header
+### Added
+- `index.html` — the page frame: title, description, empty favicon (real one comes later), early download of the two main fonts, the import map pointing to `vendor/` (gsap, gsap/ScrollTrigger, lenis, model-viewer), a "Skip to main content" link, the header, and an empty `<main>` for the next sections.
+- `css/tokens.css` — the design system as named settings: the 5 colours, the 2 fonts (`@font-face` for the Latin files and the ₹ files; a ₹ file downloads only when a ₹ appears), type sizes, spacing, corner style (pill for tappable things, soft corners for cards), glow and shadow, motion times.
+- `css/base.css` — Night background with still amber and pink pools of light, a very fine grain texture made in code, base text styles, a neon keyboard-focus ring, and "reduce motion" support (no transitions, no smooth scrolling).
+- `css/header.css` — the header: PARSH'S logo, links (Menu, How to order, Visit), pink "Your order" button with a count of 0. Phones: two rows; from 832 px wide: one row. See-through at the top; turns solid Griddle with a quick fade after a little scroll.
+- `js/header.js` — makes the header solid in browsers that cannot do it with CSS alone (older Safari and Firefox).
+
 ## 2026-11-15 — Phase 2, Step 6: Libraries saved in vendor/
 ### Added
 - `vendor/gsap/` — GSAP 3.15.1 core + ScrollTrigger as ES module files (`index.js`, `gsap-core.js`, `CSSPlugin.js`, `ScrollTrigger.js`, `Observer.js`), plus `LICENSE.md` (link and summary of the GSAP Standard License; the package has no licence file).

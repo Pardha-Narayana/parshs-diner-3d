@@ -55,3 +55,8 @@ Summary: Downloaded Big Shoulders Display and Figtree from Google Fonts as Latin
 
 ### 15 · 2026-11-15 · Phase 2, Step 6 · Save the 3 libraries in vendor/
 Summary: Downloaded the latest stable GSAP (3.15.1, core + ScrollTrigger), Lenis (1.3.27, with its CSS) and model-viewer (4.4.0, self-contained build) from their official npm packages, as ES modules for an import map. Saved them unchanged in vendor/ with their licences, checked each licence allows a business website, tested them together in a browser, and added them to CREDITS.md.
+
+## Phase 3 — Build
+
+### 16 · 2026-11-15 · Phase 3, Step 1 · Base page, design system and header
+Summary: Built index.html (page frame, import map to vendor/, header only), the design system in css/tokens.css (5 colours, 2 fonts with ₹ files, spacing, corners, glow, motion times), the night background with amber and pink pools of light and fine grain (css/base.css), and the header (css/header.css + js/header.js): logo, Menu / How to order / Visit links, "Your order" button with count 0, turns solid after a little scroll. Checked at 360px, 375px and desktop with chrome-devtools.

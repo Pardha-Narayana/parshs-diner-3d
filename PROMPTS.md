@@ -32,3 +32,6 @@ Summary: Wrote SITE-PLAN.md from the decisions made in Claude Chat (Steps 1–7)
 
 ### 8 · 2026-11-14 · Phase 1, Step 9 · Switch to a real restaurant
 Summary: PARSH'S Diner is real (Kakinada, 100% halal, Est. 2024). Updated the plan, rules and README: real address, map link, hours, delivery within 5 km, 4-dish menu, stock photos for now, hosting chosen at launch.
+
+### 9 · 2026-11-15 · Phase 1, Step 10 · How to run
+Summary: Filled in how to preview the site (npx serve on port 3000) and how deploying works.

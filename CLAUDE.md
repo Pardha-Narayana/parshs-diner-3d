@@ -111,7 +111,9 @@ Git rules (I do not type Git commands — you do the Git work, but ALWAYS ask me
 - chrome-devtools: to open the site, check phone and desktop views, read errors and check speed.
 
 ## 11. How to run the site
-To be filled in during Phase 1 (how to preview the site on my computer).
+- To preview: Claude Code starts a local preview server from the project folder with "npx serve -l 3000" (this downloads the small "serve" tool for that run only; nothing is added to the project). Then open http://localhost:3000 in Chrome.
+- Stop the preview server when we finish a session.
+- There is no build step.
 
 ## 12. Project files
 - CLAUDE.md — these standing rules.

@@ -10,6 +10,7 @@ Newest changes at the top.
 
 ### Changed
 - PARSH'S Diner is now a real restaurant in Kakinada: updated CLAUDE.md, README.md and SITE-PLAN.md (address, map, hours, delivery, 4-dish menu, hosting note).
+- `CLAUDE.md` and `README.md` — filled in how to preview and deploy the site.
 
 ## 2026-11-14 — Phase 0: Setup
 

@@ -19,10 +19,16 @@ A motion + 3D upgrade of the PARSH'S Diner website, built by Pardha (PARSH). It 
 - Hosting: GitHub + a host chosen at launch — Vercel Pro, or a free host that allows business use (Vercel's free Hobby plan does not allow business sites).
 
 ## 3. How to run it on your computer
-To be filled in during Phase 1, once we decide between plain files and a build tool.
+The site is plain files. There is no build step.
+
+1. Install [Node.js](https://nodejs.org) (it includes `npx`).
+2. Open a terminal in the project folder.
+3. Run `npx serve -l 3000`. This downloads the small "serve" tool for that run only; nothing is added to the project.
+4. Open http://localhost:3000 in your browser.
+5. When you are done, stop the preview server with Ctrl + C in the terminal.
 
 ## 4. How to put it online (deploy)
-To be filled in during Phase 1. In short: every push to the `main` branch on GitHub updates the live site on Vercel.
+Plain files, no build step. The host is chosen at launch (Vercel's free Hobby plan does not allow business sites). Settings on any host: no build command; the site is the project folder itself. Every push to the `main` branch on GitHub updates the live site.
 
 ## 5. Settings and secrets (environment variables)
 None. This site uses no passwords, keys or tokens.

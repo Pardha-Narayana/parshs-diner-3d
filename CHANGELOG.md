@@ -4,6 +4,19 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 4: Menu section and the Add button
+### Added
+- Menu section in `index.html`, right below the hero (`id="menu"`, so the header "Menu" link and the hero "See the menu" button jump here): heading "The menu", the line "Pick your dishes and tap Add. You send the order to us on WhatsApp.", and the 4 dishes with their exact names, short lines and prices (₹220, ₹150, ₹260, ₹190). Photos: burger, chocolate shake, ribbon pasta, French toast (the cherry shake and penne photos stay in `assets/images/`, unused). Photos load only when scrolled near (lazy loading). A hidden status line tells screen readers what was added.
+- `css/menu.css` — raised Griddle cards with a lit top edge, thin outline and deep soft shadow; each photo cut to a square under its own still amber spotlight with darker edges. One card per row on phones, 2 from 640 px, 4 from 1088 px; names, lines and prices line up across a row. Price in streetlight amber; neon pink Add button that presses in. Cards lift a little on mouse-over (computers only, as in the motion map). The header count "ticks up" once (0.2 s).
+- `js/cart.js` — the 4 dishes (exact names and prices for the order and the Google Sheet), the cart saved in the browser (survives a refresh; old or edited saved data is cleaned on load), at most 10 of one dish, and the header "Your order" count. Keeps the count the same across tabs.
+- `js/menu.js` — Add buttons: press-in, count ticks up, small "Added" note (fades in and out in 0.2 s, stays about 1.4 s). At 10 of one dish it shows "Max 10" instead.
+
+### Changed
+- `index.html` — links `css/menu.css` and `js/menu.js`.
+- `js/motion.js` — new end point for the burger opening, the same rule on phones and computers: fully open just before the open burger's top bun reaches the header (8 px below it), so the whole open burger is always in view. Measured: the open top bun sits 14.6% down the burger box; the rule uses 14%. Result: fully open after about 174 px of scrolling on a 1440 × 900 desktop (was 150 px) and about 490 px on a 375 px phone (was about 450 px). The 150 px minimum was removed.
+- `js/motion.js` — computers only (from 832 px): while the burger opens, it and its "Drag to spin" hint drift gently down, moving up the screen at half the page's speed (a light depth effect, a GSAP transform; no pinning, the page never stops). This doubles the opening's scroll time on a 1440 × 900 desktop, from about 174 px to about 348 px, and it still ends fully open 8 px below the header. The drift stops when the burger is fully open; the burger then stays about 174 px lower and scrolls away normally. Phones: no drift. "Reduce motion": no drift, and switching it on mid-visit puts the burger back in place.
+- `.gitignore` — `.claude/launch.json` (the preview server settings for Claude Code's preview tool, now on port 3000) is kept on this computer only and never saved to GitHub.
+
 ## 2026-11-15 — Phase 3, Step 3 fix: Solid burger layers
 ### Added
 - `tools/burger/solidify.mjs` — fills the empty middles of the 3D burger's layers (the original model only had their outsides): bread-coloured cut sides on both buns, a lettuce disc with thickness, a tomato-red top and patty-brown bottom on the filling. Colours measured from the model's texture. Hidden when the burger is closed.

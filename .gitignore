@@ -18,6 +18,7 @@ build/
 
 # ---- Claude Code personal settings on this computer ----
 .claude/settings.local.json
+.claude/launch.json
 
 # ---- Log files ----
 *.log

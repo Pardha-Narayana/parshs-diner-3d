@@ -56,29 +56,51 @@ async function startMotion() {
       // allow the camera to move back that far (model-viewer limits it otherwise)
       viewer.maxCameraOrbit = `Infinity 78deg ${startRadius * 1.25}m`;
 
+      // Computers only (from 832px): while it opens, the burger (and its
+      // "Drag to spin" hint) drifts down gently, so it moves up the screen at
+      // half the page's speed. A light depth effect that gives the opening more
+      // scroll time. No pinning: the page itself never stops. Phones: no drift.
+      const visual = stage.closest(".hero__visual") || stage;
+      const wide = window.matchMedia("(min-width: 52rem)");
+      const DRIFT = 0.5; // 0.5 = the burger moves at half the page's speed while opening
+      const drift = () => (wide.matches ? DRIFT : 0);
+
       gsap.to(state, {
         time: length,
         ease: "none", // the opening follows the scroll exactly
-        onUpdate: () => {
+        // a normal function, so "this" is the opening animation (needed for the drift)
+        onUpdate: function () {
           const open = state.time / length; // 0 = closed, 1 = open
           viewer.currentTime = state.time; // model-viewer redraws only when this changes
           const orbit = viewer.getCameraOrbit(); // keep the visitor's own spin angle
           viewer.cameraTarget = `${target.x}m ${target.y + 0.4 * open}m ${target.z}m`;
           viewer.cameraOrbit = `${orbit.theta}rad ${orbit.phi}rad ${startRadius * (1 + 0.2 * open)}m`;
           viewer.jumpCameraToGoal(); // no camera lag: it follows the scroll exactly
+          // the drift: the scroll done so far × DRIFT (a transform, so it stays smooth)
+          const st = this.scrollTrigger;
+          const distance = st ? st.end - st.start : 0;
+          gsap.set(visual, { y: drift() * distance * open });
         },
         scrollTrigger: {
           trigger: stage,
           // clamp() keeps the start at the top of the page, so the burger is always
           // closed when the page opens, even when it is already on screen (computers)
           start: "clamp(top 85%)",
-          // Fully open when the burger box's top is just below the header, so the
-          // whole burger is still clearly in view. On computers the burger starts
-          // high on the screen, so give it at least 150px of scrolling to open.
+          // Fully open just before the open burger's top bun reaches the header,
+          // so the whole open burger is always in view (phones and computers).
+          // When open, the top of the bun sits about 14.6% down the burger box
+          // (measured; the camera moves back while it opens). We use 14% and stop
+          // 8px below the header, to keep a small safe gap.
+          // With the drift, the bun rises only (1 − DRIFT) px per px scrolled,
+          // so the same point is reached after proportionally more scrolling.
           end: (self) => {
             const header = document.querySelector(".site-header").offsetHeight;
-            const boxTop = self.trigger.getBoundingClientRect().top + window.scrollY;
-            return Math.max(boxTop - header - 8, 150);
+            const box = self.trigger.getBoundingClientRect();
+            const driftNow = gsap.getProperty(visual, "y") || 0; // measure without the drift
+            const bunTop = box.top - driftNow + window.scrollY + box.height * 0.14;
+            const d = drift();
+            const start = Math.max(self.start || 0, 0);
+            return Math.max((bunTop - header - 8 - d * start) / (1 - d), 1);
           },
           scrub: true, // moves only while scrolling, stops when scrolling stops
         },
@@ -103,6 +125,8 @@ async function startMotion() {
         viewer.cameraTarget = "auto auto auto";
         viewer.cameraOrbit = "30deg 78deg auto";
         viewer.jumpCameraToGoal();
+        // burger back in its normal place (no drift)
+        gsap.set(stage.closest(".hero__visual") || stage, { clearProps: "transform" });
       }
     };
   });

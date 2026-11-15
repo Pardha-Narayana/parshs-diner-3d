@@ -1,0 +1,250 @@
+/* ==========================================================
+   PARSH'S Diner — menu (the 4 dishes)
+   Phones: one card per row. From 640px: 2 per row.
+   From 1088px: all 4 in one row.
+   Depth: raised Griddle cards with a lit top edge and a deep soft
+   shadow; each photo sits under its own soft amber spotlight.
+   Nothing moves on its own.
+   ========================================================== */
+
+.menu {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+/* ---------- Heading ---------- */
+.menu__intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.menu__title {
+  font-size: clamp(3rem, 1.6rem + 6vw, 5.5rem);
+  line-height: 0.9;
+  /* same lit-sign look as the hero heading */
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.14);
+}
+
+.menu__line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+/* ---------- The grid of cards ----------
+   Each card shares 4 row tracks with its neighbours (photo, name,
+   short line, price + Add), so names and prices line up in a row. */
+.menu__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .menu__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 68rem) {
+  .menu__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.menu__list > li,
+.dish {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+/* ---------- One dish card ---------- */
+.dish {
+  position: relative;
+  isolation: isolate;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  background:
+    /* a little light falling on the top of the card */
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 40%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.05),
+    var(--shadow-deep);
+  transition:
+    transform var(--time-quick) ease-out,
+    box-shadow var(--time-quick) ease-out;
+}
+
+/* Computer mouse only: the card lifts a little */
+@media (hover: hover) {
+  .dish:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      var(--edge-lit),
+      0 0 0 1px rgb(var(--cream-rgb) / 0.08),
+      0 2rem 3.5rem -1rem rgb(0 0 0 / 0.75);
+  }
+}
+
+/* ---------- Photo with its own spotlight ---------- */
+.dish__photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius-card) - var(--space-2));
+  background: var(--night);
+  /* the photo sits slightly "into" the card */
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.4);
+}
+
+.dish__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* tall photos: keep the food in the middle of the square */
+.dish[data-dish="milkshake"] img {
+  object-position: 50% 62%;
+}
+
+.dish[data-dish="french-toast"] img {
+  object-position: 50% 40%;
+}
+
+/* The spotlight: warm amber light from above, centre bright,
+   edges falling off into the dark. Drawn over the photo, never moving. */
+.dish__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgb(var(--streetlight-rgb) / 0.22), transparent 70%),
+    radial-gradient(85% 85% at 50% 45%, transparent 55%, rgb(var(--night-rgb) / 0.6) 100%);
+  border-radius: inherit;
+}
+
+/* An amber pool of light spilling onto the card under the photo */
+.dish__photo::before {
+  content: "";
+  position: absolute;
+  inset: auto 10% -1px;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(to right, transparent, rgb(var(--streetlight-rgb) / 0.45), transparent);
+}
+
+/* ---------- Words ---------- */
+.dish__name {
+  margin-top: var(--space-4);
+  padding-inline: var(--space-2);
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 1.875rem);
+  line-height: 1;
+}
+
+.dish__line {
+  margin-top: var(--space-2);
+  padding-inline: var(--space-2);
+  font-size: 0.9375rem;
+  color: var(--text-soft);
+}
+
+/* ---------- Price + Add ---------- */
+.dish__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-1) 0 var(--space-2);
+  border-top: 1px solid var(--line);
+  align-self: end;
+}
+
+.dish__price {
+  margin-right: auto;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+/* "Added" note: shows for a moment after a tap, then fades */
+.dish__note {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  color: var(--cream);
+  opacity: 0;
+  transition: opacity var(--time-quick) ease-out;
+}
+
+.dish__note.is-shown {
+  opacity: 1;
+}
+
+/* ---------- Add button ----------
+   Neon pink = something you tap. Presses in when tapped. */
+.add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0) 55%),
+    var(--neon);
+  color: var(--night);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-base);
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--glow-neon);
+  transition:
+    box-shadow var(--time-quick) ease-out,
+    transform var(--time-quick) ease-out;
+}
+
+.add-button:focus-visible {
+  outline-color: var(--cream);
+}
+
+/* pressed: by finger/mouse (:active) or for a moment after a tap (.is-pressed) */
+.add-button:active,
+.add-button.is-pressed {
+  transform: scale(0.94);
+  box-shadow:
+    inset 0 2px 4px rgb(0 0 0 / 0.35),
+    0 0 0 1px rgb(var(--neon-rgb) / 0.55),
+    0 0 0.75rem rgb(var(--neon-rgb) / 0.3);
+}
+
+@media (hover: hover) {
+  .add-button:hover {
+    box-shadow: var(--glow-neon-strong);
+  }
+}
+
+/* ---------- Header count ticks up once after an Add ---------- */
+.order-button__count.is-ticking {
+  animation: count-tick var(--time-quick) var(--ease-out);
+}
+
+@keyframes count-tick {
+  50% {
+    transform: scale(1.3);
+  }
+}

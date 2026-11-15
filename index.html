@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/buttons.css">
   <link rel="stylesheet" href="/css/hero.css">
+  <link rel="stylesheet" href="/css/menu.css">
   <link rel="stylesheet" href="/vendor/lenis/lenis.css">
 
   <!-- Import map: tells the browser where our saved libraries live (vendor/).
@@ -35,6 +36,7 @@
   <script type="module" src="/js/header.js"></script>
   <script type="module" src="/js/hero-burger.js"></script>
   <script type="module" src="/js/motion.js"></script>
+  <script type="module" src="/js/menu.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -94,7 +96,93 @@
       </div>
     </section>
 
-    <!-- Next steps add: menu, how to order, why order direct, visit, final call, footer. -->
+    <section class="menu" id="menu" aria-labelledby="menu-title">
+      <div class="wrap">
+        <div class="menu__intro">
+          <h2 class="menu__title" id="menu-title">The menu</h2>
+          <p class="menu__line">Pick your dishes and tap Add. You send the order to us on WhatsApp.</p>
+        </div>
+
+        <ul class="menu__list" role="list">
+          <li>
+            <article class="dish" data-dish="burger">
+              <div class="dish__photo">
+                <img src="/assets/images/menu-burger.jpg" width="1200" height="997" loading="lazy" decoding="async"
+                     alt="A double smash burger with cheese, sauce, pickles, tomato and lettuce in a sesame bun">
+              </div>
+              <h3 class="dish__name">Griddle-Smashed Burger</h3>
+              <p class="dish__line">Juicy, edge-charred patties stacked with melted cheese on a toasted bun.</p>
+              <footer class="dish__foot">
+                <p class="dish__price"><span class="visually-hidden">Price: </span>₹220</p>
+                <span class="dish__note" data-note aria-hidden="true"></span>
+                <button class="add-button" type="button" data-add="burger">
+                  Add<span class="visually-hidden"> Griddle-Smashed Burger to your order</span>
+                </button>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article class="dish" data-dish="milkshake">
+              <div class="dish__photo">
+                <img src="/assets/images/menu-milkshake-chocolate.jpg" width="1200" height="1800" loading="lazy" decoding="async"
+                     alt="A tall chocolate milkshake topped with whipped cream and chocolate sauce">
+              </div>
+              <h3 class="dish__name">Hand-Spun Milkshake</h3>
+              <p class="dish__line">Thick, cold, and made-to-order in classic diner flavors.</p>
+              <footer class="dish__foot">
+                <p class="dish__price"><span class="visually-hidden">Price: </span>₹150</p>
+                <span class="dish__note" data-note aria-hidden="true"></span>
+                <button class="add-button" type="button" data-add="milkshake">
+                  Add<span class="visually-hidden"> Hand-Spun Milkshake to your order</span>
+                </button>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article class="dish" data-dish="pasta">
+              <div class="dish__photo">
+                <img src="/assets/images/menu-pasta-tagliatelle.jpg" width="1200" height="900" loading="lazy" decoding="async"
+                     alt="Ribbon pasta in a meat sauce with grated cheese, in a dark bowl">
+              </div>
+              <h3 class="dish__name">Homemade Pasta</h3>
+              <p class="dish__line">Slow-simmered sauces tossed fresh, served hot off the pan.</p>
+              <footer class="dish__foot">
+                <p class="dish__price"><span class="visually-hidden">Price: </span>₹260</p>
+                <span class="dish__note" data-note aria-hidden="true"></span>
+                <button class="add-button" type="button" data-add="pasta">
+                  Add<span class="visually-hidden"> Homemade Pasta to your order</span>
+                </button>
+              </footer>
+            </article>
+          </li>
+
+          <li>
+            <article class="dish" data-dish="french-toast">
+              <div class="dish__photo">
+                <img src="/assets/images/menu-french-toast.jpg" width="1200" height="1551" loading="lazy" decoding="async"
+                     alt="Stacked French toast with banana slices, blueberries and syrup on a dark plate">
+              </div>
+              <h3 class="dish__name">Caramelized Banana French Toast</h3>
+              <p class="dish__line">Golden brioche toast topped with warm, caramelized banana.</p>
+              <footer class="dish__foot">
+                <p class="dish__price"><span class="visually-hidden">Price: </span>₹190</p>
+                <span class="dish__note" data-note aria-hidden="true"></span>
+                <button class="add-button" type="button" data-add="french-toast">
+                  Add<span class="visually-hidden"> Caramelized Banana French Toast to your order</span>
+                </button>
+              </footer>
+            </article>
+          </li>
+        </ul>
+
+        <!-- Screen readers hear "Added …" here after each tap -->
+        <p class="visually-hidden" role="status" data-cart-status></p>
+      </div>
+    </section>
+
+    <!-- Next steps add: how to order, why order direct, visit, final call, footer. -->
   </main>
 </body>
 </html>

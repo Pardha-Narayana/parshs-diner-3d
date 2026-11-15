@@ -50,7 +50,7 @@ Plan in Claude Chat → build with Claude Code → check in Chrome and on my pho
 4. Touch only the files needed. Never mix a redesign and a logic change in the same step.
 5. Check your own work with the chrome-devtools tool: at phone width (375px) and desktop width, and look for errors in the console.
 6. Report back (see section 7), then STOP and wait for my "approved".
-7. After I approve: update CHANGELOG.md and remind me to add my prompt to PROMPTS.md. Then ASK me: "Shall I commit and push now?" and wait for my "yes". Never commit or push without my yes.
+7. After I approve: update CHANGELOG.md and add the PROMPTS.md entry for that step yourself (number, date, phase and step, short summary). Then ASK me: "Shall I commit and push now?" and wait for my "yes". Never commit or push without my yes.
 - Follow SITE-PLAN.md once it exists. If the plan should change, ask me first.
 - New ideas that are not in the plan go into the "Later" list in SITE-PLAN.md, not into the build.
 - If a session gets long and you start repeating mistakes, tell me to commit and start a fresh session.

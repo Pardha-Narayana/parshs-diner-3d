@@ -4,6 +4,18 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 2, Step 4: Burger animation and still image
+### Added
+- `assets/images/hero-burger.webp` — backup still image of the closed burger (1000 × 1000 px, 78 KB, see-through background).
+- `tools/burger/animate.mjs` — adds the "open" animation; `tools/burger/still.html` + `still-server.cjs` — make the still image.
+
+### Changed
+- `assets/models/burger.glb` — added the "open" animation (1 second; bottom bun stays, filling, lettuce and top bun rise gently). Now 1.77 MB.
+- `CREDITS.md` — burger row notes the added animation; new row for the still image (same CC-BY credit).
+- `CLAUDE.md` section 5, step 7 — Claude Code now adds the PROMPTS.md entry itself after each approved step.
+- `PROMPTS.md` — added entries 11 and 12 (3D burger, footer credit and tools) and 13 (this step).
+- `tools/burger/README.md`, `package.json`, `package-lock.json` — steps for the animation and still image; added `@gltf-transform/extensions` 4.5.1 (tools only).
+
 ## 2026-11-15 — Phase 2: 3D burger
 ### Added
 - `assets/models/burger.glb` — 3D burger, "Hamburger" by Simal Mai on Sketchfab (CC-BY). Split into 4 layers (top_bun, lettuce, filling, bottom_bun) and shrunk from 12.6 MB to 1.76 MB (2048 px WebP textures).

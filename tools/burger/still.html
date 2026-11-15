@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Burger still maker</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<style>body{margin:0;background:#1A1220}model-viewer{width:1000px;height:1000px;background:transparent}</style></head>
+<body>
+<model-viewer id="mv" loading="eager" reveal="auto" src="/burger.glb" animation-name="open" exposure="1.05" shadow-intensity="1" shadow-softness="0.9" camera-orbit="30deg 78deg auto" interaction-prompt="none"></model-viewer>
+<script type="module">
+  const mv = document.getElementById('mv');
+  window.makeStill = async () => {
+    mv.pause(); mv.currentTime = 0;
+    await new Promise((r) => setTimeout(r, 1500));
+    const blob = await mv.toBlob({ mimeType: 'image/webp', qualityArgument: 0.85 });
+    const res = await fetch('/save?name=hero-burger.webp', { method: 'POST', body: blob });
+    return (await res.text()) + ' | canvas ' + mv.shadowRoot.querySelector('canvas').width + 'x' + mv.shadowRoot.querySelector('canvas').height;
+  };
+</script>
+</body></html>

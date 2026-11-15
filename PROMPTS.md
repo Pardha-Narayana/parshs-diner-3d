@@ -40,3 +40,12 @@ Summary: Filled in how to preview the site (npx serve on port 3000) and how depl
 
 ### 10 · 2026-11-15 · Phase 2, Steps 1–2 · Choose and save 6 dish photos
 Summary: Searched Unsplash for photo options over several rounds (asked for sharper, food-focused shots on a matching dark background). Chose 6 free photos: burger, chocolate shake, cherry shake, banana French toast, ribbon pasta and penne. Saved them in assets/images/, shrank each to 1200 px wide and under 250 KB, and added a credit line for each to CREDITS.md. Skipped one paid Unsplash+ photo and deleted one unapproved photo.
+
+### 11 · 2026-11-15 · Phase 2, Step 3 · Choose and prepare the 3D burger
+Summary: Compared free CC-BY burgers on Sketchfab (Poly Pizza only had cartoon ones). Chose "Hamburger" by Simal Mai (double patty). Downloaded the 4k GLB. Fixed a shrinking error (gltf-transform 4.1.1 mixed two image-library versions; 4.5.1 works). Split the merged model into 4 layers (top bun, lettuce, filling, bottom bun) and shrank it from 12.6 MB to 1.76 MB. Saved as assets/models/burger.glb; updated CREDITS.md, SITE-PLAN.md section 7 and README.md.
+
+### 12 · 2026-11-15 · Phase 2, Step 3 follow-up · Footer credit and burger tools
+Summary: Planned a small CC-BY credit line for the burger in the website footer, plus a before-launch check (SITE-PLAN.md). Saved the burger-splitting scripts and rebuild steps in tools/burger/; tested that they rebuild an identical burger.glb.
+
+### 13 · 2026-11-15 · Phase 2, Step 4 · Burger animation and still image
+Summary: Changed CLAUDE.md so Claude Code adds PROMPTS.md entries itself, and added entries 11–12. Then finished SITE-PLAN.md section 7: shrinking was already done; added the gentle "open" animation to burger.glb (1.77 MB) and made the backup still image hero-burger.webp (78 KB). Saved the scripts and steps in tools/burger/.

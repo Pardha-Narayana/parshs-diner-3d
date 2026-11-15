@@ -28,7 +28,8 @@ Add a line here the moment something new is used.
 ## 3D models
 | What | Source / maker | Licence | Credit required? |
 |---|---|---|---|
-| 3D burger — `assets/models/burger.glb` | "Hamburger" by Simal Mai on Sketchfab — https://sketchfab.com/3d-models/hamburger-346ebe0033ba48f7bc2e10d44a5b482f | CC Attribution 4.0 (CC-BY) — https://creativecommons.org/licenses/by/4.0/ | **Yes** — credit must also be shown on the website. Changes made: split into 4 layers (top_bun, lettuce, filling, bottom_bun) and textures shrunk to 2048 px WebP. |
+| 3D burger — `assets/models/burger.glb` | "Hamburger" by Simal Mai on Sketchfab — https://sketchfab.com/3d-models/hamburger-346ebe0033ba48f7bc2e10d44a5b482f | CC Attribution 4.0 (CC-BY) — https://creativecommons.org/licenses/by/4.0/ | **Yes** — credit must also be shown on the website. Changes made: split into 4 layers (top_bun, lettuce, filling, bottom_bun), textures shrunk to 2048 px WebP, and an "open" animation added. |
+| Backup still image of the 3D burger — `assets/images/hero-burger.webp` | Rendered by us from the same "Hamburger" model by Simal Mai (see the row above) | CC Attribution 4.0 (CC-BY) | **Yes** — same credit as the 3D burger. |
 
 ## Claude Code skills used to build this site
 | Name | Source |

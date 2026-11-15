@@ -4,6 +4,16 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 3, Step 2: Hero with the 3D burger
+### Added
+- Hero section in `index.html`: small round "100% Halal" badge, heading "Hot off the griddle.", line "Smash burgers and hand-spun shakes.", buttons "See the menu" (→ #menu) and "How ordering works" (→ #how-to-order), the burger and a "Drag to spin" hint.
+- `css/buttons.css` — shared button styles: solid pink (main action) and pink outline (second choice), glow brighter on mouse-over, press-in on tap.
+- `css/hero.css` — hero layout (burger below the text on phones, on the right from 832 px), halal badge, big heading, still pink haze and amber glow behind the burger.
+- `js/hero-burger.js` — shows the backup still image first; after the page has appeared, loads model-viewer and `burger.glb` and swaps them in once fully ready. Keeps the still image if the device has no 3D support, has "data saver" on, or loading fails. Drag or arrow keys spin it sideways only; no zoom, no auto-spin, no hint animation; up-and-down swipes on phones scroll the page. Same camera and light settings as the still image, so the swap does not jump.
+
+### Changed
+- `index.html` — links the 2 new CSS files and the new script.
+
 ## 2026-11-15 — Phase 3, Step 1: Base page, design system and header
 ### Added
 - `index.html` — the page frame: title, description, empty favicon (real one comes later), early download of the two main fonts, the import map pointing to `vendor/` (gsap, gsap/ScrollTrigger, lenis, model-viewer), a "Skip to main content" link, the header, and an empty `<main>` for the next sections.

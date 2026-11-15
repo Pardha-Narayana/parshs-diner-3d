@@ -60,3 +60,6 @@ Summary: Downloaded the latest stable GSAP (3.15.1, core + ScrollTrigger), Lenis
 
 ### 16 · 2026-11-15 · Phase 3, Step 1 · Base page, design system and header
 Summary: Built index.html (page frame, import map to vendor/, header only), the design system in css/tokens.css (5 colours, 2 fonts with ₹ files, spacing, corners, glow, motion times), the night background with amber and pink pools of light and fine grain (css/base.css), and the header (css/header.css + js/header.js): logo, Menu / How to order / Visit links, "Your order" button with count 0, turns solid after a little scroll. Checked at 360px, 375px and desktop with chrome-devtools.
+
+### 17 · 2026-11-15 · Phase 3, Step 2 · Hero with the 3D burger
+Summary: Chose the hero words over several rounds: no "100% halal" in the text (shown once as a small badge instead), no "Est. 2024", no place name. Final: "Hot off the griddle." / "Smash burgers and hand-spun shakes." Built the hero (index.html, css/buttons.css, css/hero.css, js/hero-burger.js): halal badge, heading, line, two buttons, and the 3D burger that loads after the page appears and replaces the matching still image. Drag or arrow keys to spin, no zoom, no auto-spin, phone scrolling not blocked. Checked at 360px, 375px and desktop; page appears in about 2.5–2.9 s on a simulated slow phone.

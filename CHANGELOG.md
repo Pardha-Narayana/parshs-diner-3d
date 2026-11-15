@@ -4,6 +4,14 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 3, Step 3: Smooth scrolling and the burger opening
+### Added
+- `js/motion.js` — loads after the page has appeared. Starts light Lenis smooth scrolling for the mouse wheel (phones keep their own touch scrolling), sharing GSAP's clock with ScrollTrigger. Sets up the ONE scroll moment: once the 3D burger is ready, scrolling from the hero toward the next section moves its "open" animation forward; scrolling back closes it. Follows the scroll exactly, no pinning. While it opens, the 3D camera moves back 20% and aims slightly higher so the top bun stays in view; closed = the starting camera, matching the still image. Fully open when the burger box reaches just below the header (at least 150 px of scrolling on computers). Nothing runs with "reduce motion" on, and switching it on mid-visit closes the burger and stops smooth scrolling. Skipped quietly when the backup image is showing.
+
+### Changed
+- `js/hero-burger.js` — sends a "burger:ready" signal when the 3D burger is ready.
+- `index.html` — links `vendor/lenis/lenis.css` and `js/motion.js`.
+
 ## 2026-11-15 — Phase 3, Step 2: Hero with the 3D burger
 ### Added
 - Hero section in `index.html`: small round "100% Halal" badge, heading "Hot off the griddle.", line "Smash burgers and hand-spun shakes.", buttons "See the menu" (→ #menu) and "How ordering works" (→ #how-to-order), the burger and a "Drag to spin" hint.

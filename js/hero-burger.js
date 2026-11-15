@@ -71,6 +71,8 @@ async function load3D() {
         requestAnimationFrame(() => {
           stage.classList.add("is-3d");
           still.setAttribute("aria-hidden", "true");
+          // tell js/motion.js the 3D burger is ready for the scroll opening
+          stage.dispatchEvent(new CustomEvent("burger:ready", { detail: { viewer } }));
         })
       );
     },

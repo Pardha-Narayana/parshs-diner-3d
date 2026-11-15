@@ -4,6 +4,15 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 2, Step 5: Fonts
+### Added
+- `assets/fonts/big-shoulders-display-latin.woff2` (34.6 KB) and `assets/fonts/figtree-latin.woff2` (19.7 KB) — official Google Fonts files, Latin characters only. Each is a variable font: one file holds all weights (we use 700/900 and 400/600).
+- `assets/fonts/big-shoulders-display-rupee.woff2` (1.5 KB) and `assets/fonts/figtree-rupee.woff2` (1.1 KB) — official one-character files for the ₹ sign, which the Latin files do not include.
+- `assets/fonts/OFL-BigShouldersDisplay.txt` and `assets/fonts/OFL-Figtree.txt` — the SIL Open Font License 1.1 texts (required by the licence).
+
+### Changed
+- `CREDITS.md` — added both fonts and both ₹ files, with source and licence.
+
 ## 2026-11-15 — Phase 2, Step 4: Burger animation and still image
 ### Added
 - `assets/images/hero-burger.webp` — backup still image of the closed burger (1000 × 1000 px, 78 KB, see-through background).

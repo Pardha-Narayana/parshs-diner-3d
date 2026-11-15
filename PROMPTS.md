@@ -49,3 +49,6 @@ Summary: Planned a small CC-BY credit line for the burger in the website footer,
 
 ### 13 · 2026-11-15 · Phase 2, Step 4 · Burger animation and still image
 Summary: Changed CLAUDE.md so Claude Code adds PROMPTS.md entries itself, and added entries 11–12. Then finished SITE-PLAN.md section 7: shrinking was already done; added the gentle "open" animation to burger.glb (1.77 MB) and made the backup still image hero-burger.webp (78 KB). Saved the scripts and steps in tools/burger/.
+
+### 14 · 2026-11-15 · Phase 2, Step 5 · Save the two fonts
+Summary: Downloaded Big Shoulders Display and Figtree from Google Fonts as Latin-only .woff2 files (one variable file per font covers all weights). Found that the Latin files have no ₹ sign, so on request also added Google's official one-character ₹ files for both fonts. Saved both OFL licence texts and added everything to CREDITS.md.

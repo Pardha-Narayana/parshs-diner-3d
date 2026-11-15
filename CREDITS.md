@@ -13,7 +13,10 @@ Add a line here the moment something new is used.
 ## Fonts
 | Name | Source | Licence |
 |---|---|---|
-| (none yet) | | |
+| Big Shoulders Display (variable font, one file for all its weights; we use 700 and 900) — `assets/fonts/big-shoulders-display-latin.woff2`, Latin characters only | Google Fonts (fonts.google.com, file from fonts.gstatic.com, version v24). Made by The Big Shoulders Project Authors — https://github.com/xotypeco/big_shoulders | SIL Open Font License 1.1 — copy in `assets/fonts/OFL-BigShouldersDisplay.txt` |
+| Figtree (variable font, one file for all its weights; we use 400 and 600) — `assets/fonts/figtree-latin.woff2`, Latin characters only | Google Fonts (fonts.google.com, file from fonts.gstatic.com, version v9). Made by The Figtree Project Authors — https://github.com/erikdkennedy/figtree | SIL Open Font License 1.1 — copy in `assets/fonts/OFL-Figtree.txt` |
+| Big Shoulders Display, ₹ sign only — `assets/fonts/big-shoulders-display-rupee.woff2` (the Latin file has no ₹) | Google Fonts (official one-character file from fonts.gstatic.com, version v24). Same makers as above | SIL Open Font License 1.1 — copy in `assets/fonts/OFL-BigShouldersDisplay.txt` |
+| Figtree, ₹ sign only — `assets/fonts/figtree-rupee.woff2` (the Latin file has no ₹) | Google Fonts (official one-character file from fonts.gstatic.com, version v9). Same makers as above | SIL Open Font License 1.1 — copy in `assets/fonts/OFL-Figtree.txt` |
 
 ## Images and icons
 | What | Source / maker | Licence | Credit required? |

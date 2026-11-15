@@ -52,3 +52,6 @@ Summary: Changed CLAUDE.md so Claude Code adds PROMPTS.md entries itself, and ad
 
 ### 14 · 2026-11-15 · Phase 2, Step 5 · Save the two fonts
 Summary: Downloaded Big Shoulders Display and Figtree from Google Fonts as Latin-only .woff2 files (one variable file per font covers all weights). Found that the Latin files have no ₹ sign, so on request also added Google's official one-character ₹ files for both fonts. Saved both OFL licence texts and added everything to CREDITS.md.
+
+### 15 · 2026-11-15 · Phase 2, Step 6 · Save the 3 libraries in vendor/
+Summary: Downloaded the latest stable GSAP (3.15.1, core + ScrollTrigger), Lenis (1.3.27, with its CSS) and model-viewer (4.4.0, self-contained build) from their official npm packages, as ES modules for an import map. Saved them unchanged in vendor/ with their licences, checked each licence allows a business website, tested them together in a browser, and added them to CREDITS.md.

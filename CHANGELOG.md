@@ -4,6 +4,16 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-15 — Phase 2, Step 6: Libraries saved in vendor/
+### Added
+- `vendor/gsap/` — GSAP 3.15.1 core + ScrollTrigger as ES module files (`index.js`, `gsap-core.js`, `CSSPlugin.js`, `ScrollTrigger.js`, `Observer.js`), plus `LICENSE.md` (link and summary of the GSAP Standard License; the package has no licence file).
+- `vendor/lenis/` — Lenis 1.3.27 (`lenis.mjs`, `lenis.css`) and its MIT `LICENSE`.
+- `vendor/model-viewer/` — model-viewer 4.4.0 self-contained module build (`model-viewer.min.js`) and its Apache 2.0 `LICENSE`.
+- All files come unchanged from the official npm packages. Tested together through an import map: GSAP, ScrollTrigger and Lenis start, and model-viewer loads `burger.glb` with its "open" animation.
+
+### Changed
+- `CREDITS.md` — added the 3 libraries with exact version, source and licence.
+
 ## 2026-11-15 — Phase 2, Step 5: Fonts
 ### Added
 - `assets/fonts/big-shoulders-display-latin.woff2` (34.6 KB) and `assets/fonts/figtree-latin.woff2` (19.7 KB) — official Google Fonts files, Latin characters only. Each is a variable font: one file holds all weights (we use 700/900 and 400/600).

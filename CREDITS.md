@@ -8,7 +8,9 @@ Add a line here the moment something new is used.
 ## Code libraries
 | Name | What it does | Source | Licence |
 |---|---|---|---|
-| (none yet) | | | |
+| GSAP **3.15.1** (core + ScrollTrigger) — `vendor/gsap/` (`index.js`, `gsap-core.js`, `CSSPlugin.js`, `ScrollTrigger.js`, `Observer.js`; ES module files, unchanged) | Animations, and the scroll-controlled burger opening | Official `gsap` npm package (greensock/GSAP), by GreenSock / Webflow | GSAP Standard "No Charge" License — https://gsap.com/standard-license (free for commercial websites; copyright notices must stay in the files). Note in `vendor/gsap/LICENSE.md` |
+| Lenis **1.3.27** — `vendor/lenis/lenis.mjs` (ES module) and `vendor/lenis/lenis.css`, unchanged | Light smooth scrolling | Official `lenis` npm package (darkroomengineering/lenis), by darkroom.engineering | MIT License — copy in `vendor/lenis/LICENSE` |
+| model-viewer **4.4.0** — `vendor/model-viewer/model-viewer.min.js` (self-contained ES module build, unchanged) | Shows the 3D burger | Official `@google/model-viewer` npm package (google/model-viewer), by Google | Apache License 2.0 — copy in `vendor/model-viewer/LICENSE`. The file also contains three.js (MIT, Three.js Authors) and Lit (BSD-3-Clause, Google); their licence notices are kept inside the file |
 
 ## Fonts
 | Name | Source | Licence |

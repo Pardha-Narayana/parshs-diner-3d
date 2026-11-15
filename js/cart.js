@@ -4,7 +4,8 @@
 // - The cart is saved in the browser's own storage (localStorage),
 //   so it survives a refresh. Nothing is sent anywhere from here.
 // - The "Your order" count in the header always shows the total items.
-// The cart panel (next step) will use the same functions.
+// - The last sent order is saved too, for "Reorder your last order".
+// Used by js/menu.js (Add buttons) and js/cart-panel.js (the cart panel).
 
 export const MENU = {
   burger: { name: "Griddle-Smashed Burger", price: 220 },
@@ -16,33 +17,50 @@ export const MENU = {
 export const MAX_PER_DISH = 10; // the Apps Script also refuses more than 10 of one dish
 
 const STORAGE_KEY = "parsh-cart-v1";
+const LAST_ORDER_KEY = "parsh-last-order-v1";
 
 // ---------- Reading and saving ----------
 
-function load() {
+// keep only real dishes with sensible amounts (saved data could be old or edited)
+function cleanItems(raw) {
+  const clean = {};
+  for (const [id, qty] of Object.entries(raw ?? {})) {
+    const n = Math.floor(Number(qty));
+    if (MENU[id] && n > 0) clean[id] = Math.min(n, MAX_PER_DISH);
+  }
+  return clean;
+}
+
+function readJSON(key) {
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    const items = {};
-    // keep only real dishes with sensible amounts (the saved data could be old or edited)
-    for (const [id, qty] of Object.entries(saved?.items ?? {})) {
-      const n = Math.floor(Number(qty));
-      if (MENU[id] && n > 0) items[id] = Math.min(n, MAX_PER_DISH);
-    }
-    return items;
+    return JSON.parse(localStorage.getItem(key));
   } catch {
-    return {}; // storage blocked or broken: start with an empty cart
+    return null; // storage blocked or broken
   }
 }
 
-let items = load();
-
-function save() {
+function writeJSON(key, value) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ items }));
+    localStorage.setItem(key, JSON.stringify(value));
   } catch {
     // storage blocked (for example some private windows): the cart still
     // works on this page, it just won't survive a refresh
   }
+}
+
+let items = cleanItems(readJSON(STORAGE_KEY)?.items);
+
+// Everyone who wants to know when the cart changes (the header count, the panel)
+const listeners = new Set();
+
+export function onCartChange(listener) {
+  listeners.add(listener);
+}
+
+function changed({ tick = false } = {}) {
+  writeJSON(STORAGE_KEY, { items });
+  updateHeaderCount({ tick });
+  listeners.forEach((listener) => listener());
 }
 
 // ---------- Reading the cart ----------
@@ -55,6 +73,16 @@ export function countItems() {
   return Object.values(items).reduce((sum, qty) => sum + qty, 0);
 }
 
+export function totalPrice(list = items) {
+  return Object.entries(list).reduce((sum, [id, qty]) => sum + MENU[id].price * qty, 0);
+}
+
+// Prices in Indian Rupees, written like ₹1,499
+const rupees = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
+export function formatRupees(amount) {
+  return `₹${rupees.format(amount)}`;
+}
+
 // ---------- Changing the cart ----------
 
 // Adds one of a dish. Returns false if that dish is already at the maximum.
@@ -63,8 +91,48 @@ export function addItem(id) {
   const qty = items[id] ?? 0;
   if (qty >= MAX_PER_DISH) return false;
   items[id] = qty + 1;
-  save();
-  updateHeaderCount({ tick: true });
+  changed({ tick: true });
+  return true;
+}
+
+// Sets how many of a dish (1 to 10). 0 or less removes it.
+export function setQuantity(id, qty) {
+  if (!MENU[id]) return;
+  const n = Math.min(Math.floor(qty), MAX_PER_DISH);
+  if (n > 0) items[id] = n;
+  else delete items[id];
+  changed();
+}
+
+export function removeItem(id) {
+  delete items[id];
+  changed();
+}
+
+export function clearCart() {
+  items = {};
+  changed();
+}
+
+// ---------- The last sent order ("Reorder your last order") ----------
+
+export function getLastOrder() {
+  const saved = readJSON(LAST_ORDER_KEY);
+  const list = cleanItems(saved?.items);
+  return Object.keys(list).length ? { items: list, orderNumber: saved.orderNumber } : null;
+}
+
+// Saves only the dishes and the order number: no name, phone or address
+export function saveLastOrder(order) {
+  writeJSON(LAST_ORDER_KEY, { items: cleanItems(order.items), orderNumber: order.orderNumber });
+}
+
+// Puts the last order's dishes back in the cart (today's prices)
+export function reorderLast() {
+  const last = getLastOrder();
+  if (!last) return false;
+  items = { ...last.items };
+  changed({ tick: true });
   return true;
 }
 
@@ -85,11 +153,12 @@ function updateHeaderCount({ tick = false } = {}) {
 
 countEl?.addEventListener("animationend", () => countEl.classList.remove("is-ticking"));
 
-// If the order is changed in another tab of this site, show the same count here
+// If the order is changed in another tab of this site, show the same here
 window.addEventListener("storage", (event) => {
   if (event.key !== STORAGE_KEY) return;
-  items = load();
+  items = cleanItems(readJSON(STORAGE_KEY)?.items);
   updateHeaderCount();
+  listeners.forEach((listener) => listener());
 });
 
 // Show the saved count as soon as the page opens

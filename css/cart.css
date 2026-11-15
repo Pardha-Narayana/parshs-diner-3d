@@ -1,0 +1,550 @@
+/* ==========================================================
+   PARSH'S Diner — the cart panel (SITE-PLAN.md sections 6 and 8)
+   Phones: a sheet that slides up from the bottom.
+   From 640px: a panel that slides in from the right.
+   0.3 s, only when opened or closed. Reduce motion: it just appears.
+   A native <dialog>, so focus, Esc and screen readers work for free.
+   ========================================================== */
+
+/* ---------- The panel ---------- */
+.cart {
+  /* reset the browser's own dialog box */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: none;
+  max-height: none;
+  color: var(--text);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 30%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.06),
+    0 -1.5rem 4rem -1rem rgb(0 0 0 / 0.8);
+
+  /* phones: a sheet at the bottom of the screen */
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: auto;
+  max-height: 92dvh;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+
+  /* closed state (the panel animates from here) */
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: var(--time-panel);
+  transition-timing-function: var(--ease-out);
+  transition-behavior: allow-discrete;
+}
+
+.cart[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 40rem) {
+  .cart {
+    inset: 0 0 0 auto;
+    width: min(28rem, 100%);
+    height: 100dvh;
+    max-height: none;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+    box-shadow:
+      var(--edge-lit),
+      0 0 0 1px rgb(var(--cream-rgb) / 0.06),
+      -1.5rem 0 4rem -1rem rgb(0 0 0 / 0.8);
+  }
+}
+
+/* The slide only for visitors who have NOT asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .cart {
+    transform: translateY(100%);
+  }
+
+  @media (min-width: 40rem) {
+    .cart {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Open state. :where(:not([data-closing])) lets browsers without exit
+   transitions (Firefox, Safari) slide it out too (js/cart-panel.js). */
+.cart[open]:where(:not([data-closing])) {
+  opacity: 1;
+  transform: none;
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @starting-style {
+      transform: translateY(100%);
+    }
+
+    @media (min-width: 40rem) {
+      @starting-style {
+        transform: translateX(100%);
+      }
+    }
+  }
+}
+
+/* The dimmed page behind the panel; scroll stays inside the panel */
+.cart:modal {
+  overscroll-behavior: contain;
+}
+
+.cart::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgb(var(--night-rgb) / 0);
+  transition-property: background-color, display, overlay;
+  transition-duration: var(--time-panel);
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+}
+
+.cart[open]:where(:not([data-closing]))::backdrop {
+  background-color: rgb(var(--night-rgb) / 0.72);
+
+  @starting-style {
+    background-color: rgb(var(--night-rgb) / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart,
+  .cart::backdrop {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ---------- Top bar ---------- */
+.cart__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.cart__title {
+  font-size: 2.25rem;
+}
+
+.cart__close {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgb(var(--cream-rgb) / 0.06);
+  color: var(--cream);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: background-color var(--time-quick) ease-out;
+}
+
+.cart__close svg {
+  width: 1.25rem;
+}
+
+@media (hover: hover) {
+  .cart__close:hover {
+    background: rgb(var(--cream-rgb) / 0.12);
+  }
+}
+
+/* ---------- Scrolling middle ---------- */
+.cart__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-5) var(--space-6);
+}
+
+.cart [hidden] {
+  display: none !important;
+}
+
+/* ---------- Empty cart ---------- */
+.cart__empty {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+}
+
+.cart__empty-line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+.cart__empty-actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cart__last {
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+}
+
+/* ---------- Items ---------- */
+.cart__items {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name  price"
+    "qty   remove";
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-item__name {
+  grid-area: name;
+  font-weight: var(--weight-body-strong);
+  line-height: 1.3;
+}
+
+.cart-item__price {
+  grid-area: price;
+  justify-self: end;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* − 2 + : one pill, sunk into the panel */
+.stepper {
+  grid-area: qty;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  border-radius: var(--radius-pill);
+  background: rgb(var(--night-rgb) / 0.7);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5), 0 1px 0 rgb(var(--cream-rgb) / 0.06);
+}
+
+.stepper__button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--neon);
+  font-size: 1.375rem;
+  font-weight: var(--weight-body-strong);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--time-quick) ease-out, transform var(--time-quick) ease-out;
+}
+
+.stepper__button:active {
+  transform: scale(0.9);
+}
+
+.stepper__button[aria-disabled="true"] {
+  color: rgb(var(--cream-rgb) / 0.3);
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .stepper__button:not([aria-disabled="true"]):hover {
+    background: rgb(var(--neon-rgb) / 0.12);
+  }
+}
+
+.stepper__qty {
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: var(--weight-body-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-item__remove {
+  grid-area: remove;
+  justify-self: end;
+  min-height: 2.75rem;
+  padding-inline: var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--neon);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  border-radius: var(--radius-small);
+}
+
+/* ---------- Details form ---------- */
+.order-form {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.order-form__title {
+  font-size: 1.75rem;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field__label {
+  padding: 0;
+  font-weight: var(--weight-body-strong);
+  font-size: 0.9375rem;
+}
+
+.field__optional {
+  font-weight: var(--weight-body);
+  color: var(--text-soft);
+}
+
+.field__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid rgb(var(--cream-rgb) / 0.16);
+  border-radius: var(--radius-small);
+  background: rgb(var(--night-rgb) / 0.75);
+  color: var(--cream);
+  font: inherit;
+  font-size: 1rem; /* 16px: phones don't zoom in when typing */
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+  transition: border-color var(--time-quick) ease-out;
+}
+
+.field__input--area {
+  resize: vertical;
+  min-height: 4.5rem;
+}
+
+.field__input:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* Errors: only after the visitor leaves the box or presses Send.
+   Amber border + the written message (never colour alone). */
+.field__error {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  color: var(--streetlight);
+}
+
+.field__error::before {
+  content: "!" / "";
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--streetlight);
+  color: var(--night);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.field__input:user-invalid {
+  border-color: var(--streetlight);
+}
+
+.field__input:user-invalid ~ .field__error,
+.choice:has(:user-invalid) .field__error {
+  display: flex;
+}
+
+/* ---------- Pickup or Delivery ---------- */
+.choice__options {
+  display: grid;
+  gap: var(--space-2);
+}
+
+@media (min-width: 24rem) {
+  .choice__options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.choice__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3.25rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-small);
+  background: rgb(var(--night-rgb) / 0.75);
+  box-shadow: inset 0 0 0 1px rgb(var(--cream-rgb) / 0.16);
+  cursor: pointer;
+  transition: box-shadow var(--time-quick) ease-out;
+}
+
+.choice__option input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--neon);
+}
+
+.choice__option:has(:checked) {
+  box-shadow: inset 0 0 0 2px var(--neon), 0 0 1rem rgb(var(--neon-rgb) / 0.18);
+}
+
+.choice:has(:user-invalid) .choice__option {
+  box-shadow: inset 0 0 0 1px var(--streetlight);
+}
+
+.choice__text {
+  display: grid;
+  font-weight: var(--weight-body-strong);
+  line-height: 1.25;
+}
+
+.choice__note {
+  font-weight: var(--weight-body);
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+}
+
+/* ---------- The address box opens smoothly (0.25 s) ---------- */
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: calc(-1 * var(--space-4)); /* no gap while closed */
+  transition:
+    grid-template-rows var(--time-open) var(--ease-out),
+    margin-top var(--time-open) var(--ease-out),
+    visibility var(--time-open);
+  visibility: hidden;
+}
+
+.reveal.is-open {
+  grid-template-rows: 1fr;
+  margin-top: 0;
+  visibility: visible;
+}
+
+.reveal__inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 3px; /* room for the focus ring */
+  margin: -3px;
+}
+
+/* ---------- Trap box for spam robots: off screen, never seen ---------- */
+.trap {
+  position: absolute;
+  left: -100vw;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Bottom bar: total + send ---------- */
+.cart__foot {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) max(var(--space-5), env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: rgb(var(--night-rgb) / 0.35);
+}
+
+.cart__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  max-width: none;
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-lg);
+}
+
+.cart__total-price {
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--streetlight);
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart__send {
+  width: 100%;
+}
+
+.cart__small {
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+  text-align: center;
+  max-width: none;
+}
+
+/* ---------- After sending ---------- */
+.cart__sent {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+}
+
+.cart__sent-title {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.cart__sent-title:focus {
+  outline: none;
+}
+
+.cart__sent-number {
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  color: var(--streetlight);
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+.cart__sent a {
+  color: var(--neon);
+  font-weight: var(--weight-body-strong);
+}
+
+.cart__sent .button {
+  justify-self: start;
+  margin-top: var(--space-3);
+}

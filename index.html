@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/css/buttons.css">
   <link rel="stylesheet" href="/css/hero.css">
   <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/cart.css">
   <link rel="stylesheet" href="/vendor/lenis/lenis.css">
 
   <!-- Import map: tells the browser where our saved libraries live (vendor/).
@@ -37,6 +38,7 @@
   <script type="module" src="/js/hero-burger.js"></script>
   <script type="module" src="/js/motion.js"></script>
   <script type="module" src="/js/menu.js"></script>
+  <script type="module" src="/js/cart-panel.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -57,7 +59,7 @@
           </ul>
         </nav>
 
-        <button class="order-button" type="button">
+        <button class="order-button" type="button" aria-haspopup="dialog" data-open-cart>
           <span>Your order</span>
           <span class="order-button__count" data-order-count>0</span>
           <span class="visually-hidden">items</span>
@@ -184,5 +186,119 @@
 
     <!-- Next steps add: how to order, why order direct, visit, final call, footer. -->
   </main>
+
+  <!-- ===== The cart panel (SITE-PLAN.md section 8) =====
+       A native modal dialog: keeps keyboard focus inside, closes with Esc,
+       the close button or a tap outside. data-lenis-prevent: the mouse wheel
+       scrolls the panel, not the page behind it. -->
+  <dialog class="cart" id="cart" aria-labelledby="cart-title" closedby="any" data-lenis-prevent>
+    <div class="cart__head">
+      <h2 class="cart__title" id="cart-title">Your order</h2>
+      <button class="cart__close" type="button" data-close-cart>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        <span class="visually-hidden">Close your order</span>
+      </button>
+    </div>
+
+    <!-- View 1: the order (items, details, send) -->
+    <div class="cart__body" data-view="order">
+      <div class="cart__empty" data-empty>
+        <p class="cart__empty-line">Your order is empty. Pick something from the menu.</p>
+        <div class="cart__empty-actions">
+          <button class="button button--primary" type="button" data-reorder hidden>Reorder your last order</button>
+          <a class="button button--ghost" href="#menu" data-close-cart>See the menu</a>
+        </div>
+        <p class="cart__last" data-last-order hidden></p>
+      </div>
+
+      <div data-filled>
+        <ul class="cart__items" role="list" data-items></ul>
+
+        <form class="order-form" id="order-form" data-order-form>
+          <h3 class="order-form__title">Your details</h3>
+
+          <div class="field">
+            <label class="field__label" for="order-name">Name</label>
+            <input class="field__input" id="order-name" name="name" type="text" required
+                   minlength="2" maxlength="40" autocomplete="name"
+                   pattern="(?=(.*\p{L}){2})[\p{L}\p{M} .'\-]{2,40}"
+                   data-error="order-name-error">
+            <p class="field__error" id="order-name-error">Enter your name, 2 to 40 letters.</p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="order-phone">Mobile number</label>
+            <input class="field__input" id="order-phone" name="phone" type="tel" required
+                   inputmode="tel" maxlength="20" autocomplete="tel-national"
+                   pattern="\s*(\+?\s*91[\s\-]*|0)?[6-9]([\s\-]*\d){9}\s*"
+                   data-error="order-phone-error">
+            <p class="field__error" id="order-phone-error">Enter a 10-digit mobile number.</p>
+          </div>
+
+          <fieldset class="field choice">
+            <legend class="field__label">Pickup or delivery</legend>
+            <div class="choice__options">
+              <label class="choice__option">
+                <input type="radio" name="way" value="pickup" required data-error="order-way-error">
+                <span class="choice__text">Pickup <span class="choice__note">at the restaurant</span></span>
+              </label>
+              <label class="choice__option">
+                <input type="radio" name="way" value="delivery" required data-error="order-way-error">
+                <span class="choice__text">Delivery <span class="choice__note">within 5 km</span></span>
+              </label>
+            </div>
+            <p class="field__error" id="order-way-error">Choose Pickup or Delivery.</p>
+          </fieldset>
+
+          <!-- Only for Delivery: opens smoothly when Delivery is chosen -->
+          <div class="reveal" data-address inert>
+            <div class="reveal__inner">
+              <div class="field">
+                <label class="field__label" for="order-address">Delivery address</label>
+                <textarea class="field__input field__input--area" id="order-address" name="address" rows="3"
+                          minlength="5" maxlength="200" autocomplete="street-address"
+                          data-error="order-address-error"></textarea>
+                <p class="field__error" id="order-address-error">Enter your delivery address.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="order-notes">Notes <span class="field__optional">(optional)</span></label>
+            <textarea class="field__input field__input--area" id="order-notes" name="notes" rows="2"
+                      maxlength="200"></textarea>
+          </div>
+
+          <!-- Trap for spam robots: hidden from people and screen readers.
+               A person never fills it in; if it has text, nothing is sent. -->
+          <div class="trap" aria-hidden="true">
+            <label for="order-website">Leave this empty</label>
+            <input id="order-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="cart__foot" data-view="order" data-filled>
+      <p class="cart__total">
+        <span>Total</span>
+        <span class="cart__total-price" data-total>₹0</span>
+      </p>
+      <button class="button button--primary cart__send" type="submit" form="order-form">Send order on WhatsApp</button>
+      <p class="cart__small">WhatsApp opens with your order typed. Press Send there to finish.</p>
+    </div>
+
+    <!-- View 2: after sending -->
+    <div class="cart__body cart__sent" data-view="sent" hidden>
+      <h3 class="cart__sent-title" tabindex="-1" data-sent-title>Order ready in WhatsApp</h3>
+      <p class="cart__sent-number" data-sent-number></p>
+      <p>Press Send in WhatsApp to finish your order.</p>
+      <p>WhatsApp didn&rsquo;t open? <a href="#" target="_blank" rel="noopener" data-sent-link>Open WhatsApp</a></p>
+      <button class="button button--ghost" type="button" data-close-cart>Done</button>
+    </div>
+
+    <!-- Screen readers hear quantity changes here -->
+    <p class="visually-hidden" role="status" data-panel-status></p>
+  </dialog>
 </body>
 </html>

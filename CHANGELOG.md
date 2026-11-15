@@ -4,6 +4,16 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 5: Cart panel and the WhatsApp order
+### Added
+- Cart panel in `index.html`: a native modal dialog with "Your order" heading and close button; the list of items; an empty state ("Your order is empty. Pick something from the menu.", "See the menu", and "Reorder your last order" when there is one); the details form (name, mobile number, Pickup or Delivery with "at the restaurant" / "within 5 km", delivery address only for Delivery, optional notes, and a hidden trap box for spam robots); a bottom bar with the total and "Send order on WhatsApp"; and an "Order ready in WhatsApp" view with the order number and an "Open WhatsApp" link in case it did not open. The header "Your order" button now opens it.
+- `css/cart.css` — raised Griddle panel with a lit edge and deep shadow over a dimmed page. Slides up from the bottom on phones and in from the right from 640 px, in 0.3 s, both opening and closing (Firefox and Safari too); with "reduce motion" it just appears. − / quantity / + in a sunk pill, prices in amber, Pickup / Delivery as two choice boxes, the address box opens smoothly (0.25 s). Errors in amber with a "!" mark and written text, shown only after the visitor leaves a box or presses Send.
+- `js/cart-panel.js` — opens and closes the panel (close button, Esc, tap outside, "Done"); shows items with − / + (1 to 10) and Remove without losing keyboard focus; total in ₹; screen readers hear each change. Form checks: name 2–40 letters (English or Telugu), a 10-digit Indian mobile starting 6–9 (+91, 0, spaces and dashes are allowed and cleaned), Pickup or Delivery, address required only for Delivery (max 200), notes max 200. Send makes an order number (PD-1000 to PD-9999) and opens WhatsApp to +91 77805 30607 with the order typed (order number, items, total, name, phone, Pickup or Delivery, address only for Delivery, notes only if written). Then the cart empties, the form clears, and the dishes are saved as the "last order". If the trap box is filled, nothing is sent. No Google Sheet yet.
+
+### Changed
+- `js/cart.js` — new shared functions for the panel: change quantity, remove, empty the cart, total price, ₹ formatting (₹1,499 style), "last order" save / read / reorder (dishes and order number only — no name, phone or address), and a change signal so the panel and header count stay in step.
+- `index.html` — links `css/cart.css` and `js/cart-panel.js`; the "Your order" button says it opens a dialog.
+
 ## 2026-11-16 — Phase 3, Step 4: Menu section and the Add button
 ### Added
 - Menu section in `index.html`, right below the hero (`id="menu"`, so the header "Menu" link and the hero "See the menu" button jump here): heading "The menu", the line "Pick your dishes and tap Add. You send the order to us on WhatsApp.", and the 4 dishes with their exact names, short lines and prices (₹220, ₹150, ₹260, ₹190). Photos: burger, chocolate shake, ribbon pasta, French toast (the cherry shake and penne photos stay in `assets/images/`, unused). Photos load only when scrolled near (lazy loading). A hidden status line tells screen readers what was added.

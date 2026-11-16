@@ -172,7 +172,7 @@ Apps Script protections (a new, upgraded script):
   - [x] In the Restaurant details for Google (index.html), make "image" and "hasMenu" full addresses and add "url"
   - [x] Create sitemap.xml (home and privacy pages) and add a "Sitemap:" line with its full address to robots.txt
   - [x] Check the share preview by sending the link in WhatsApp
-  - [ ] Test the home page in Google's Rich Results Test
+  - [x] Test the home page in Google's Rich Results Test
 
 ## 10. Later list (not in this version)
 - Second language (Telugu or Hindi), checked by a native speaker.

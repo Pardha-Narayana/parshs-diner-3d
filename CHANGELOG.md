@@ -4,6 +4,14 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 5 follow-up 2: Google checks passed
+Pardha did these in Google's own tools, on the live site:
+- Search Console: ownership of https://parshs-diner-3d.vercel.app/ is verified with the HTML tag. `sitemap.xml` was submitted: status Success, 2 pages found (home and privacy).
+- Rich Results Test on the home page: 2 valid items (Local businesses and Organisation), no errors.
+
+### Changed
+- `SITE-PLAN.md` before-launch checklist: "Test the home page in Google's Rich Results Test" is ticked. Every item under "Once the final web address is known" is now done.
+
 ## 2026-11-16 — Phase 4, Step 5 follow-up: Search Console tag, WhatsApp preview checked
 Pardha checked the live site: the WhatsApp preview shows "PARSH'S" fully, and new Sheet rows show India time in Date and Time. The test rows were deleted.
 

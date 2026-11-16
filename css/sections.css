@@ -1,0 +1,391 @@
+/* ==========================================================
+   PARSH'S Diner — home sections below the menu:
+   How ordering works, Why order direct, Hours and visit,
+   Final call to action.
+   Depth: raised Griddle panels (lit top edge, deep soft shadow),
+   small amber "bulbs", and still pools of light behind sections.
+   Nothing here moves on its own. Only design-system tokens are used.
+   ========================================================== */
+
+/* ---------- Shared: section heading and line (same look as the menu) ---------- */
+.section-intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.section-title {
+  font-size: clamp(3rem, 1.6rem + 6vw, 5.5rem);
+  line-height: 0.9;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.14);
+}
+
+.section-line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* A raised Griddle panel: light falling on its top, lit top edge, deep shadow */
+.how__steps,
+.visit__board {
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 40%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.05),
+    var(--shadow-deep);
+}
+
+/* A small lit amber bulb in front of a line, like a sign light */
+.direct__name::before,
+.visit__ways li::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--streetlight);
+  box-shadow:
+    0 0 0.5rem rgb(var(--streetlight-rgb) / 0.8),
+    0 0 1.25rem rgb(var(--streetlight-rgb) / 0.35);
+}
+
+/* Lists styled without bullets (role="list" in the HTML keeps them lists for Safari) */
+.how__steps,
+.direct__points,
+.visit__ways,
+.visit__facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ==========================================================
+   1. How ordering works
+   One raised panel holding the 3 steps.
+   Phones: steps stacked. From 832px: 3 side by side.
+   ========================================================== */
+.how {
+  padding-block: var(--space-8);
+}
+
+.how__steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.how__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--space-4);
+  align-items: start;
+  align-content: start; /* steps with a shorter line don't spread out, so headings line up */
+  padding: var(--space-5);
+}
+
+.how__step + .how__step {
+  border-top: 1px solid var(--line);
+}
+
+/* The number sits in a round socket pressed into the panel, lit amber */
+.how__number {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, rgb(var(--streetlight-rgb) / 0.14), transparent 70%),
+    rgb(var(--night-rgb) / 0.7);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 0.55),
+    0 1px 0 rgb(var(--cream-rgb) / 0.08),
+    0 0 0 1px rgb(var(--streetlight-rgb) / 0.3);
+  color: var(--streetlight);
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  line-height: 1;
+  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.55);
+}
+
+.how__name {
+  align-self: center;
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 1.875rem);
+  line-height: 1;
+}
+
+.how__line {
+  margin-top: var(--space-2);
+  color: var(--text-soft);
+}
+
+@media (min-width: 52rem) {
+  .how__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .how__step {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-6);
+  }
+
+  .how__number {
+    grid-row: auto;
+    width: 4.5rem;
+    margin-bottom: var(--space-5);
+    font-size: 2.5rem;
+  }
+
+  .how__step + .how__step {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* ==========================================================
+   2. Why order direct
+   Heading on the left, 3 points on the right (computers).
+   A soft pink neon spill sits still behind the section.
+   ========================================================== */
+.direct {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8);
+}
+
+.direct::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(50% 60% at 15% 50%, rgb(var(--neon-rgb) / 0.08), transparent 70%);
+}
+
+.direct__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.direct__inner .section-intro {
+  margin-bottom: 0;
+}
+
+.direct__point {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.direct__point:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.direct__name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.75rem);
+  line-height: 1;
+}
+
+.direct__line {
+  margin-top: var(--space-2);
+  padding-left: calc(0.5rem + var(--space-3)); /* lines up with the words, after the bulb */
+  color: var(--text-soft);
+}
+
+@media (min-width: 52rem) {
+  .direct__inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+/* ==========================================================
+   3. Hours and visit
+   A raised board under a still amber streetlight pool.
+   Phones: address, then hours. From 832px: side by side.
+   ========================================================== */
+.visit {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8);
+}
+
+.visit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(55% 55% at 70% 35%, rgb(var(--streetlight-rgb) / 0.12), transparent 70%);
+}
+
+.visit__title {
+  margin-bottom: var(--space-7);
+}
+
+.visit__board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-5);
+}
+
+.visit__heading {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-sign-light);
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+
+.visit__address {
+  font-style: normal;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+.visit__map {
+  margin-top: var(--space-5);
+}
+
+.visit__ways {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.visit__ways li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: var(--weight-body-strong);
+}
+
+/* Hours: like a diner menu board, with a dotted line from day to time */
+.hours {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.hours__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+}
+
+.hours dt {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--text-soft);
+}
+
+.hours dt::after {
+  content: "";
+  flex: 1;
+  min-width: var(--space-4);
+  border-bottom: 2px dotted rgb(var(--cream-rgb) / 0.2);
+}
+
+.hours dd {
+  margin: 0;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign-light);
+  font-size: 1.375rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+/* 100% halal and Est. 2024: two small amber-lit tags */
+.visit__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.visit__facts li {
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--streetlight);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-sm);
+  background: rgb(var(--streetlight-rgb) / 0.06);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--streetlight-rgb) / 0.45),
+    0 0 1rem rgb(var(--streetlight-rgb) / 0.12);
+}
+
+@media (min-width: 52rem) {
+  .visit__board {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-8);
+    padding: var(--space-7);
+  }
+
+  .visit__facts {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================
+   4. Final call to action — the one big moment below the menu.
+   A very large sign-style line under a still amber pool of light.
+   ========================================================== */
+.final {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-9);
+}
+
+.final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 30% 45%, rgb(var(--streetlight-rgb) / 0.14), transparent 70%),
+    radial-gradient(35% 35% at 20% 80%, rgb(var(--neon-rgb) / 0.08), transparent 70%);
+}
+
+.final__inner {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-6);
+}
+
+.final__title {
+  max-width: 12ch;
+  font-size: clamp(3.5rem, 1.2rem + 9.5vw, 9.5rem);
+  line-height: 0.86;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.14),
+    0 0 4.5rem rgb(var(--streetlight-rgb) / 0.22);
+}
+
+.final__button {
+  min-height: 3.5rem;
+  padding-inline: var(--space-7);
+  font-size: var(--text-lg);
+}

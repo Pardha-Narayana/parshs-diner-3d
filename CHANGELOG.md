@@ -4,6 +4,20 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 7: The rest of the home sections
+### Added
+- 4 sections in `index.html`, below the menu:
+  - How ordering works (`id="how-to-order"`): "Three steps. No app, no sign-up." and 3 numbered steps (Pick your food, Add your details, Send on WhatsApp).
+  - Why order direct: "Order straight from us" and 3 points (No app to download, Straight to the restaurant with +91 77805 30607, Pickup or delivery within 5 km in Kakinada). No made-up claims or numbers.
+  - Hours and visit (`id="visit"`): the address, an "Open in Google Maps" link (opens in a new tab), Pickup at the restaurant, Delivery within 5 km, the hours (Mon – Fri 11:00 AM – 10:00 PM, Saturday 10:00 AM – 11:00 PM, Sunday 10:00 AM – 10:00 PM), and two small tags: 100% halal, Est. 2024.
+  - Final call to action: "Order straight from the griddle." and an "Order now" button.
+  The header links "How to order" and "Visit" (and the hero's "How ordering works" button) now land on these sections.
+- `css/sections.css` — styles for the 4 sections, using only the design-system tokens. One raised Griddle panel holding the 3 steps, each number in a round amber-lit socket (stacked on phones, side by side from 832 px). Small lit amber "bulbs" before the direct-order points and the Pickup/Delivery lines. A raised Visit board with the hours like a diner menu board (dotted line from day to amber time). Still pools of light behind Why order direct (pink), Visit and the final section (amber). A very large sign-style final line. Nothing moves on its own.
+- `js/order-now.js` — "Order now": opens the cart when it has items; when it is empty, goes to the menu and puts keyboard focus on the first Add button.
+
+### Changed
+- `index.html` — links `css/sections.css` and `js/order-now.js`; the end-of-page note now says only the footer is still to come.
+
 ## 2026-11-16 — Phase 3, Step 6: Google Sheet order log
 ### Added
 - `apps-script/Code.gs` — the new order-log script. Only adds rows (never reads, changes or deletes), limited to its own Sheet (`@OnlyCurrentDoc`). Checks every order: order number like PD-1432, name 2–40 letters, 10-digit Indian mobile, Pickup or Delivery, address only for Delivery (5–200), notes up to 200, only our 4 dishes at their real prices, 1–10 of each, and a total that matches. Drops orders with the hidden trap box filled. Spam limits in Google's cache: 3 orders per phone in 10 minutes, 20 orders a minute overall. Text starting with =, +, - or @ is made harmless. Columns A–I in the old order (full timestamp, date, time, name, phone, Pickup/Delivery, address, items, total), then Site ("3D"), Order no., Notes. Timestamp, date and time in the same format as the old rows (UTC, e.g. "2026-07-09T10:32:40.031Z", "2026-07-09", "10:32:40").

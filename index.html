@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/css/buttons.css">
   <link rel="stylesheet" href="/css/hero.css">
   <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="/css/sections.css">
   <link rel="stylesheet" href="/css/cart.css">
   <link rel="stylesheet" href="/vendor/lenis/lenis.css">
 
@@ -39,6 +40,7 @@
   <script type="module" src="/js/motion.js"></script>
   <script type="module" src="/js/menu.js"></script>
   <script type="module" src="/js/cart-panel.js"></script>
+  <script type="module" src="/js/order-now.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -184,7 +186,120 @@
       </div>
     </section>
 
-    <!-- Next steps add: how to order, why order direct, visit, final call, footer. -->
+    <!-- ===== How ordering works (a real 3-step sequence, so numbered) ===== -->
+    <section class="how" id="how-to-order" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-intro">
+          <h2 class="section-title" id="how-title">How ordering works</h2>
+          <p class="section-line">Three steps. No app, no sign-up.</p>
+        </div>
+
+        <ol class="how__steps" role="list">
+          <li class="how__step">
+            <span class="how__number" aria-hidden="true">1</span>
+            <h3 class="how__name">Pick your food</h3>
+            <p class="how__line">Tap Add on any dish. Your order is saved in this browser.</p>
+          </li>
+          <li class="how__step">
+            <span class="how__number" aria-hidden="true">2</span>
+            <h3 class="how__name">Add your details</h3>
+            <p class="how__line">Your name, mobile number, and Pickup or Delivery. We ask for an address only for Delivery.</p>
+          </li>
+          <li class="how__step">
+            <span class="how__number" aria-hidden="true">3</span>
+            <h3 class="how__name">Send on WhatsApp</h3>
+            <p class="how__line">WhatsApp opens with your order typed. Press Send to finish.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Why order direct (only real facts) ===== -->
+    <section class="direct" aria-labelledby="direct-title">
+      <div class="direct__inner wrap">
+        <div class="section-intro">
+          <h2 class="section-title" id="direct-title">Order straight from us</h2>
+          <p class="section-line">Your order goes from your WhatsApp to our kitchen.</p>
+        </div>
+
+        <ul class="direct__points" role="list">
+          <li class="direct__point">
+            <h3 class="direct__name">No app to download</h3>
+            <p class="direct__line">If you have WhatsApp, you can order.</p>
+          </li>
+          <li class="direct__point">
+            <h3 class="direct__name">Straight to the restaurant</h3>
+            <p class="direct__line">Your order arrives in our own WhatsApp, <span class="nowrap">+91 77805 30607</span>.</p>
+          </li>
+          <li class="direct__point">
+            <h3 class="direct__name">Pickup or delivery</h3>
+            <p class="direct__line">Collect it at the restaurant, or get it delivered within 5&nbsp;km in Kakinada.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Hours and visit (SITE-PLAN.md section 5) ===== -->
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="wrap">
+        <h2 class="section-title visit__title" id="visit-title">Visit us</h2>
+
+        <div class="visit__board">
+          <div class="visit__place">
+            <h3 class="visit__heading">Address</h3>
+            <address class="visit__address">
+              PARSH&rsquo;S Diner<br>
+              Near Church Square centre, Jagannaickpur,<br>
+              Kakinada, Andhra Pradesh 533002
+            </address>
+            <a class="button button--ghost visit__map" href="https://maps.app.goo.gl/GvMQWYbLxqMJfsXBA"
+               target="_blank" rel="noopener">
+              Open in Google Maps<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+
+            <ul class="visit__ways" role="list">
+              <li>Pickup at the restaurant</li>
+              <li>Delivery within 5&nbsp;km</li>
+            </ul>
+          </div>
+
+          <div class="visit__hours">
+            <h3 class="visit__heading">Hours</h3>
+            <dl class="hours">
+              <div class="hours__row">
+                <dt>Mon &ndash; Fri</dt>
+                <dd>11:00 AM &ndash; 10:00 PM</dd>
+              </div>
+              <div class="hours__row">
+                <dt>Saturday</dt>
+                <dd>10:00 AM &ndash; 11:00 PM</dd>
+              </div>
+              <div class="hours__row">
+                <dt>Sunday</dt>
+                <dd>10:00 AM &ndash; 10:00 PM</dd>
+              </div>
+            </dl>
+          </div>
+
+          <ul class="visit__facts" role="list">
+            <li>100% halal</li>
+            <li>Est. 2024</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Final call to action =====
+         "Order now": opens the cart when it has items, otherwise goes to
+         the menu (js/order-now.js). -->
+    <section class="final" aria-labelledby="final-title">
+      <div class="final__inner wrap">
+        <h2 class="final__title" id="final-title">Order straight from the griddle.</h2>
+        <button class="button button--primary final__button" type="button" data-order-now>Order now</button>
+      </div>
+    </section>
+
+    <!-- Next step adds: the footer. -->
   </main>
 
   <!-- ===== The cart panel (SITE-PLAN.md section 8) =====

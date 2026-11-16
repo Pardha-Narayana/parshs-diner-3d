@@ -165,6 +165,7 @@ Apps Script protections (a new, upgraded script):
 - [ ] README and CHANGELOG are true
 - [ ] Address, map link and hours are correct
 - [ ] Hosting plan allows business use
+- [ ] Before real customers use the site, move it to Vercel Pro or a free host that allows business use. (For now it is on Vercel's free Hobby plan as a demo only.)
 - Once the final web address is known (these need the full address, so they were left out in Phase 3, Step 9):
   - [ ] Add a canonical link (the "main address" tag) to index.html and privacy.html
   - [ ] Change og:image (and add og:url) on index.html and privacy.html to full addresses, like https://<address>/assets/images/share.jpg — WhatsApp only shows the share image with a full address

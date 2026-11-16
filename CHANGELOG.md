@@ -4,6 +4,18 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 4: The site is online (Vercel, free Hobby plan, demo only)
+Live address: https://parshs-diner-3d.vercel.app. A new Vercel project "parshs-diner-3d" (Framework: Other, no build), connected to the GitHub repository Pardha-Narayana/parshs-diner-3d, so every push to main updates the site. The old Vercel project (parsh_s_diner) was not touched. The free Hobby plan does not allow business sites, so this is a demo until launch.
+
+### Added
+- `.vercelignore`: keeps everything that is not the website off the internet: `tools/`, `apps-script/`, `.claude/`, `skills-lock.json`, every `.md` notes file, `.gitignore` and any `.env` file.
+- SITE-PLAN.md before-launch checklist: "Before real customers use the site, move it to Vercel Pro or a free host that allows business use."
+
+### Checked on the live site
+- With chrome-devtools at 375 px and desktop: home, /privacy and a made-up address (our 404 page) work, with no console errors and no sideways scrolling. The 3D burger loads after the first scroll.
+- The ordering flow: add, change quantity, remove, totals (₹590, ₹520, ₹300, ₹450), and the Pickup and Delivery WhatsApp messages and Sheet data are correct. The WhatsApp and Sheet sends were blocked in the test, so no row was added.
+- Not reachable online (all give 404): `tools/` pages and files, `apps-script/Code.gs`, `CLAUDE.md`, `PROMPTS.md`, `.claude/`, `skills-lock.json`, `.env.local`, `.vercel/`.
+
 ## 2026-11-16 — Phase 4, Step 3: Full test before launch, and 4 fixes
 Full test with chrome-devtools at 360, 375, 768 and 1440 px: every section, link and button, header, 3D burger, cart, form checks, Pickup and Delivery, WhatsApp message, Sheet data (sends blocked, no row added), reorder, footer, privacy and 404 pages, reduce motion, keyboard only, no sideways scrolling, no console errors, no "TODO/placeholder/lorem". Main heading at about 2.2 s on a simulated slow phone with slow 4G. Lighthouse at phone size: Accessibility, Best Practices and SEO 100. It found 3 problems and 1 colour-rule slip, fixed below.
 

@@ -1,0 +1,20 @@
+# .vercelignore — files Vercel must NOT put online
+# (PARSH'S Diner 3D). Only the website itself is published.
+
+# ---- Helper tools (3D burger and share-image makers) ----
+tools/
+
+# ---- Google Apps Script code (lives in Google, not on the website) ----
+apps-script/
+
+# ---- Claude Code settings and skills ----
+.claude/
+skills-lock.json
+
+# ---- Project notes (plans, history, rules) ----
+*.md
+
+# ---- Git and secret files ----
+.gitignore
+.env
+.env.*

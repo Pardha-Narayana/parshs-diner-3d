@@ -4,6 +4,19 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 5 follow-up: Search Console tag, WhatsApp preview checked
+Pardha checked the live site: the WhatsApp preview shows "PARSH'S" fully, and new Sheet rows show India time in Date and Time. The test rows were deleted.
+
+### Added
+- `index.html`: the Google Search Console verification tag (`google-site-verification`), in the head next to the other meta tags. It proves to Google that we own the site. It is not a secret. The privacy and 404 pages don't have it, because Google needs it only on the home page.
+
+### Changed
+- `SITE-PLAN.md` before-launch checklist: one line held two checks, so it is now two lines. "Check the share preview by sending the link in WhatsApp" is ticked. "Test the home page in Google's Rich Results Test" is still open.
+
+### Checked
+- Local preview, in the app's built-in browser: the tag is in the head exactly once, no console errors. Ordering flow correct: totals ₹590 and ₹440, and the Delivery and Pickup WhatsApp messages and Sheet data are right. The sends were captured in the test, so no row was added.
+- Not yet checked: verification in Search Console. That works only after the push, and Pardha clicks **Verify** there.
+
 ## 2026-11-16 — Phase 4, Step 5: Final-address items, India time in the Sheet, new share image
 Uses the live address https://parshs-diner-3d.vercel.app.
 

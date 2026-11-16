@@ -4,6 +4,27 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 2: Faster main heading
+Lighthouse at phone size, home page: Performance about 90 → 96 (3 runs: 96, 92, 96); the main heading appears at about 2.7 s instead of about 3.0 s (simulated slow phone). Accessibility, Best Practices and SEO stay 100. Privacy page stays 100 / 100 / 100 / 100. Screenshots of the home, privacy and 404 pages at phone and desktop size are pixel-identical before and after.
+
+### Added
+- `css/site.css`: the shared styles for every page (tokens, base page, header, buttons), joined unchanged and in the same order.
+- `css/home.css`: the home page styles (hero, menu, more sections, cart, footer and the Lenis styles), joined unchanged and in the same order.
+- SITE-PLAN.md "Later" list: smaller 3D burger textures.
+
+### Changed
+- `index.html`: 2 style files instead of 10. Only the heading font (Big Shoulders Display) is downloaded early; the body font loads normally. No layout shift.
+- `privacy.html` and `404.html`: `css/site.css` instead of the 4 shared files (`css/page.css` stays).
+- `js/hero-burger.js`: the "can this device show 3D?" check now runs at the visitor's first action, not when the page opens. The check starts the phone's graphics engine, which took about 0.5 s even on a fast computer.
+- `js/cart-panel.js`, `js/cart.js`, `js/header.js`, `js/order-now.js`: comments now name `css/site.css` or `css/home.css` instead of the old files. No code change.
+- `tools/share-image/share.html` (design tool, not part of the website): links `css/site.css` instead of `css/tokens.css`, with a note that the text now sits a few px lower, so a remade share.jpg should be compared with the current one first. `assets/images/share.jpg` is unchanged.
+
+### Removed
+- The 9 old style files, after asking: `css/tokens.css`, `base.css`, `header.css`, `buttons.css`, `hero.css`, `menu.css`, `sections.css`, `cart.css`, `footer.css`. `vendor/lenis/lenis.css` is kept with the Lenis library, unused.
+
+### Found
+- The "RangeError: Invalid typed array length: 4" seen in earlier tests came from the test itself: the test blocker answered every download (including the burger file) with 2 bytes. A clean tab shows no console errors, and the 3D burger loads.
+
 ## 2026-11-16 — Phase 4, Step 1: Speed and quality fixes
 Lighthouse at phone size, home page: Performance 58 → about 90 (3 runs: 69, 94, 90). Accessibility, Best Practices and SEO stay 100. Privacy page stays 100 / 100 / 100 / 100. First-load size of the home page: 2,736 KB → 676 KB. Blocking time: 6,340 ms → 0 ms (2 of 3 runs).
 

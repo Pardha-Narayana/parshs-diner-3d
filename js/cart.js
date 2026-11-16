@@ -144,7 +144,7 @@ function updateHeaderCount({ tick = false } = {}) {
   if (!countEl) return;
   countEl.textContent = String(countItems());
   if (tick) {
-    // restart the little "tick up" (css/menu.css). Reduce motion: no movement.
+    // restart the little "tick up" (the menu part of css/home.css). Reduce motion: no movement.
     countEl.classList.remove("is-ticking");
     void countEl.offsetWidth;
     countEl.classList.add("is-ticking");

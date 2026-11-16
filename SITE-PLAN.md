@@ -177,3 +177,4 @@ Apps Script protections (a new, upgraded script):
 - A bigger custom 3D scene (Three.js).
 - Menu filter: tap a group name to jump to it — when the menu grows.
 - Real photos of our own dishes (to replace the stock photos).
+- Smaller 3D burger textures: shrink the 2 texture pictures inside `assets/models/burger.glb` (now 2048 px, about 400 KB of the 1.37 MB file) with the tools in `tools/burger`, then compare the burger closed and open with the current one, and remake the backup still image if it no longer matches.

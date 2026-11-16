@@ -66,7 +66,7 @@ if (dialog && openButton) {
   });
 
   // Firefox and Safari can't animate a dialog closing by themselves:
-  // play the slide-out first, then close (see css/cart.css).
+  // play the slide-out first, then close (see the cart part of css/home.css).
   let canTransitionDisplay;
   function supportsTopLayerExit() {
     if (canTransitionDisplay === undefined) {

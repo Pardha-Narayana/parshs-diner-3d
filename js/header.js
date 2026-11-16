@@ -1,5 +1,5 @@
 // PARSH'S Diner — header turns solid after a little scroll.
-// css/header.css also tries to do this with CSS alone (a very new browser
+// css/site.css (header part) also tries to do this with CSS alone (a very new browser
 // feature). That feature did not switch on reliably in Chrome, so this
 // script now runs in EVERY browser: it adds the "is-solid" class itself.
 

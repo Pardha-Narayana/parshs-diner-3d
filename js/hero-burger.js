@@ -61,6 +61,9 @@ function onFirstAction(task) {
 }
 
 async function load3D() {
+  // Checked here, not when the page opens: testing for 3D starts the
+  // phone's graphics engine, which is slow, so we only do it when needed.
+  if (!canShow3D()) return; // keep the still image
   try {
     await import("@google/model-viewer");
   } catch {
@@ -97,4 +100,4 @@ async function load3D() {
   stage.append(viewer);
 }
 
-if (stage && canShow3D()) onFirstAction(load3D);
+if (stage) onFirstAction(load3D);

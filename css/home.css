@@ -1,0 +1,1558 @@
+/* ==========================================================
+   PARSH'S Diner — home.css: the home page sections
+   (hero, menu, more sections, cart, footer, Lenis), in this order.
+   Load after site.css. One file instead of six, so the page appears sooner.
+   ========================================================== */
+
+/* ==========================================================
+   PARSH'S Diner — hero (first section)
+   Phones: badge, heading, line, buttons, then the burger below.
+   Computers (from 832px): text on the left, burger on the right.
+   ========================================================== */
+
+.hero {
+  /* the glow behind the burger may reach past the screen edge — cut it off
+     so the page never scrolls sideways */
+  overflow-x: clip;
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-6) var(--space-8);
+}
+
+@media (min-width: 52rem) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-7);
+    min-height: calc(100svh - var(--header-height));
+    padding-block: var(--space-6) var(--space-8);
+  }
+}
+
+/* ---------- 100% Halal badge ----------
+   A small round seal, tilted like a sticker. It never moves. */
+.halal-badge {
+  display: inline-grid;
+  place-content: center;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  margin: 0 0 var(--space-5);
+  border-radius: 50%;
+  color: var(--streetlight);
+  text-align: center;
+  line-height: 1;
+  rotate: -10deg;
+  background:
+    radial-gradient(circle at 50% 30%, rgb(var(--streetlight-rgb) / 0.16), transparent 70%),
+    rgb(var(--night-rgb) / 0.6);
+  box-shadow:
+    inset 0 0 0 2px var(--streetlight),
+    inset 0 0 0 5px rgb(var(--night-rgb) / 0.9),
+    inset 0 0 0 6px rgb(var(--streetlight-rgb) / 0.45),
+    0 0 1.25rem rgb(var(--streetlight-rgb) / 0.25);
+}
+
+.halal-badge__big {
+  display: block;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 1.375rem;
+}
+
+.halal-badge__small {
+  display: block;
+  margin-top: 0.125rem;
+  font-weight: var(--weight-body-strong);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Heading and line ---------- */
+.hero__title {
+  font-size: clamp(3.75rem, 1.5rem + 9vw, 8rem);
+  line-height: 0.88;
+  /* the lit-sign look, same as the logo: warm light, never moving */
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.14);
+}
+
+.hero__line {
+  margin-top: var(--space-4);
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  color: var(--text-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.hero__actions .button {
+  flex: 1 1 12rem; /* full width on small phones, side by side when there is room */
+}
+
+@media (min-width: 52rem) {
+  .hero__actions .button {
+    flex: 0 0 auto;
+  }
+}
+
+/* ---------- The burger ---------- */
+.hero__visual {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}
+
+.hero__stage {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 30rem);
+  aspect-ratio: 1;
+}
+
+@media (min-width: 52rem) {
+  .hero__stage {
+    width: min(100%, 40rem);
+  }
+}
+
+/* Pink neon haze and amber glow behind the burger (still, never moving) */
+.hero__stage::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side at 58% 36%, rgb(var(--streetlight-rgb) / 0.3), transparent),
+    radial-gradient(closest-side at 44% 60%, rgb(var(--neon-rgb) / 0.26), transparent);
+}
+
+/* The backup still image shows first. The 3D burger sits on top of it,
+   invisible until it has fully loaded, then they swap. */
+.hero__still,
+.hero__model {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__model {
+  opacity: 0;
+  background-color: transparent;
+  --poster-color: transparent;
+  /* up-and-down swipes always scroll the page; sideways drags spin the burger */
+  touch-action: pan-y;
+}
+
+.hero__stage.is-3d .hero__model {
+  opacity: 1;
+}
+
+.hero__stage.is-3d .hero__still {
+  visibility: hidden;
+}
+
+/* "Drag to spin" — only shown once the 3D burger is ready */
+.hero__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+  visibility: hidden;
+}
+
+.hero__hint svg {
+  width: 1.5rem;
+  height: auto;
+}
+
+.hero__visual:has(.is-3d) .hero__hint {
+  visibility: visible;
+}
+
+/* ==========================================================
+   PARSH'S Diner — menu (the 4 dishes)
+   Phones: one card per row. From 640px: 2 per row.
+   From 1088px: all 4 in one row.
+   Depth: raised Griddle cards with a lit top edge and a deep soft
+   shadow; each photo sits under its own soft amber spotlight.
+   Nothing moves on its own.
+   ========================================================== */
+
+.menu {
+  padding-block: var(--space-8) var(--space-9);
+}
+
+/* ---------- Heading ---------- */
+.menu__intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.menu__title {
+  font-size: clamp(3rem, 1.6rem + 6vw, 5.5rem);
+  line-height: 0.9;
+  /* same lit-sign look as the hero heading */
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.14);
+}
+
+.menu__line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+/* ---------- The grid of cards ----------
+   Each card shares 4 row tracks with its neighbours (photo, name,
+   short line, price + Add), so names and prices line up in a row. */
+.menu__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .menu__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 68rem) {
+  .menu__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.menu__list > li,
+.dish {
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+/* ---------- One dish card ---------- */
+.dish {
+  position: relative;
+  isolation: isolate;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  border-radius: var(--radius-card);
+  background:
+    /* a little light falling on the top of the card */
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 40%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.05),
+    var(--shadow-deep);
+  transition:
+    transform var(--time-quick) ease-out,
+    box-shadow var(--time-quick) ease-out;
+}
+
+/* Computer mouse only: the card lifts a little */
+@media (hover: hover) {
+  .dish:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      var(--edge-lit),
+      0 0 0 1px rgb(var(--cream-rgb) / 0.08),
+      0 2rem 3.5rem -1rem rgb(0 0 0 / 0.75);
+  }
+}
+
+/* ---------- Photo with its own spotlight ---------- */
+.dish__photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius-card) - var(--space-2));
+  background: var(--night);
+  /* the photo sits slightly "into" the card */
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.4);
+}
+
+.dish__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* tall photos: keep the food in the middle of the square */
+.dish[data-dish="milkshake"] img {
+  object-position: 50% 62%;
+}
+
+.dish[data-dish="french-toast"] img {
+  object-position: 50% 40%;
+}
+
+/* The spotlight: warm amber light from above, centre bright,
+   edges falling off into the dark. Drawn over the photo, never moving. */
+.dish__photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgb(var(--streetlight-rgb) / 0.22), transparent 70%),
+    radial-gradient(85% 85% at 50% 45%, transparent 55%, rgb(var(--night-rgb) / 0.6) 100%);
+  border-radius: inherit;
+}
+
+/* An amber pool of light spilling onto the card under the photo */
+.dish__photo::before {
+  content: "";
+  position: absolute;
+  inset: auto 10% -1px;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(to right, transparent, rgb(var(--streetlight-rgb) / 0.45), transparent);
+}
+
+/* ---------- Words ---------- */
+.dish__name {
+  margin-top: var(--space-4);
+  padding-inline: var(--space-2);
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 1.875rem);
+  line-height: 1;
+}
+
+.dish__line {
+  margin-top: var(--space-2);
+  padding-inline: var(--space-2);
+  font-size: 0.9375rem;
+  color: var(--text-soft);
+}
+
+/* ---------- Price + Add ---------- */
+.dish__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-1) 0 var(--space-2);
+  border-top: 1px solid var(--line);
+  align-self: end;
+}
+
+.dish__price {
+  margin-right: auto;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+/* "Added" note: shows for a moment after a tap, then fades */
+.dish__note {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  color: var(--cream);
+  opacity: 0;
+  transition: opacity var(--time-quick) ease-out;
+}
+
+.dish__note.is-shown {
+  opacity: 1;
+}
+
+/* ---------- Add button ----------
+   Neon pink = something you tap. Presses in when tapped. */
+.add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background:
+    linear-gradient(to bottom, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0) 55%),
+    var(--neon);
+  color: var(--night);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-base);
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--glow-neon);
+  transition:
+    box-shadow var(--time-quick) ease-out,
+    transform var(--time-quick) ease-out;
+}
+
+.add-button:focus-visible {
+  outline-color: var(--cream);
+}
+
+/* pressed: by finger/mouse (:active) or for a moment after a tap (.is-pressed) */
+.add-button:active,
+.add-button.is-pressed {
+  transform: scale(0.94);
+  box-shadow:
+    inset 0 2px 4px rgb(0 0 0 / 0.35),
+    0 0 0 1px rgb(var(--neon-rgb) / 0.55),
+    0 0 0.75rem rgb(var(--neon-rgb) / 0.3);
+}
+
+@media (hover: hover) {
+  .add-button:hover {
+    box-shadow: var(--glow-neon-strong);
+  }
+}
+
+/* ---------- Header count ticks up once after an Add ---------- */
+.order-button__count.is-ticking {
+  animation: count-tick var(--time-quick) var(--ease-out);
+}
+
+@keyframes count-tick {
+  50% {
+    transform: scale(1.3);
+  }
+}
+
+/* ==========================================================
+   PARSH'S Diner — home sections below the menu:
+   How ordering works, Why order direct, Hours and visit,
+   Final call to action.
+   Depth: raised Griddle panels (lit top edge, deep soft shadow),
+   small amber "bulbs", and still pools of light behind sections.
+   Nothing here moves on its own. Only design-system tokens are used.
+   ========================================================== */
+
+/* ---------- Shared: section heading and line (same look as the menu) ---------- */
+.section-intro {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.section-title {
+  font-size: clamp(3rem, 1.6rem + 6vw, 5.5rem);
+  line-height: 0.9;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.14);
+}
+
+.section-line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* A raised Griddle panel: light falling on its top, lit top edge, deep shadow */
+.how__steps,
+.visit__board {
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 40%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.05),
+    var(--shadow-deep);
+}
+
+/* A small lit amber bulb in front of a line, like a sign light */
+.direct__name::before,
+.visit__ways li::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--streetlight);
+  box-shadow:
+    0 0 0.5rem rgb(var(--streetlight-rgb) / 0.8),
+    0 0 1.25rem rgb(var(--streetlight-rgb) / 0.35);
+}
+
+/* Lists styled without bullets (role="list" in the HTML keeps them lists for Safari) */
+.how__steps,
+.direct__points,
+.visit__ways,
+.visit__facts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ==========================================================
+   1. How ordering works
+   One raised panel holding the 3 steps.
+   Phones: steps stacked. From 832px: 3 side by side.
+   ========================================================== */
+.how {
+  padding-block: var(--space-8);
+}
+
+.how__steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.how__step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--space-4);
+  align-items: start;
+  align-content: start; /* steps with a shorter line don't spread out, so headings line up */
+  padding: var(--space-5);
+}
+
+.how__step + .how__step {
+  border-top: 1px solid var(--line);
+}
+
+/* The number sits in a round socket pressed into the panel, lit amber */
+.how__number {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 35%, rgb(var(--streetlight-rgb) / 0.14), transparent 70%),
+    rgb(var(--night-rgb) / 0.7);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 0.55),
+    0 1px 0 rgb(var(--cream-rgb) / 0.08),
+    0 0 0 1px rgb(var(--streetlight-rgb) / 0.3);
+  color: var(--streetlight);
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  line-height: 1;
+  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.55);
+}
+
+.how__name {
+  align-self: center;
+  font-size: clamp(1.625rem, 1.3rem + 1vw, 1.875rem);
+  line-height: 1;
+}
+
+.how__line {
+  margin-top: var(--space-2);
+  color: var(--text-soft);
+}
+
+@media (min-width: 52rem) {
+  .how__steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .how__step {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-6);
+  }
+
+  .how__number {
+    grid-row: auto;
+    width: 4.5rem;
+    margin-bottom: var(--space-5);
+    font-size: 2.5rem;
+  }
+
+  .how__step + .how__step {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* ==========================================================
+   2. Why order direct
+   Heading on the left, 3 points on the right (computers).
+   A soft pink neon spill sits still behind the section.
+   ========================================================== */
+.direct {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8);
+}
+
+.direct::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(50% 60% at 15% 50%, rgb(var(--neon-rgb) / 0.08), transparent 70%);
+}
+
+.direct__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.direct__inner .section-intro {
+  margin-bottom: 0;
+}
+
+.direct__point {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.direct__point:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.direct__name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.75rem);
+  line-height: 1;
+}
+
+.direct__line {
+  margin-top: var(--space-2);
+  padding-left: calc(0.5rem + var(--space-3)); /* lines up with the words, after the bulb */
+  color: var(--text-soft);
+}
+
+@media (min-width: 52rem) {
+  .direct__inner {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+/* ==========================================================
+   3. Hours and visit
+   A raised board under a still amber streetlight pool.
+   Phones: address, then hours. From 832px: side by side.
+   ========================================================== */
+.visit {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8);
+}
+
+.visit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(55% 55% at 70% 35%, rgb(var(--streetlight-rgb) / 0.12), transparent 70%);
+}
+
+.visit__title {
+  margin-bottom: var(--space-7);
+}
+
+.visit__board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-5);
+}
+
+.visit__heading {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-sign-light);
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+
+.visit__address {
+  font-style: normal;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+.visit__map {
+  margin-top: var(--space-5);
+}
+
+.visit__ways {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.visit__ways li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: var(--weight-body-strong);
+}
+
+/* Hours: like a diner menu board, with a dotted line from day to time */
+.hours {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.hours__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+}
+
+.hours dt {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: baseline;
+  gap: var(--space-3);
+  color: var(--text-soft);
+}
+
+.hours dt::after {
+  content: "";
+  flex: 1;
+  min-width: var(--space-4);
+  border-bottom: 2px dotted rgb(var(--cream-rgb) / 0.2);
+}
+
+.hours dd {
+  margin: 0;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign-light);
+  font-size: 1.375rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+/* 100% halal and Est. 2024: two small amber-lit tags */
+.visit__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.visit__facts li {
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--streetlight);
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-sm);
+  background: rgb(var(--streetlight-rgb) / 0.06);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--streetlight-rgb) / 0.45),
+    0 0 1rem rgb(var(--streetlight-rgb) / 0.12);
+}
+
+@media (min-width: 52rem) {
+  .visit__board {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-8);
+    padding: var(--space-7);
+  }
+
+  .visit__facts {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================
+   4. Final call to action — the one big moment below the menu.
+   A very large sign-style line under a still amber pool of light.
+   ========================================================== */
+.final {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-9);
+}
+
+.final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 30% 45%, rgb(var(--streetlight-rgb) / 0.14), transparent 70%),
+    radial-gradient(35% 35% at 20% 80%, rgb(var(--neon-rgb) / 0.08), transparent 70%);
+}
+
+.final__inner {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-6);
+}
+
+.final__title {
+  max-width: 12ch;
+  font-size: clamp(3.5rem, 1.2rem + 9.5vw, 9.5rem);
+  line-height: 0.86;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.14),
+    0 0 4.5rem rgb(var(--streetlight-rgb) / 0.22);
+}
+
+.final__button {
+  min-height: 3.5rem;
+  padding-inline: var(--space-7);
+  font-size: var(--text-lg);
+}
+
+/* ==========================================================
+   PARSH'S Diner — the cart panel (SITE-PLAN.md sections 6 and 8)
+   Phones: a sheet that slides up from the bottom.
+   From 640px: a panel that slides in from the right.
+   0.3 s, only when opened or closed. Reduce motion: it just appears.
+   A native <dialog>, so focus, Esc and screen readers work for free.
+   ========================================================== */
+
+/* ---------- The panel ---------- */
+.cart {
+  /* reset the browser's own dialog box */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: none;
+  max-height: none;
+  color: var(--text);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 30%),
+    var(--griddle);
+  box-shadow:
+    var(--edge-lit),
+    0 0 0 1px rgb(var(--cream-rgb) / 0.06),
+    0 -1.5rem 4rem -1rem rgb(0 0 0 / 0.8);
+
+  /* phones: a sheet at the bottom of the screen */
+  position: fixed;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: auto;
+  max-height: 92dvh;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+
+  /* closed state (the panel animates from here) */
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: var(--time-panel);
+  transition-timing-function: var(--ease-out);
+  transition-behavior: allow-discrete;
+}
+
+.cart[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 40rem) {
+  .cart {
+    inset: 0 0 0 auto;
+    width: min(28rem, 100%);
+    height: 100dvh;
+    max-height: none;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+    box-shadow:
+      var(--edge-lit),
+      0 0 0 1px rgb(var(--cream-rgb) / 0.06),
+      -1.5rem 0 4rem -1rem rgb(0 0 0 / 0.8);
+  }
+}
+
+/* The slide only for visitors who have NOT asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .cart {
+    transform: translateY(100%);
+  }
+
+  @media (min-width: 40rem) {
+    .cart {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Open state. :where(:not([data-closing])) lets browsers without exit
+   transitions (Firefox, Safari) slide it out too (js/cart-panel.js). */
+.cart[open]:where(:not([data-closing])) {
+  opacity: 1;
+  transform: none;
+
+  @starting-style {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @starting-style {
+      transform: translateY(100%);
+    }
+
+    @media (min-width: 40rem) {
+      @starting-style {
+        transform: translateX(100%);
+      }
+    }
+  }
+}
+
+/* The dimmed page behind the panel; scroll stays inside the panel */
+.cart:modal {
+  overscroll-behavior: contain;
+}
+
+.cart::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgb(var(--night-rgb) / 0);
+  transition-property: background-color, display, overlay;
+  transition-duration: var(--time-panel);
+  transition-timing-function: ease-out;
+  transition-behavior: allow-discrete;
+}
+
+.cart[open]:where(:not([data-closing]))::backdrop {
+  background-color: rgb(var(--night-rgb) / 0.72);
+
+  @starting-style {
+    background-color: rgb(var(--night-rgb) / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart,
+  .cart::backdrop {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* ---------- Top bar ---------- */
+.cart__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.cart__title {
+  font-size: 2.25rem;
+}
+
+.cart__close {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgb(var(--cream-rgb) / 0.06);
+  color: var(--cream);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: background-color var(--time-quick) ease-out;
+}
+
+.cart__close svg {
+  width: 1.25rem;
+}
+
+@media (hover: hover) {
+  .cart__close:hover {
+    background: rgb(var(--cream-rgb) / 0.12);
+  }
+}
+
+/* ---------- Scrolling middle ---------- */
+.cart__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-5) var(--space-6);
+}
+
+.cart [hidden] {
+  display: none !important;
+}
+
+/* ---------- Empty cart ---------- */
+.cart__empty {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+}
+
+.cart__empty-line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+.cart__empty-actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cart__last {
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+}
+
+/* ---------- Items ---------- */
+.cart__items {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name  price"
+    "qty   remove";
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-item__name {
+  grid-area: name;
+  font-weight: var(--weight-body-strong);
+  line-height: 1.3;
+}
+
+.cart-item__price {
+  grid-area: price;
+  justify-self: end;
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--streetlight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* − 2 + : one pill, sunk into the panel */
+.stepper {
+  grid-area: qty;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  border-radius: var(--radius-pill);
+  background: rgb(var(--night-rgb) / 0.7);
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.5), 0 1px 0 rgb(var(--cream-rgb) / 0.06);
+}
+
+.stepper__button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--neon);
+  font-size: 1.375rem;
+  font-weight: var(--weight-body-strong);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--time-quick) ease-out, transform var(--time-quick) ease-out;
+}
+
+.stepper__button:active {
+  transform: scale(0.9);
+}
+
+.stepper__button[aria-disabled="true"] {
+  color: rgb(var(--cream-rgb) / 0.3);
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .stepper__button:not([aria-disabled="true"]):hover {
+    background: rgb(var(--neon-rgb) / 0.12);
+  }
+}
+
+.stepper__qty {
+  min-width: 1.75rem;
+  text-align: center;
+  font-weight: var(--weight-body-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-item__remove {
+  grid-area: remove;
+  justify-self: end;
+  min-height: 2.75rem;
+  padding-inline: var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--neon);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+  border-radius: var(--radius-small);
+}
+
+/* ---------- Details form ---------- */
+.order-form {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.order-form__title {
+  font-size: 1.75rem;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field__label {
+  padding: 0;
+  font-weight: var(--weight-body-strong);
+  font-size: 0.9375rem;
+}
+
+.field__optional {
+  font-weight: var(--weight-body);
+  color: var(--text-soft);
+}
+
+.field__input {
+  width: 100%;
+  min-height: 3rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid rgb(var(--cream-rgb) / 0.16);
+  border-radius: var(--radius-small);
+  background: rgb(var(--night-rgb) / 0.75);
+  color: var(--cream);
+  font: inherit;
+  font-size: 1rem; /* 16px: phones don't zoom in when typing */
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.45);
+  transition: border-color var(--time-quick) ease-out;
+}
+
+.field__input--area {
+  resize: vertical;
+  min-height: 4.5rem;
+}
+
+.field__input:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* Errors: only after the visitor leaves the box or presses Send.
+   Amber border + the written message (never colour alone). */
+.field__error {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-body-strong);
+  color: var(--streetlight);
+}
+
+.field__error::before {
+  content: "!" / "";
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--streetlight);
+  color: var(--night);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.field__input:user-invalid {
+  border-color: var(--streetlight);
+}
+
+.field__input:user-invalid ~ .field__error,
+.choice:has(:user-invalid) .field__error {
+  display: flex;
+}
+
+/* ---------- Pickup or Delivery ---------- */
+.choice__options {
+  display: grid;
+  gap: var(--space-2);
+}
+
+@media (min-width: 24rem) {
+  .choice__options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.choice__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3.25rem;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-small);
+  background: rgb(var(--night-rgb) / 0.75);
+  box-shadow: inset 0 0 0 1px rgb(var(--cream-rgb) / 0.16);
+  cursor: pointer;
+  transition: box-shadow var(--time-quick) ease-out;
+}
+
+.choice__option input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--neon);
+}
+
+.choice__option:has(:checked) {
+  box-shadow: inset 0 0 0 2px var(--neon), 0 0 1rem rgb(var(--neon-rgb) / 0.18);
+}
+
+.choice:has(:user-invalid) .choice__option {
+  box-shadow: inset 0 0 0 1px var(--streetlight);
+}
+
+.choice__text {
+  display: grid;
+  font-weight: var(--weight-body-strong);
+  line-height: 1.25;
+}
+
+.choice__note {
+  font-weight: var(--weight-body);
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+}
+
+/* ---------- The address box opens smoothly (0.25 s) ---------- */
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: calc(-1 * var(--space-4)); /* no gap while closed */
+  transition:
+    grid-template-rows var(--time-open) var(--ease-out),
+    margin-top var(--time-open) var(--ease-out),
+    visibility var(--time-open);
+  visibility: hidden;
+}
+
+.reveal.is-open {
+  grid-template-rows: 1fr;
+  margin-top: 0;
+  visibility: visible;
+}
+
+.reveal__inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 3px; /* room for the focus ring */
+  margin: -3px;
+}
+
+/* ---------- Trap box for spam robots: off screen, never seen ---------- */
+.trap {
+  position: absolute;
+  left: -100vw;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ---------- Bottom bar: total + send ---------- */
+.cart__foot {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) max(var(--space-5), env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: rgb(var(--night-rgb) / 0.35);
+}
+
+.cart__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  max-width: none;
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-lg);
+}
+
+.cart__total-price {
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--streetlight);
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+  font-variant-numeric: tabular-nums;
+}
+
+.cart__send {
+  width: 100%;
+}
+
+.cart__small {
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+  text-align: center;
+  max-width: none;
+}
+
+/* ---------- After sending ---------- */
+.cart__sent {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+}
+
+.cart__sent-title {
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+.cart__sent-title:focus {
+  outline: none;
+}
+
+.cart__sent-number {
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: 2rem;
+  color: var(--streetlight);
+  text-shadow: 0 0 1.25rem rgb(var(--streetlight-rgb) / 0.3);
+}
+
+.cart__sent a {
+  color: var(--neon);
+  font-weight: var(--weight-body-strong);
+}
+
+.cart__sent .button {
+  justify-self: start;
+  margin-top: var(--space-3);
+}
+
+/* ==========================================================
+   PARSH'S Diner — footer
+   The shop sign once more, then the facts: where we are, how to
+   reach us, the links, and the small print (3D burger credit, ©).
+   Sits on a Griddle panel with a lit top edge. Nothing moves.
+   Only design-system tokens are used.
+   ========================================================== */
+
+.site-footer {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--space-8) var(--space-6);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.04), transparent 30%),
+    var(--griddle);
+  box-shadow: var(--edge-lit), 0 -1.5rem 3rem -1.5rem rgb(0 0 0 / 0.6);
+}
+
+/* A still pool of amber light behind the sign */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(45% 55% at 12% 0%, rgb(var(--streetlight-rgb) / 0.12), transparent 70%);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-7);
+}
+
+/* ---------- The sign ---------- */
+.site-footer__sign {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.site-footer__name {
+  font-family: var(--font-sign);
+  font-weight: var(--weight-sign);
+  font-size: clamp(3.5rem, 1.6rem + 8vw, 7.5rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 1.25rem rgb(var(--cream-rgb) / 0.16),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.22);
+}
+
+.site-footer__sub {
+  font-weight: var(--weight-body-strong);
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+/* ---------- The facts: one column on phones, three on wide screens ---------- */
+.site-footer__cols {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 52rem) {
+  .site-footer__cols {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+.site-footer__address {
+  max-width: 28ch;
+  font-style: normal;
+  font-size: var(--text-lg);
+  line-height: 1.45;
+}
+
+.site-footer__contact {
+  display: grid;
+  gap: var(--space-2);
+  color: var(--text-soft);
+}
+
+/* The phone number is the one highlight here: streetlight amber */
+.site-footer__phone {
+  display: inline-block;
+  padding-block: var(--space-1);
+  color: var(--streetlight);
+  font-weight: var(--weight-body-strong);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.3);
+  border-radius: var(--radius-small);
+}
+
+.site-footer__links {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Links you tap: neon pink, big enough for a thumb */
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--neon);
+  font-weight: var(--weight-body-strong);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgb(var(--neon-rgb) / 0.45);
+  text-underline-offset: 0.3em;
+  border-radius: var(--radius-small);
+  transition:
+    text-decoration-color var(--time-quick) ease-out,
+    text-shadow var(--time-quick) ease-out;
+}
+
+@media (hover: hover) {
+  .site-footer__link:hover {
+    text-decoration-color: var(--neon);
+    text-shadow: 0 0 0.75rem rgb(var(--neon-rgb) / 0.45);
+  }
+}
+
+/* ---------- Small print ---------- */
+.site-footer__small {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  font-size: var(--text-sm);
+  color: var(--text-soft);
+}
+
+.site-footer__small a {
+  color: var(--neon);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+@media (min-width: 52rem) {
+  .site-footer__small {
+    grid-template-columns: 1fr auto;
+    column-gap: var(--space-6);
+  }
+}
+
+/* ---------- Lenis smooth scrolling (MIT licence) ----------
+   Copied unchanged from vendor/lenis/lenis.css */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}

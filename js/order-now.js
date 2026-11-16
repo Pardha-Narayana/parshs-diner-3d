@@ -16,6 +16,6 @@ button?.addEventListener("click", () => {
 
   const menu = document.querySelector("#menu");
   if (!menu) return;
-  menu.scrollIntoView({ block: "start" }); // stops below the header (scroll-padding-top in base.css)
+  menu.scrollIntoView({ block: "start" }); // stops below the header (scroll-padding-top in css/site.css)
   menu.querySelector("[data-add]")?.focus({ preventScroll: true });
 });

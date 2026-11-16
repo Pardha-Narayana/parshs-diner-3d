@@ -45,6 +45,7 @@ var PHONE_WINDOW_SECONDS = 600;   // …in 10 minutes
 var ORDERS_PER_MINUTE_LIMIT = 20; // at most 20 orders per minute from everyone
 var MAX_BODY_LENGTH = 3000;       // a real order is far smaller than this
 var SITE_LABEL = "3D";
+var TIME_ZONE = "Asia/Kolkata";   // India time, for the Date (B) and Time (C) columns
 
 // ---------- Receiving an order ----------
 
@@ -214,13 +215,15 @@ function addRow_(order) {
   var tab = ORDERS_TAB_NAME ? book.getSheetByName(ORDERS_TAB_NAME) : book.getSheets()[0];
   if (!tab) throw new Error("Orders tab not found");
 
-  // Same format as the old rows: all three come from one UTC timestamp,
-  // like "2026-07-09T10:32:40.031Z", "2026-07-09", "10:32:40".
-  var stamp = new Date().toISOString();
+  // All three come from the same moment.
+  // A: full timestamp in UTC, same format as the old rows ("2026-07-09T10:32:40.031Z").
+  // B and C: India time (Asia/Kolkata), so the restaurant reads its own clock:
+  // that same moment is "2026-07-09" and "16:02:40".
+  var now = new Date();
   tab.appendRow([
-    stamp,                                                       // A full timestamp
-    stamp.slice(0, 10),                                          // B date (YYYY-MM-DD)
-    stamp.slice(11, 19),                                         // C time (HH:MM:SS, 24-hour)
+    now.toISOString(),                                           // A full timestamp (UTC)
+    Utilities.formatDate(now, TIME_ZONE, "yyyy-MM-dd"),          // B date, India (YYYY-MM-DD)
+    Utilities.formatDate(now, TIME_ZONE, "HH:mm:ss"),            // C time, India (HH:MM:SS, 24-hour)
     safe_(order.name),                                           // D name
     order.phone,                                                 // E phone
     order.way === "delivery" ? "Delivery" : "Pickup",            // F Pickup/Delivery

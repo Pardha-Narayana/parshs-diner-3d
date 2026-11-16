@@ -166,11 +166,11 @@ Apps Script protections (a new, upgraded script):
 - [ ] Address, map link and hours are correct
 - [ ] Hosting plan allows business use
 - [ ] Before real customers use the site, move it to Vercel Pro or a free host that allows business use. (For now it is on Vercel's free Hobby plan as a demo only.)
-- Once the final web address is known (these need the full address, so they were left out in Phase 3, Step 9):
-  - [ ] Add a canonical link (the "main address" tag) to index.html and privacy.html
-  - [ ] Change og:image (and add og:url) on index.html and privacy.html to full addresses, like https://<address>/assets/images/share.jpg — WhatsApp only shows the share image with a full address
-  - [ ] In the Restaurant details for Google (index.html), make "image" and "hasMenu" full addresses and add "url"
-  - [ ] Create sitemap.xml (home and privacy pages) and add a "Sitemap:" line with its full address to robots.txt
+- Once the final web address is known (these need the full address, so they were left out in Phase 3, Step 9). Done in Phase 4, Step 5 for https://parshs-diner-3d.vercel.app — if the address ever changes (for example a custom domain), change it in all of these places:
+  - [x] Add a canonical link (the "main address" tag) to index.html and privacy.html
+  - [x] Change og:image (and add og:url) on index.html and privacy.html to full addresses, like https://<address>/assets/images/share.jpg — WhatsApp only shows the share image with a full address
+  - [x] In the Restaurant details for Google (index.html), make "image" and "hasMenu" full addresses and add "url"
+  - [x] Create sitemap.xml (home and privacy pages) and add a "Sitemap:" line with its full address to robots.txt
   - [ ] Check the share preview by sending the link in WhatsApp, and test the home page in Google's Rich Results Test
 
 ## 10. Later list (not in this version)

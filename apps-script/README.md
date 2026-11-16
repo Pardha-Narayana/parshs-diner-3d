@@ -31,7 +31,8 @@ A Timestamp | B Date | C Time | D Name | E Phone | F Pickup/Delivery | G Address
 
 A to I are in the same order as the old Sheet, so the dashboard can read both. Never move them.
 
-- Timestamp, date and time use the old rows' format, in UTC (India time minus 5 h 30 min). Example: `2026-07-09T10:32:40.031Z`, `2026-07-09`, `10:32:40`.
+- Timestamp (A) uses the old rows' format, in UTC (India time minus 5 h 30 min). Example: `2026-07-09T10:32:40.031Z`.
+- Date (B) and Time (C) are in India time (Asia/Kolkata), for the same moment. Example: `2026-07-09`, `16:02:40`. (Since 16 November 2026. Rows before that have B and C in UTC.)
 - Site is always `3D`.
 - Order no. matches the WhatsApp message (like `PD-1432`).
 
@@ -57,13 +58,13 @@ The web part never reads the Sheet, so it cannot write these headings itself. Th
 
 There must be exactly **one** such trigger. Two would do no harm, but are untidy.
 
-Status (16 November 2026): the clean-up code is uploaded (deployment version 3, same web address), and the monthly timer was added by Pardha in the account that owns the Sheet (pardhanarayanav@gmail.com).
+Status (16 November 2026): the clean-up code is uploaded (deployment version 3, same web address; version 4 later that day switched Date and Time to India time), and the monthly timer was added by Pardha in the account that owns the Sheet (pardhanarayanav@gmail.com).
 
 ### The settings file (`appsscript.json`)
 
 - `oauthScopes`: the script may only use **the one spreadsheet it is attached to**, nothing else.
 - `webapp`: run as the owner, open to anyone (needed so customers' browsers can send orders).
-- `timeZone`: India. This does not change the timestamps, which are in UTC like the old rows.
+- `timeZone`: India (Asia/Kolkata). `Code.gs` also names it (`TIME_ZONE`) for the Date and Time columns. The Timestamp column stays in UTC like the old rows.
 
 ---
 

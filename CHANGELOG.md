@@ -4,6 +4,28 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 5: Final-address items, India time in the Sheet, new share image
+Uses the live address https://parshs-diner-3d.vercel.app.
+
+### Added
+- `sitemap.xml`: the home page and the privacy page, with their full addresses.
+- `robots.txt`: a "Sitemap:" line with the sitemap's full address.
+- `index.html` and `privacy.html`: a canonical link (the page's main address), `og:url`, `og:image:type`, `twitter:image` and `twitter:image:alt`.
+- `index.html` Restaurant details for Google: `"url"`.
+
+### Changed
+- `apps-script/Code.gs`: the Date (B) and Time (C) columns are now India time (Asia/Kolkata), using a new `TIME_ZONE` setting. Before, they were UTC, so a 2:35 pm order showed as 09:05. Column A (full timestamp) keeps its UTC format, so the monthly clean-up still reads it the same way. `appsscript.json` already said Asia/Kolkata, so it did not change. Uploaded with clasp; the same deployment "3D site orders" now runs version 4, so the web address did not change. The old Sheet and old script were not touched.
+- `apps-script/README.md`: the column notes, the settings-file note and the status line say the above.
+- `index.html` and `privacy.html`: `og:image` is now the full address of the share image, and its alt text describes the new layout. `index.html`: `"image"` and `"hasMenu"` in the Restaurant details are full addresses.
+- `tools/share-image/share.html` and `assets/images/share.jpg`: new layout. WhatsApp shows the share image as a small square cut from the middle, which cut off "PARSH'S". Now the name, "Diner", the 100% halal badge and the burger all sit inside the centre 630 × 630 square; "Kakinada / Jagannaickpur / Est. 2024" and "Order on WhatsApp / Pickup, or delivery within 5 km" sit at the sides as extras. Same colours, fonts and burger image. Still 1200 × 630, now 69 KB (was 76 KB). Exported with Chrome's headless screenshot mode, because the chrome-devtools browser was busy in another chat.
+- `SITE-PLAN.md`: ticked 4 before-launch items (canonical link, full share-image address and og:url, full addresses in the Restaurant details, sitemap) and noted that all of them must change if the web address changes. "Check the share preview in WhatsApp" stays open.
+
+### Checked
+- Local preview, in the app's built-in browser: home and privacy pages have the right canonical, og:url, og:image and twitter:image addresses; the Restaurant details still read correctly; sitemap.xml and robots.txt open; no console errors.
+- The ordering flow: add, change quantity, remove, totals (₹630, ₹850, ₹590, ₹190), and the Delivery and Pickup WhatsApp messages and Sheet data are correct; the address box closes for Pickup. The WhatsApp and Sheet sends were captured in the test, so no row was added.
+- The order web address still answers "PARSH'S Diner order log is running." after the update.
+- Not yet checked: the new share image and sitemap.xml on the live site (they go online after the push), WhatsApp's preview, and the India time in a real Sheet row (Pardha tests that).
+
 ## 2026-11-16 — Phase 4, Step 4: The site is online (Vercel, free Hobby plan, demo only)
 Live address: https://parshs-diner-3d.vercel.app. A new Vercel project "parshs-diner-3d" (Framework: Other, no build), connected to the GitHub repository Pardha-Narayana/parshs-diner-3d, so every push to main updates the site. The old Vercel project (parsh_s_diner) was not touched. The free Hobby plan does not allow business sites, so this is a demo until launch.
 

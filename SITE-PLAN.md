@@ -139,7 +139,7 @@ Journey:
 Errors show next to the box, for example "Enter a 10-digit mobile number."
 Known limit: the customer must still press Send in WhatsApp. The Sheet shows orders started; WhatsApp shows orders sent.
 
-Google Sheet: the same "PARSH'S Orders" Sheet and dashboard as the old site. Add ONE new column at the END: "Site" = "3D". Do not change existing columns.
+Google Sheet: the 3D site logs to its OWN new Sheet, "PARSH'S Orders (3D site)" (the old site keeps its "PARSH'S Orders" Sheet and dashboard). Same column order as the old Sheet, plus 3 new columns at the END: "Site" (= "3D"), "Order no." and "Notes". Do not change existing columns.
 
 Apps Script protections (a new, upgraded script):
 - Only adds rows — cannot read, change or delete anything.
@@ -153,6 +153,7 @@ Apps Script protections (a new, upgraded script):
 - [ ] Every page checked on a real phone, on mobile data (not Wi-Fi)
 - [ ] A test order sent: WhatsApp message correct AND a row arrived in the Sheet (then delete test rows)
 - [ ] Cart, quantities, total, Pickup/Delivery all work
+- [ ] Point the dashboard to the new Sheet ("PARSH'S Orders (3D site)")
 - [ ] No placeholder text, "TODO" or "lorem" anywhere
 - [ ] Own 404 page works
 - [ ] Every page has a title, description, share image and favicon

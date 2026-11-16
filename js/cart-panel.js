@@ -6,7 +6,9 @@
 //    Errors show after the visitor leaves a box or presses Send.
 // 4. Send: makes an order number (PD-1432), opens WhatsApp with the order
 //    typed, empties the cart and saves the dishes as "last order".
-// The Google Sheet copy is added in the next step.
+// 5. At the same moment, a copy goes to the Google Sheet with the SAME order
+//    number (apps-script/Code.gs). The site never waits for it, and the
+//    customer never sees an error from it.
 
 import {
   MENU,
@@ -25,6 +27,11 @@ import {
 } from "/js/cart.js";
 
 const WHATSAPP_NUMBER = "917780530607"; // +91 77805 30607, no + or spaces for wa.me
+
+// The Google Sheet order log: the "Web app URL" from apps-script/README.md, Step 6.
+// Empty = nothing is sent to the Sheet (WhatsApp ordering still works).
+const SHEET_WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbz9mCcRkep2_2li4JtTnVh5JEkCB1LwZEKMWyRsadH7CgOU9BaQBazYXu6zNKCFDyfGJQ/exec";
 
 const dialog = document.querySelector("#cart");
 const openButton = document.querySelector("[data-open-cart]");
@@ -315,6 +322,35 @@ if (dialog && openButton) {
     return lines.join("\n");
   }
 
+  // Sends a copy to the Google Sheet in the background. Fire and forget:
+  // - "keepalive" lets it finish even if the visitor leaves the page.
+  // - "no-cors" + plain text: Google's script accepts it with no extra checks,
+  //   and the site never reads the answer, so it never waits for it.
+  // - Any failure is swallowed: the customer never sees a Sheet error.
+  function sendToSheet(order) {
+    if (!SHEET_WEB_APP_URL) return;
+    try {
+      fetch(SHEET_WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        keepalive: true,
+        body: JSON.stringify({
+          orderNumber: order.orderNumber,
+          items: order.items,
+          total: order.total,
+          name: order.name,
+          phone: order.phone,
+          way: order.way,
+          address: order.address,
+          notes: order.notes,
+          website: form.elements.website.value, // the trap box (empty for people)
+        }),
+      }).catch(() => {});
+    } catch {
+      // never block the order
+    }
+  }
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const items = getItems();
@@ -337,6 +373,7 @@ if (dialog && openButton) {
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildMessage(order))}`;
     window.open(url, "_blank", "noopener");
+    sendToSheet(order);
 
     // After sending: save as "last order", empty the cart, show "Order ready"
     saveLastOrder(order);

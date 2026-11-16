@@ -4,6 +4,18 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 6: Google Sheet order log
+### Added
+- `apps-script/Code.gs` — the new order-log script. Only adds rows (never reads, changes or deletes), limited to its own Sheet (`@OnlyCurrentDoc`). Checks every order: order number like PD-1432, name 2–40 letters, 10-digit Indian mobile, Pickup or Delivery, address only for Delivery (5–200), notes up to 200, only our 4 dishes at their real prices, 1–10 of each, and a total that matches. Drops orders with the hidden trap box filled. Spam limits in Google's cache: 3 orders per phone in 10 minutes, 20 orders a minute overall. Text starting with =, +, - or @ is made harmless. Columns A–I in the old order (full timestamp, date, time, name, phone, Pickup/Delivery, address, items, total), then Site ("3D"), Order no., Notes. Timestamp, date and time in the same format as the old rows (UTC, e.g. "2026-07-09T10:32:40.031Z", "2026-07-09", "10:32:40").
+- `apps-script/appsscript.json` — the script's settings: only the one-spreadsheet permission, web app run as the owner and open to anyone, India time zone.
+- `apps-script/README.md` — what is set up on Google (Sheet, script ID, deployment ID, columns), how it was set up with clasp, and how to update the script later without changing the web address.
+- A new Google Sheet "PARSH'S Orders (3D site)" with Code.gs attached, set up with clasp (Google's Apps Script tool, run with npx, nothing added to the website), and a web app deployment "3D site orders" (Execute as: me, Access: anyone; asks only for "spreadsheets this app is installed in"). The old Sheet, script and deployment were not touched.
+
+### Changed
+- `js/cart-panel.js` — new setting `SHEET_WEB_APP_URL` (the "3D site orders" address). When "Send order on WhatsApp" is pressed, a copy of the order goes to the Sheet at the same moment with the same order number, in the background (fetch with keepalive, no-cors). The site never waits for it and never shows the customer an error from it.
+- `SITE-PLAN.md` section 8 — the 3D site logs to its own new Sheet with 3 new columns at the end (Site, Order no., Notes); the old site keeps "PARSH'S Orders" and its dashboard.
+- `SITE-PLAN.md` section 9 — new before-launch item: point the dashboard to the new Sheet.
+
 ## 2026-11-16 — Phase 3, Step 5: Cart panel and the WhatsApp order
 ### Added
 - Cart panel in `index.html`: a native modal dialog with "Your order" heading and close button; the list of items; an empty state ("Your order is empty. Pick something from the menu.", "See the menu", and "Reorder your last order" when there is one); the details form (name, mobile number, Pickup or Delivery with "at the restaurant" / "within 5 km", delivery address only for Delivery, optional notes, and a hidden trap box for spam robots); a bottom bar with the total and "Send order on WhatsApp"; and an "Order ready in WhatsApp" view with the order number and an "Open WhatsApp" link in case it did not open. The header "Your order" button now opens it.

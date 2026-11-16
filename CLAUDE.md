@@ -90,7 +90,7 @@ Only say "tested" if you actually ran a check. Otherwise say "not tested yet".
 ## 9. Safety rules
 - Only work inside this project folder. Never touch other folders (like parsh-portfolio).
 - Never write passwords, keys or tokens into any file. If one is needed, use a .env file (which must be in .gitignore) and put a placeholder until I give the real value.
-- The Google Sheet order address will be visible in the page code (normal for a static site). So the Apps Script must ONLY add order rows, must check the data (required fields, length limits, sensible totals), and must limit spam. It must never get access to anything else.
+- The Google Sheet order address will be visible in the page code (normal for a static site). So the Apps Script's web part (the only part the website can reach) must ONLY add order rows, must check the data (required fields, length limits, sensible totals), and must limit spam. It must never get access to anything else. The only other job allowed is the monthly clean-up, started only by a timer inside Google (never by the website), which deletes order rows older than 6 months (the privacy page promise).
 - Collect only what an order needs: name, phone, items, notes, and Pickup or Delivery. Ask for the delivery address ONLY when Delivery is chosen. The privacy page will explain this.
 - Ask me before installing any tool, library, skill or plugin. Do not add another design skill — we use frontend-design only.
 - Ask me before deleting any file.

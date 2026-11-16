@@ -2,7 +2,9 @@
 
 This folder holds the script that copies each website order into the 3D site's own Google Sheet.
 
-- `Code.gs`: the script. It can only ADD rows to its own Sheet. It never reads, changes or deletes anything.
+- `Code.gs`: the script. It has two separate parts:
+  - **The web part** (`doPost`): the only part the website can reach. It can only ADD rows to its own Sheet. It never reads, changes or deletes anything.
+  - **The monthly clean-up** (`deleteOldOrders`): deletes order rows older than 6 months, as the privacy page promises. It runs only from a monthly timer in Google (see "The monthly clean-up" below). The website cannot start it.
 - `appsscript.json`: the script's settings (see "The settings file" below).
 - This file: what is online, and how to update it.
 
@@ -33,7 +35,29 @@ A to I are in the same order as the old Sheet, so the dashboard can read both. N
 - Site is always `3D`.
 - Order no. matches the WhatsApp message (like `PD-1432`).
 
-The script never reads the Sheet, so it cannot write these headings itself. They were typed in by hand. If row 1 is ever empty, the first order lands in row 1.
+The web part never reads the Sheet, so it cannot write these headings itself. They were typed in by hand. If row 1 is ever empty, the first order lands in row 1.
+
+### The monthly clean-up (`deleteOldOrders`)
+
+- **Why:** the privacy page says "We delete order records from our order list after 6 months."
+- **What it does:** looks at column A (Timestamp) from row 2 down, and deletes every row older than 6 months. Row 1 (the headings) is never touched. A row whose timestamp it cannot read is kept, never deleted.
+- **When:** once a month, from a time-driven trigger (a timer inside Google).
+- **Safe from the website:** a web address can only run `doPost` or `doGet`, and neither of them calls `deleteOldOrders`.
+- **Permission:** none extra. It uses the same one permission as before ("this one Sheet only").
+- **To see what it did:** Apps Script editor → **Executions** (left side). Each run says how many rows it deleted.
+
+**Setting up the timer (done once, by hand):**
+1. Open the script (link above) → click the **clock icon, Triggers** (left side).
+2. Click **+ Add Trigger** (bottom right).
+3. Choose which function to run: **deleteOldOrders**.
+4. Which runs at deployment: **Head**.
+5. Select event source: **Time-driven**. Type of time based trigger: **Month timer**. Day of month: **1st**. Time of day: **3am to 4am** (India time; the restaurant is closed then).
+6. Failure notification settings: **Notify me immediately**. Click **Save**.
+7. If Google asks for permission: **Advanced → Go to PARSH'S Orders (3D site) (unsafe)**, tick **only** "View and manage spreadsheets that this application has been installed in", then **Continue**.
+
+There must be exactly **one** such trigger. Two would do no harm, but are untidy.
+
+Status (16 November 2026): the clean-up code is uploaded (deployment version 3, same web address), and the monthly timer was added by Pardha in the account that owns the Sheet (pardhanarayanav@gmail.com).
 
 ### The settings file (`appsscript.json`)
 

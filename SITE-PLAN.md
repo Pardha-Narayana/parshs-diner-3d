@@ -119,7 +119,7 @@ Words: plain, friendly, honest. No made-up claims, awards or numbers.
 Reduce motion ON: no smooth scrolling, no scroll moment (burger stays closed), panels appear instead of sliding.
 
 ## 7. 3D plan
-- One semi-realistic burger model (not cartoon) with 4 separate layers: top bun, lettuce, filling (tomato, cheese and two patties together), bottom bun. Chosen: "Hamburger" by Simal Mai (CC-BY), saved as `assets/models/burger.glb` (1.76 MB). In this model the tomato, cheese and patties are one connected shape, so they open together as "filling".
+- One semi-realistic burger model (not cartoon) with 4 separate layers: top bun, lettuce, filling (tomato, cheese and two patties together), bottom bun. Chosen: "Hamburger" by Simal Mai (CC-BY), saved as `assets/models/burger.glb` (1.79 MB). In this model the tomato, cheese and patties are one connected shape, so they open together as "filling".
 - Free licence that allows use (CC0, or CC-BY with credit). Sources: Poly Pizza, Sketchfab. Recorded in CREDITS.md.
 - Under about 2 MB after shrinking.
 - Claude Code adds the "opening" animation to the file once, with a free tool. The website only uses model-viewer.
@@ -142,7 +142,8 @@ Known limit: the customer must still press Send in WhatsApp. The Sheet shows ord
 Google Sheet: the 3D site logs to its OWN new Sheet, "PARSH'S Orders (3D site)" (the old site keeps its "PARSH'S Orders" Sheet and dashboard). Same column order as the old Sheet, plus 3 new columns at the END: "Site" (= "3D"), "Order no." and "Notes". Do not change existing columns.
 
 Apps Script protections (a new, upgraded script):
-- Only adds rows — cannot read, change or delete anything.
+- The web part (the only part the website can reach) only adds rows — it cannot read, change or delete anything.
+- A separate monthly job, started only by a timer inside Google (never by the website), deletes order rows older than 6 months (the privacy page promise).
 - Checks every order: required fields, length limits, max 10 of one item, sensible totals.
 - Spam limits: at most 3 orders per phone number in 10 minutes, and a cap on orders per minute overall.
 - Hidden trap box in the form: if filled, the order is ignored.
@@ -177,4 +178,4 @@ Apps Script protections (a new, upgraded script):
 - A bigger custom 3D scene (Three.js).
 - Menu filter: tap a group name to jump to it — when the menu grows.
 - Real photos of our own dishes (to replace the stock photos).
-- Smaller 3D burger textures: shrink the 2 texture pictures inside `assets/models/burger.glb` (now 2048 px, about 400 KB of the 1.37 MB file) with the tools in `tools/burger`, then compare the burger closed and open with the current one, and remake the backup still image if it no longer matches.
+- Smaller 3D burger textures: shrink the 2 texture pictures inside `assets/models/burger.glb` (now 2048 px, about 400 KB of the 1.79 MB file) with the tools in `tools/burger`, then compare the burger closed and open with the current one, and remake the backup still image if it no longer matches.

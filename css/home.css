@@ -1461,15 +1461,15 @@
   color: var(--text-soft);
 }
 
-/* The phone number is the one highlight here: streetlight amber */
+/* The phone number can be tapped (it calls us), so it is neon pink like every tappable thing */
 .site-footer__phone {
   display: inline-block;
   padding-block: var(--space-1);
-  color: var(--streetlight);
+  color: var(--neon);
   font-weight: var(--weight-body-strong);
   font-variant-numeric: tabular-nums;
   text-decoration: none;
-  text-shadow: 0 0 1rem rgb(var(--streetlight-rgb) / 0.3);
+  text-shadow: 0 0 1rem rgb(var(--neon-rgb) / 0.3);
   border-radius: var(--radius-small);
 }
 

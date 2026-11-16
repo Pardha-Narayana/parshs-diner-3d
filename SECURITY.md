@@ -13,7 +13,8 @@ Report it privately through GitHub: open this repository's **Security** tab and 
 - Orders are sent by the customer through **WhatsApp** (a wa.me link). The site never sees WhatsApp passwords or messages.
 - A copy of each order is sent to a **Google Apps Script** that adds one row to a Google Sheet.
 - That script's web address is visible in the page code (normal for a static site), so the script:
-  - can ONLY add order rows — it cannot read, change or delete anything,
+  - its web part (the only part the website can reach) can ONLY add order rows — it cannot read, change or delete anything,
+  - a separate monthly job, started only by a timer inside Google (never by the website), deletes order rows older than 6 months, as the privacy page promises,
   - checks the data (required fields, length limits, sensible totals),
   - limits spam (too many orders in a short time are rejected).
 

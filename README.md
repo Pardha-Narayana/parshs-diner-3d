@@ -49,7 +49,7 @@ None yet. Hosting is chosen at launch: if it is Vercel Pro, note its monthly cos
 ## 8. Things that are unusual on purpose
 - Only real facts. No made-up reviews, awards, press or numbers.
 - Dish photos are free stock photos (Unsplash) for now. They must be replaced with real photos of our own dishes.
-- The Google Sheet order address is visible in the page code (normal for a static site). The Apps Script behind it only adds order rows and checks the data. See SECURITY.md.
+- The Google Sheet order address is visible in the page code (normal for a static site). The Apps Script behind it only adds order rows and checks the data; a separate monthly job, started only by a timer inside Google, deletes orders older than 6 months. See SECURITY.md.
 
 ## 9. Project files
 - `CLAUDE.md` — standing rules for Claude Code.

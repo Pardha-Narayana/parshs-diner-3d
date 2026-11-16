@@ -10,10 +10,15 @@
  * the one Sheet it lives in — none of your other files.
  *
  * What this script does, and nothing more:
- * - It receives one order from the website (doPost).
- * - It checks the order. A bad order is dropped quietly.
- * - It ADDS one row at the bottom of the orders tab.
- * It never reads, changes or deletes any row.
+ * - The web part (doPost, the only part the website can reach):
+ *   - receives one order from the website,
+ *   - checks it (a bad order is dropped quietly),
+ *   - ADDS one row at the bottom of the orders tab.
+ *   The web part never reads, changes or deletes any row.
+ * - A separate monthly job (deleteOldOrders, at the bottom of this file):
+ *   deletes order rows older than 6 months, as the privacy page promises.
+ *   It runs ONLY from a monthly timer in Google (see apps-script/README.md).
+ *   The website cannot start it: a web address only ever runs doPost or doGet.
  *
  * Columns, in this exact order (the dashboard reads A to I — never move them):
  *  A full timestamp | B date | C time | D name | E phone | F Pickup/Delivery
@@ -226,4 +231,60 @@ function addRow_(order) {
     order.orderNumber,                                           // K Order no.
     safe_(order.notes)                                           // L Notes
   ]);
+}
+
+// ---------- Monthly clean-up: delete orders older than 6 months ----------
+// The privacy page (privacy.html) promises: "We delete order records from
+// our order list after 6 months." This job keeps that promise.
+// - It runs ONLY from a time-driven trigger (once a month), set up by hand
+//   in the Apps Script editor: see apps-script/README.md.
+// - Nothing in doPost or doGet calls it, so the website can never start it.
+// - It looks only at column A (the timestamp). Rows whose timestamp it
+//   cannot read are KEPT, never deleted. Row 1 (the headings) is never touched.
+
+var KEEP_MONTHS = 6;
+
+function deleteOldOrders() {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(30000); // never at the same moment as a new order being added
+  try {
+    var book = SpreadsheetApp.getActiveSpreadsheet();
+    var tab = ORDERS_TAB_NAME ? book.getSheetByName(ORDERS_TAB_NAME) : book.getSheets()[0];
+    if (!tab) throw new Error("Orders tab not found");
+
+    var lastRow = tab.getLastRow();
+    if (lastRow < 2) return; // only the headings, nothing to delete
+
+    var cutoff = new Date();
+    cutoff.setMonth(cutoff.getMonth() - KEEP_MONTHS);
+
+    var stamps = tab.getRange(2, 1, lastRow - 1, 1).getValues(); // column A, from row 2
+    var deleted = 0;
+
+    // Work from the bottom up, so the row numbers above stay correct.
+    // Old rows next to each other are deleted together, in one step.
+    var i = stamps.length - 1;
+    while (i >= 0) {
+      if (!isOlderThan_(stamps[i][0], cutoff)) {
+        i--;
+        continue;
+      }
+      var last = i;
+      while (i - 1 >= 0 && isOlderThan_(stamps[i - 1][0], cutoff)) i--;
+      tab.deleteRows(i + 2, last - i + 1); // +2: the list starts at row 2
+      deleted += last - i + 1;
+      i--;
+    }
+
+    console.log("Deleted " + deleted + " order row(s) from before " + cutoff.toISOString());
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// true only when the timestamp is a real date before the cutoff
+function isOlderThan_(value, cutoff) {
+  var when = value instanceof Date ? value : new Date(String(value));
+  if (isNaN(when.getTime())) return false; // cannot read it: keep the row
+  return when.getTime() < cutoff.getTime();
 }

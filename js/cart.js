@@ -139,10 +139,13 @@ export function reorderLast() {
 // ---------- The "Your order" count in the header ----------
 
 const countEl = document.querySelector("[data-order-count]");
+const countWordEl = document.querySelector("[data-order-count-word]"); // heard by screen readers only
 
 function updateHeaderCount({ tick = false } = {}) {
   if (!countEl) return;
-  countEl.textContent = String(countItems());
+  const count = countItems();
+  countEl.textContent = String(count);
+  if (countWordEl) countWordEl.textContent = count === 1 ? "item" : "items"; // "1 item", "2 items"
   if (tick) {
     // restart the little "tick up" (the menu part of css/home.css). Reduce motion: no movement.
     countEl.classList.remove("is-ticking");

@@ -4,6 +4,19 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 3: Full test before launch, and 4 fixes
+Full test with chrome-devtools at 360, 375, 768 and 1440 px: every section, link and button, header, 3D burger, cart, form checks, Pickup and Delivery, WhatsApp message, Sheet data (sends blocked, no row added), reorder, footer, privacy and 404 pages, reduce motion, keyboard only, no sideways scrolling, no console errors, no "TODO/placeholder/lorem". Main heading at about 2.2 s on a simulated slow phone with slow 4G. Lighthouse at phone size: Accessibility, Best Practices and SEO 100. It found 3 problems and 1 colour-rule slip, fixed below.
+
+### Added
+- `apps-script/Code.gs`: a separate monthly job, `deleteOldOrders`, that deletes order rows older than 6 months, as the privacy page promises. It looks only at column A (timestamp), never touches row 1, and keeps any row whose date it cannot read. It runs only from a monthly timer in Google (1st of the month, 3–4 am), never from the website: the web address only runs `doPost` and `doGet`, which never call it. No new Google permission. Uploaded with clasp; the same deployment was updated (version 3), so the web address did not change. The timer was added by hand by Pardha.
+- `apps-script/README.md`: what the monthly job does, how to add its timer, how to see its runs, and its status.
+
+### Changed
+- `apps-script/Code.gs` (top comment), `apps-script/README.md`, `SECURITY.md`, `SITE-PLAN.md` section 8, `CLAUDE.md` section 9 and `README.md`: "the script only adds rows / never deletes" now says the web part only adds rows, and a separate monthly job, started only by a Google timer, deletes rows older than 6 months.
+- `index.html` and `js/cart.js`: screen readers now hear "1 item" instead of "1 items" on the "Your order" button.
+- `css/home.css`: the footer phone number is neon pink (it can be tapped) instead of streetlight amber.
+- `SITE-PLAN.md`: the 3D burger size is the real 1.79 MB in both places (was 1.76 MB and 1.37 MB). README.md has no size, so nothing to change there.
+
 ## 2026-11-16 — Phase 4, Step 2: Faster main heading
 Lighthouse at phone size, home page: Performance about 90 → 96 (3 runs: 96, 92, 96); the main heading appears at about 2.7 s instead of about 3.0 s (simulated slow phone). Accessibility, Best Practices and SEO stay 100. Privacy page stays 100 / 100 / 100 / 100. Screenshots of the home, privacy and 404 pages at phone and desktop size are pixel-identical before and after.
 

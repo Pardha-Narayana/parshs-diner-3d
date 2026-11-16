@@ -1,6 +1,7 @@
 // PARSH'S Diner — the 3D burger in the hero.
 // 1. The backup still image is already on the page (it shows first).
-// 2. After the page has appeared, and only if this device can run 3D,
+// 2. After the page has appeared and the visitor first scrolls, touches,
+//    moves the mouse or presses a key (and only if this device can run 3D),
 //    we load model-viewer and the 3D burger in the background.
 // 3. When the 3D burger is fully ready, it replaces the still image.
 //    If anything goes wrong, the still image simply stays.
@@ -37,13 +38,26 @@ function canShow3D() {
   }
 }
 
-function afterPageAppears(task) {
-  const start = () =>
-    "requestIdleCallback" in window
-      ? requestIdleCallback(task, { timeout: 2000 })
-      : setTimeout(task, 200);
-  if (document.readyState === "complete") start();
-  else window.addEventListener("load", start, { once: true });
+// Setting up the 3D burger keeps a phone busy for a few seconds. So we wait
+// for the visitor's first action (scroll, touch, mouse move, key press) after
+// the page has appeared. Until then the still image shows, and it looks
+// exactly like the closed 3D burger.
+const FIRST_ACTIONS = ["scroll", "wheel", "touchstart", "pointerdown", "pointermove", "keydown"];
+
+function onFirstAction(task) {
+  let started = false;
+  const go = () => {
+    if (started) return;
+    started = true;
+    for (const name of FIRST_ACTIONS) window.removeEventListener(name, go);
+    // start just after this action is handled, so the action itself stays quick
+    setTimeout(task, 0);
+  };
+  const listen = () => {
+    for (const name of FIRST_ACTIONS) window.addEventListener(name, go, { passive: true });
+  };
+  if (document.readyState === "complete") listen();
+  else window.addEventListener("load", listen, { once: true });
 }
 
 async function load3D() {
@@ -83,4 +97,4 @@ async function load3D() {
   stage.append(viewer);
 }
 
-if (stage && canShow3D()) afterPageAppears(load3D);
+if (stage && canShow3D()) onFirstAction(load3D);

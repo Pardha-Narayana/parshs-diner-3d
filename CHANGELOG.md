@@ -4,6 +4,24 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 1: Speed and quality fixes
+Lighthouse at phone size, home page: Performance 58 → about 90 (3 runs: 69, 94, 90). Accessibility, Best Practices and SEO stay 100. Privacy page stays 100 / 100 / 100 / 100. First-load size of the home page: 2,736 KB → 676 KB. Blocking time: 6,340 ms → 0 ms (2 of 3 runs).
+
+### Added
+- 12 smaller WebP copies of the 4 menu photos in `assets/images/` (`menu-…-480.webp`, `-800.webp`, `-1200.webp`), made with the existing image tool in `tools/burger`. Same photos and crop.
+- `vercel.json`: browser "keep this" rules (cache): fonts for 30 days; photos, the 3D burger and the vendor libraries for 7 days. Pages, CSS and JS are not cached long, so updates show at once. Only works once the site is online.
+
+### Changed
+- `js/hero-burger.js`: the 3D burger now starts loading at the visitor's first scroll, touch, mouse move or key press, not by itself after the page appears. Until then the matching still image shows. Drag-to-spin and the scroll opening are unchanged.
+- `index.html`: the 4 menu photos use the WebP copies, and the browser picks the size it needs (`srcset` and `sizes`). The wider burger and pasta photos get a larger size hint so they stay sharp.
+- `CREDITS.md`: the 4 photo rows now name the WebP copies.
+
+### Not changed
+- `assets/models/burger.glb`: a smaller "quantized" copy came out bigger (1.42 MB vs 1.37 MB), and stronger compression would need an extra decoder library. Left as it is.
+
+### Removed
+- The 4 original JPEG menu photos (`menu-burger.jpg`, `menu-milkshake-chocolate.jpg`, `menu-pasta-tagliatelle.jpg`, `menu-french-toast.jpg`), no longer used on the page, after asking. CREDITS.md now lists the WebP copies only.
+
 ## 2026-11-16 — Phase 3, Step 9: Search and sharing basics
 ### Added
 - Browser-tab icon `assets/images/icon.svg`: a cream "P" with a warm amber glow, like a lit shop sign, on the Griddle colour. The P is drawn as a shape, so it looks the same everywhere.

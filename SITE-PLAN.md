@@ -154,7 +154,6 @@ Apps Script protections (a new, upgraded script):
 - [ ] Every page checked on a real phone, on mobile data (not Wi-Fi)
 - [ ] A test order sent: WhatsApp message correct AND a row arrived in the Sheet (then delete test rows)
 - [ ] Cart, quantities, total, Pickup/Delivery all work
-- [ ] Point the dashboard to the new Sheet ("PARSH'S Orders (3D site)")
 - [ ] No placeholder text, "TODO" or "lorem" anywhere
 - [ ] Own 404 page works
 - [ ] Every page has a title, description, share image and favicon
@@ -181,3 +180,6 @@ Apps Script protections (a new, upgraded script):
 - Menu filter: tap a group name to jump to it — when the menu grows.
 - Real photos of our own dishes (to replace the stock photos).
 - Smaller 3D burger textures: shrink the 2 texture pictures inside `assets/models/burger.glb` (now 2048 px, about 400 KB of the 1.79 MB file) with the tools in `tools/burger`, then compare the burger closed and open with the current one, and remake the backup still image if it no longer matches.
+- Add the website link (https://parshs-diner-3d.vercel.app, or the final address) to the restaurant's Google Business Profile / Google Maps listing.
+- Point the old order dashboard to the new Sheet "PARSH'S Orders (3D site)".
+- Make the photos about 225 KB smaller.

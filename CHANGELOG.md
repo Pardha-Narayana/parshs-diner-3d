@@ -4,6 +4,20 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 4, Step 6: Final launch check — Phase 4 complete
+The site is online as a demo at https://parshs-diner-3d.vercel.app. Phase 4 (speed, testing and going online) is complete.
+
+### Checked (live site, chrome-devtools, slow 4G network)
+- Phone (375px, phone CPU slowed 4×): main content showed in about 2.5 s, no layout jumps, no console errors, no sideways scrolling. The 3D burger loaded in the background after the first scroll (about 13 s on slow 4G; the still image shows until then).
+- Cart: add, change quantity, remove and total correct (₹370, then ₹440). The address box appears only for Delivery. No order was sent.
+- Reduce motion: no smooth scrolling and no running animations.
+- Desktop (1440px): 3D burger, layout and console all fine.
+- 404 page, privacy page, sitemap.xml and robots.txt open; tools/ and the notes files are not published.
+
+### Changed
+- `README.md`: the live address, the pages, a new "How orders work" section, Vercel hosting as it is today (free Hobby plan, demo only, auto-update from GitHub), `.vercelignore`, Google Search Console, and the `apps-script/` and `tools/` folders.
+- `SITE-PLAN.md` "Later" list: add the website link to the Google Business Profile / Maps listing; point the old order dashboard to the new Sheet "PARSH'S Orders (3D site)". The "move to a business-allowed host before real customers" item stays open.
+
 ## 2026-11-16 — Phase 4, Step 5 follow-up 2: Google checks passed
 Pardha did these in Google's own tools, on the live site:
 - Search Console: ownership of https://parshs-diner-3d.vercel.app/ is verified with the HTML tag. `sitemap.xml` was submitted: status Success, 2 pages found (home and privacy).

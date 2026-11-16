@@ -1,0 +1,167 @@
+/* ==========================================================
+   PARSH'S Diner — simple pages (privacy.html, 404.html)
+   Same night-diner look as the home page: the header, the big
+   sign headings, Griddle panel, still pools of light, grain.
+   Nothing moves on its own. Only design-system tokens are used.
+   ========================================================== */
+
+/* ---------- Header on simple pages: logo + "Back to home" ---------- */
+.site-header--page .site-header__inner {
+  grid-template-areas: "logo order";
+  padding-block: var(--space-3);
+}
+
+@media (min-width: 52rem) {
+  .site-header--page .site-header__inner {
+    grid-template-columns: auto 1fr;
+    padding-block: var(--space-4);
+  }
+}
+
+.back-link {
+  grid-area: order;
+  justify-self: end;
+  min-height: 2.75rem;
+  padding-block: var(--space-2);
+  font-size: 0.9375rem;
+}
+
+/* ---------- Privacy: a reading page ---------- */
+.page {
+  padding-block: var(--space-7) var(--space-9);
+}
+
+.page__head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+.page__title {
+  font-size: clamp(3.5rem, 1.6rem + 8vw, 7.5rem);
+  line-height: 0.85;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.12),
+    0 0 4rem rgb(var(--streetlight-rgb) / 0.18);
+}
+
+.page__date {
+  color: var(--text-soft);
+}
+
+/* The text sits on a raised Griddle panel: lit top edge, deep shadow */
+.page__panel {
+  display: grid;
+  gap: var(--space-7);
+  max-width: 46rem;
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-card);
+  background:
+    linear-gradient(to bottom, rgb(var(--cream-rgb) / 0.05), transparent 40%),
+    var(--griddle);
+  box-shadow: var(--edge-lit), var(--shadow-deep);
+}
+
+@media (min-width: 52rem) {
+  .page__panel {
+    padding: var(--space-7);
+  }
+}
+
+.page__section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.page__section + .page__section {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.page__section h2 {
+  font-size: var(--text-xl);
+  line-height: 1.05;
+}
+
+.page__section p,
+.page__section li {
+  color: var(--text-soft);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.page__section ol {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.page__section li::marker {
+  color: var(--streetlight);
+  font-weight: var(--weight-body-strong);
+}
+
+.page__section a {
+  color: var(--neon);
+  font-weight: var(--weight-body-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.page__end {
+  margin-top: var(--space-7);
+}
+
+/* ---------- 404: one big sign under a pool of light ---------- */
+.lost {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100dvh - var(--header-height));
+  padding-block: var(--space-8);
+}
+
+.lost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 45% at 30% 45%, rgb(var(--streetlight-rgb) / 0.14), transparent 70%),
+    radial-gradient(35% 35% at 18% 80%, rgb(var(--neon-rgb) / 0.08), transparent 70%);
+}
+
+.lost__inner {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.lost__title {
+  max-width: 12ch;
+  font-size: clamp(3.25rem, 1.2rem + 8vw, 8rem);
+  line-height: 0.86;
+  text-shadow:
+    0 0 1.5rem rgb(var(--cream-rgb) / 0.14),
+    0 0 4.5rem rgb(var(--streetlight-rgb) / 0.22);
+}
+
+.lost__line {
+  font-size: var(--text-lg);
+  color: var(--text-soft);
+}
+
+.lost__button {
+  margin-top: var(--space-3);
+  min-height: 3.5rem;
+  padding-inline: var(--space-7);
+  font-size: var(--text-lg);
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy | PARSH'S Diner</title>
+  <meta name="description" content="What PARSH'S Diner collects when you order on WhatsApp, where it goes, and how to ask us to delete it.">
+  <meta name="theme-color" content="#1a1220">
+  <!-- Real favicon comes in a later step. This empty one stops a "not found" error. -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/page.css">
+
+  <!-- Only the header helper (makes the header solid after a little scroll).
+       No animation scripts on this page. -->
+  <script type="module" src="/js/header.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header site-header--page">
+    <div class="site-header__bar">
+      <div class="site-header__inner wrap">
+        <a class="logo" href="/" aria-label="PARSH'S Diner home page">
+          <span class="logo__name">PARSH&rsquo;S</span>
+          <span class="logo__sub">Diner</span>
+        </a>
+        <a class="button button--ghost back-link" href="/">Back to home</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="page" tabindex="-1">
+    <div class="wrap">
+      <div class="page__head">
+        <h1 class="page__title">Privacy</h1>
+        <p class="page__date">Last updated: <time datetime="2026-11-16">16 November 2026</time></p>
+      </div>
+
+      <div class="page__panel">
+        <section class="page__section" aria-labelledby="collect-title">
+          <h2 id="collect-title">What we collect</h2>
+          <p>When you send an order, we ask for your name, your mobile number, and Pickup or Delivery. We ask for your address only if you choose Delivery. Notes are optional. We also keep the dishes you chose, the total and an order number.</p>
+        </section>
+
+        <section class="page__section" aria-labelledby="why-title">
+          <h2 id="why-title">Why</h2>
+          <p>Only to prepare your order, and to deliver it if you chose Delivery.</p>
+        </section>
+
+        <section class="page__section" aria-labelledby="where-title">
+          <h2 id="where-title">Where it goes</h2>
+          <p>Your order goes to two places:</p>
+          <ol>
+            <li>The restaurant&rsquo;s WhatsApp (<span class="nowrap">+91 77805 30607</span>), as a message you send yourself. WhatsApp is run by Meta.</li>
+            <li>The restaurant&rsquo;s own Google Sheet, our order list. Google Sheets is run by Google.</li>
+          </ol>
+        </section>
+
+        <section class="page__section" aria-labelledby="device-title">
+          <h2 id="device-title">What stays on your device</h2>
+          <p>Your cart and your last order are saved only in your own browser, so you can reorder later. We save just the dishes and the order number there, never your name, phone or address. Clearing your browser data removes them.</p>
+        </section>
+
+        <section class="page__section" aria-labelledby="dont-title">
+          <h2 id="dont-title">What we don&rsquo;t do</h2>
+          <p>No tracking. No analytics. No ads. We never sell or share your details.</p>
+          <p>The company that hosts this website may keep basic technical records, like your IP address, to keep the site running.</p>
+        </section>
+
+        <section class="page__section" aria-labelledby="delete-title">
+          <h2 id="delete-title">Ask us to delete your order</h2>
+          <p>We delete order records from our order list after 6 months.</p>
+          <p>Send a WhatsApp message to <a class="nowrap" href="https://wa.me/917780530607" target="_blank" rel="noopener">+91 77805 30607<span class="visually-hidden"> (opens WhatsApp in a new tab)</span></a> with your order number (like PD-1432) or your phone number. We will delete it from our order list. This can&rsquo;t remove the message from your own WhatsApp.</p>
+        </section>
+      </div>
+
+      <div class="page__end">
+        <a class="button button--primary" href="/">Back to home</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

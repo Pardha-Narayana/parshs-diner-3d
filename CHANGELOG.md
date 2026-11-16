@@ -4,6 +4,18 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 8: Footer, 404 page, privacy page and header fix
+### Added
+- Footer in `index.html`: a big "PARSH'S Diner" sign, the address, "Phone / WhatsApp: +91 77805 30607" (tap to call), "Chat on WhatsApp", a Privacy link, "Website by PARSH" (links to https://parsh-ai.vercel.app), the 3D burger credit — "Hamburger" by Simal Mai, CC BY 4.0, changed by us — with links to the model page and the licence, and © 2026 PARSH'S Diner. Outside links open in a new tab.
+- `css/footer.css` — the footer look: Griddle panel with a lit top edge, a still amber pool of light behind the sign, amber phone number, neon-pink links. One column on phones, three on wide screens. Nothing moves.
+- `404.html` — our own "page not found" page: "This page isn't on the menu.", "The link may be old, or the address may have a typo." and a "Back to the home page" button. Marked `noindex`, so search engines don't list it.
+- `privacy.html` — the privacy page in plain English: what we collect and why, where it goes (the restaurant's WhatsApp and Google Sheet), what stays in the visitor's own browser (only dishes and order number), no tracking, no analytics, no ads, no selling, the hosting company's basic technical records, order records deleted after 6 months, how to ask for deletion on WhatsApp, and "Last updated: 16 November 2026". Same header style, with "Back to home".
+- `css/page.css` — shared look for the privacy and 404 pages (header with "Back to home", raised reading panel, big 404 sign).
+
+### Changed
+- `js/header.js` — the header now turns solid after a little scroll in EVERY browser. Before, the script only ran in browsers without the new CSS "scroll-state" feature, and in Chrome that feature did not switch on reliably, so the header stayed see-through. `privacy.html` and `404.html` load it too.
+- `index.html` — links `css/footer.css`; removed the "Next step adds: the footer" note.
+
 ## 2026-11-16 — Phase 3, Step 7: The rest of the home sections
 ### Added
 - 4 sections in `index.html`, below the menu:

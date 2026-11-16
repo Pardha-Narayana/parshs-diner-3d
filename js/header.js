@@ -1,10 +1,11 @@
 // PARSH'S Diner — header turns solid after a little scroll.
-// Newer browsers already do this in css/header.css with no script.
-// This file only helps browsers that cannot do it in CSS yet.
+// css/header.css also tries to do this with CSS alone (a very new browser
+// feature). That feature did not switch on reliably in Chrome, so this
+// script now runs in EVERY browser: it adds the "is-solid" class itself.
 
 const header = document.querySelector(".site-header");
 
-if (header && !CSS.supports("container-type", "scroll-state")) {
+if (header) {
   // A tiny invisible marker at the very top of the page.
   // When it leaves the screen, the page has scrolled: make the header solid.
   const marker = document.createElement("div");

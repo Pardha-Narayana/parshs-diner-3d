@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | PARSH'S Diner</title>
+  <meta name="description" content="This page could not be found. Go back to the PARSH'S Diner home page.">
+  <!-- Keep this page out of search results -->
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1a1220">
+  <!-- Real favicon comes in a later step. This empty one stops a "not found" error. -->
+  <link rel="icon" href="data:,">
+
+  <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/page.css">
+
+  <!-- Header helper: makes the header solid after a little scroll -->
+  <script type="module" src="/js/header.js"></script>
+</head>
+<body>
+  <header class="site-header site-header--page">
+    <div class="site-header__bar">
+      <div class="site-header__inner wrap">
+        <a class="logo" href="/" aria-label="PARSH'S Diner home page">
+          <span class="logo__name">PARSH&rsquo;S</span>
+          <span class="logo__sub">Diner</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="lost">
+    <div class="lost__inner wrap">
+      <h1 class="lost__title">This page isn&rsquo;t on the menu.</h1>
+      <p class="lost__line">The link may be old, or the address may have a typo.</p>
+      <a class="button button--primary lost__button" href="/">Back to the home page</a>
+    </div>
+  </main>
+</body>
+</html>

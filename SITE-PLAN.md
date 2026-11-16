@@ -164,6 +164,12 @@ Apps Script protections (a new, upgraded script):
 - [ ] README and CHANGELOG are true
 - [ ] Address, map link and hours are correct
 - [ ] Hosting plan allows business use
+- Once the final web address is known (these need the full address, so they were left out in Phase 3, Step 9):
+  - [ ] Add a canonical link (the "main address" tag) to index.html and privacy.html
+  - [ ] Change og:image (and add og:url) on index.html and privacy.html to full addresses, like https://<address>/assets/images/share.jpg — WhatsApp only shows the share image with a full address
+  - [ ] In the Restaurant details for Google (index.html), make "image" and "hasMenu" full addresses and add "url"
+  - [ ] Create sitemap.xml (home and privacy pages) and add a "Sitemap:" line with its full address to robots.txt
+  - [ ] Check the share preview by sending the link in WhatsApp, and test the home page in Google's Rich Results Test
 
 ## 10. Later list (not in this version)
 - Second language (Telugu or Hindi), checked by a native speaker.

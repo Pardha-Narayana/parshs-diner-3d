@@ -4,6 +4,26 @@ Newest changes at the top.
 
 ---
 
+## 2026-11-16 — Phase 3, Step 9: Search and sharing basics
+### Added
+- Browser-tab icon `assets/images/icon.svg`: a cream "P" with a warm amber glow, like a lit shop sign, on the Griddle colour. The P is drawn as a shape, so it looks the same everywhere.
+- Phone home-screen icons `assets/images/apple-touch-icon.png` (180 px), `icon-192.png` and `icon-512.png`: the same P with more space around it, so Android can cut it into a circle.
+- `site.webmanifest`: tells Android phones the site's name, colours and icons.
+- Share image `assets/images/share.jpg` (1200 × 630, 76 KB): the closed burger with the site's amber and pink glow, the "100% Halal" badge, "PARSH'S DINER", "Kakinada" and "Order on WhatsApp for pickup or delivery".
+- `tools/share-image/share.html` and `icon.html`: the design pages the share image and PNG icons were screenshotted from. They are not part of the website.
+- Share tags (Open Graph and X/Twitter) on `index.html` and `privacy.html`: share title, description, image, image size and image description, locale en_IN.
+- Restaurant details for Google (schema.org Restaurant) in `index.html`: name, description, address, phone, opening hours, servings (burgers, milkshakes, pasta, French toast), price range ₹150–₹260, Est. 2024, menu link, Google Maps link, 100% halal, Pickup, Delivery within 5 km, and ordering on WhatsApp.
+- `robots.txt`: allows all search engines.
+- SITE-PLAN.md before-launch checklist: 5 items that need the final web address (canonical link; full addresses for the share image and Google details; sitemap.xml with a Sitemap line in robots.txt; testing the WhatsApp preview and Google's Rich Results Test).
+- CREDITS.md: rows for the icons and the share image.
+
+### Changed
+- `index.html`, `privacy.html`, `404.html`: page language is now "en-IN" (English, India). The empty placeholder tab icon is replaced by the real icons and the manifest.
+- `privacy.html`: title is now "Privacy | PARSH'S Diner, Kakinada".
+
+### Removed
+- `assets/images/menu-milkshake-cherry.jpg` and `assets/images/menu-pasta-penne.jpg` (unused photos) and their CREDITS.md lines.
+
 ## 2026-11-16 — Phase 3, Step 8: Footer, 404 page, privacy page and header fix
 ### Added
 - Footer in `index.html`: a big "PARSH'S Diner" sign, the address, "Phone / WhatsApp: +91 77805 30607" (tap to call), "Chat on WhatsApp", a Privacy link, "Website by PARSH" (links to https://parsh-ai.vercel.app), the 3D burger credit — "Hamburger" by Simal Mai, CC BY 4.0, changed by us — with links to the model page and the licence, and © 2026 PARSH'S Diner. Outside links open in a new tab.

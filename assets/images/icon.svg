@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- PARSH'S Diner browser-tab icon: a lit "P" shop sign on the Griddle colour.
+       The P is drawn as a shape (not text), so it looks the same everywhere. -->
+  <defs>
+    <radialGradient id="light" cx="62%" cy="22%" r="80%">
+      <stop offset="0" stop-color="#f7b538" stop-opacity=".32"/>
+      <stop offset=".6" stop-color="#f7b538" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#2a1c2e"/>
+  <rect width="64" height="64" rx="14" fill="url(#light)"/>
+  <g fill-rule="evenodd">
+    <path fill="#f7b538" opacity=".55" filter="url(#glow)"
+          d="M19 10H36C45.5 10 51 15.5 51 24V28C51 36.5 45.5 42 36 42H29.5V54H19ZM29.5 19V33H35C38.8 33 40.5 31.2 40.5 28V24C40.5 20.8 38.8 19 35 19Z"/>
+    <path fill="#f6e9d8"
+          d="M19 10H36C45.5 10 51 15.5 51 24V28C51 36.5 45.5 42 36 42H29.5V54H19ZM29.5 19V33H35C38.8 33 40.5 31.2 40.5 28V24C40.5 20.8 38.8 19 35 19Z"/>
+  </g>
+</svg>
